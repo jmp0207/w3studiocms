@@ -1,0 +1,94 @@
+/*
+ * This file is part of the w3studioCMS package library and it is distributed 
+ * under the LGPL LICENSE Version 2.1. To use this library you must leave 
+ * intact this copyright notice.
+ *  
+ * (c) 2007-2008 Giansimon Diblas <giansimon.diblas@w3studiocms.com>
+ *  
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/* ------------------------------------ *
+    Page elements
+ * ------------------------------------ */
+#w3s_image_editor{
+  background-color:#EEE;
+  border-top:1px solid #CCC;
+  border-left:1px solid #CCC;
+  border-right:1px solid #999;
+  border-bottom:1px solid #999;
+}
+
+#w3s_image_editor table{
+  padding: 0px;
+}
+
+#w3s_image_editor table td{
+  text-align:center;
+}
+
+#w3s_image_editor table td p{
+  margin: 0px;
+  padding: 0px;
+  text-align:center;
+}
+
+#w3s_image_editor .buttons{
+	padding:2px 6px !important;
+	border: 1px solid #666 !important;
+  background-color:#CCCCCC !important;
+  text-align:center !important;
+}
+
+#w3s_image_size{
+  color:#aaa;
+}
+
+#w3s_image_editor input{
+  background-color:#FFF;
+}
+
+/*
+#w3s_image_editor{
+  background-color:#EEE;
+  border-top:1px solid #CCC;
+  border-left:1px solid #CCC;
+  border-right:1px solid #999 !important;
+  border-bottom:1px solid #999 !important;
+}
+
+#w3s_image_editor table{
+  padding: 0px;
+}
+
+#w3s_image_editor table td{
+  text-align:center !important;
+}
+
+#w3s_image_editor table td p{
+  margin: 0px;
+  padding: 0px;
+}
+
+#w3s_image_editor .buttons{
+  background-color:#CCCCCC !important;
+  text-align:center !important;  
+}
+
+#w3s_image_size{
+  color:#aaa !important;
+}
+
+#w3s_image_editor input{
+  background-color:#FFF !important;
+}
+*/
+
+#w3s_image_editor .enabled{
+  color:#000 !important;
+}
+
+#w3s_image_editor .disabled{
+  color:#aaa !important;
+}

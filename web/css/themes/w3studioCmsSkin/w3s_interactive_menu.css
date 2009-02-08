@@ -1,0 +1,83 @@
+/*
+ * This file is part of the w3studioCMS package library and it is distributed 
+ * under the LGPL LICENSE Version 2.1. To use this library you must leave 
+ * intact this copyright notice.
+ *  
+ * (c) 2007-2008 Giansimon Diblas <giansimon.diblas@w3studiocms.com>
+ *  
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+#w3s_interactive_menu{
+  position:absolute;
+  background-color:transparent;
+  display:none;
+  text-align:left;
+  border-top:1px solid #99CCAA;
+  border-bottom:1px solid #336600;
+}
+
+#w3s_im_clone_element{
+  background-color:#EEF9F9;
+  opacity:0.1;
+  filter: alpha(opacity = 10);
+  cursor:pointer;
+}
+
+#w3s_im_commands{
+  display:none;
+  width:38px;
+  position:absolute;
+  border-top:1px solid #99CCAA;
+  border-bottom:1px solid #336600;
+  background-color:#99CC66;
+}
+
+#w3s_im_commands p{
+  padding:2px;
+}
+
+#w3s_im_editor{
+  color:#000;
+  font: 11px Verdana, Arial, Helvetica, sans-serif;
+  background-color:#99CCAA;
+  border:3px solid #99CCAA;
+}
+
+#w3s_im_editor input{
+  color:#000;
+  font: 11px Verdana, Arial, Helvetica, sans-serif;
+  background-color:#99CC66;
+}
+
+#w3s_editor_container{
+  padding:4px;
+  border:1px solid #000;
+  border-top:1px solid #bbb;
+  border-left:1px solid #bbb;
+  border-bottom:1px solid #777;
+  border-right:1px solid #777;
+  background-color:#99CC66;
+}
+
+#w3s_im_actions{
+  display:none;
+  position:absolute;
+  border-right:1px solid #006600;
+  border-bottom:1px solid #006600;
+  text-align:left;
+  background-color:#669900;
+  background-image:url(images/w3s_interactive_menu/actions_bg_0.png);
+  background-repeat:repeat-y;
+  padding:6px;
+}
+
+#w3s_im_actions a{
+  color:#FFF;
+  font-weight: bold;
+}
+
+#w3s_im_actions td{
+  padding:2px !important;
+}

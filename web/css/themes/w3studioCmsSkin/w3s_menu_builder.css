@@ -1,0 +1,97 @@
+/*
+ * This file is part of the w3studioCMS package library and it is distributed 
+ * under the LGPL LICENSE Version 2.1. To use this library you must leave 
+ * intact this copyright notice.
+ *  
+ * (c) 2007-2008 Giansimon Diblas <giansimon.diblas@w3studiocms.com>
+ *  
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/* ------------------------------------ *
+    Page elements
+ * ------------------------------------ */
+
+#w3s_menu_builder{
+  width:600px;
+  padding:4px;
+  background-color:#99CC66;
+  border-left:1px solid #99CCAA;
+  border-bottom:1px solid #336600;
+  border-right:1px solid #336600;
+  text-align:left;
+}
+
+#w3s_menu_builder table, #w3s_mb_list li span{
+  font: 10px Verdana, Arial, Helvetica, sans-serif;
+}
+
+#w3s_mb_menu{
+  width:400px;
+  height:330px;
+  border: 1px solid #666;
+  overflow:auto;
+  background-color:#FFF;
+}
+
+#w3s_mb_commands
+{
+	padding:6px 0;
+}
+
+#w3s_menu_items li{
+  margin:0;
+  list-style-type:none;
+  width:396px;
+  background-color:#FFFFFF;
+  border-bottom:1px dotted #990000;
+  padding:8px 2px;
+}
+
+#w3s_menu_header{
+  font: bold 12px/18px Verdana, Arial, Helvetica, sans-serif;
+  background-color:#CC9900;
+	padding:8px 2px;
+	color:#FFFFFF;
+}
+
+#w3s_mb_properties{
+  width:192px;
+}
+
+#w3s_mb_menu .currentSelectedLink{
+  background-color:#FFCC00;
+}
+
+#w3s_menu_options_header{
+  border:1px solid #666;
+  border-bottom:1px solid #CCC;
+  padding: 4px;
+  margin-top:10px;
+  background-color:#CCC7BA;
+  font: bold 11px/12px Verdana, Arial, Helvetica, sans-serif;
+}
+
+#w3s_menu_options{
+  width:182px;
+  border:1px solid #666;
+  padding:4px;
+  background-color:#ECE9D8;
+}
+
+#w3s_menu_options table td{
+  padding:4px;
+  font: 10px Verdana, Arial, Helvetica, sans-serif;
+}
+
+#w3s_menu_options table td select{
+  border:1px solid #999;
+  background-color:#FFFFFF;
+  font: 9px Verdana, Arial, Helvetica, sans-serif;
+  width:80px;
+}
+
+#w3s_menu_options .border_bottom_dotted{
+  border-bottom:1px dotted #999;
+}

@@ -1,0 +1,94 @@
+# Install sfW3studioCmsPlugin #
+
+This tutorial assumes that symfony is correctly installed in your system.
+
+1. Init a project.
+2. Init an applicaion.
+3. Install the sfGuardPlugin.
+4. Install the dbFinderPlugin.
+5. Install the sfW3studioCmsPlugin, as follows:
+   
+   If you want to **install from the pear package** type:
+
+        php symfony plugin:install sfW3studioCmsPlugin-0.8.0.tgz
+
+   If you want to **install from the zip file**, simple copy the sfW3studioCmsPlugin into the plugins directory.
+
+6. Inside the extra directory of sfW3studioCmsPlugin you will find the sfGuardAuth module: copy it into the 
+modules directory of your application to override the standard sfGuardAuth module. If your system supports 
+symbolic links you can make one instead copy the directory, as follows:
+
+        ln -s [path/to]/[Project Name]/plugins/sfW3studioCmsPlugin/extra/sfGuardAuth [path/to]/[Project Name]/apps/[App Name]/modules/sfGuardAuth
+
+7. In the extra directory you will find the tool used by w3studioCMS to upload images into the directory 
+fileUploader. To use this tool you must copy this folder to /web/js folder. 
+        
+8. The entire content of sfW3studioCmsPlugin's web directory have to be copied into the web directory of your 
+application and have to be renamed as sfW3studioCmsPlugin. The better solution is to make a symbolic link if your 
+system support this feature. When you install from pear this symbolic link should be automatically made. 
+If something fails you must do this operation manually, as shown below.
+
+        ln -s [path/to]/[Project Name]/plugins/sfW3studioCmsPlugin/web [path/to]/[Project Name]/web/sfW3studioCmsPlugin
+
+9. Enable all the sfW3studioCmsPlugin modules into the all section of your settings.yml file, of your 
+application. These are the modules: webSite, webEditor, menuBuilder, pagesManager, templatesImport, sbStructure, 
+languagesManager, contentsManager, groupsManager, imageEditor, tinyMCE
+
+10. Enable the i18n paramether.
+
+11. Set the prototype_web_dir to /sfW3studioCmsPlugin/js/scriptaculous/lib.
+
+12. Set the rich_text_js_dir parameter to js/tiny_mce.
+
+13. At last your setting.yml file will be like this:
+
+        all:
+          .settings:
+          i18n: on
+          enabled_modules: [default, sfGuardGroup, sfGuardUser, sfGuardPermission, sfGuardAuth, webSite, webEditor, imagesManager, menuBuilder, pagesManager, projectImport, controlPanel, languagesManager, contentsManager, groupsManager, imageEditor, tinyMCE]
+          prototype_web_dir: /sfW3studioCmsPlugin/js/scriptaculous/lib
+
+          login_module: sfGuardAuth # To be called when a non-authenticated user
+          login_action: signin # Tries to access a secure page
+
+          secure_module: sfGuardAuth # To be called when a user doesn't have
+          secure_action: secure # The credentials required for an action
+
+          rich_text_js_dir: js/tiny_mce
+
+14. W3StudioCMS uses tinyMce as default editor, but you can use another web editor as you prefer. In the 
+sfW3studioCmsPlugin's app.yml file you will find the app_webeditor parameter: change it to use another web editor, 
+then open webEditor/indexSuccess module. Here you will find where the tinyMce web editor is initialized, so you 
+can change it. If you prefer to use tinyMce, download the tinyMce editor, then install it into the js directory. 
+Notice that you have to install the tinyMce compressor too. You can download it from the tinyMce and simply copy the
+tiny_mce folder of the extracted file into the js directory of web folder. With firefox 3 is required 
+the version 3.2 of tinyMce with the 2.0.1 version of the compressor.
+
+15. Delete the empty schema.yml from the config directory of your project.
+
+16. Configure the propel.ini file to access to your database.
+
+17. Create the database w3studiocms. The db name is not important, so you can choose another name.
+
+18. Configure your database.yml to access the database.
+
+19. Clear the cache.
+
+20. From the CLI run the command:
+
+        symfony propel:build-all
+        symfony propel:data-load [you app name]
+
+21. Clear the cache again.
+
+22. Inside the extra directory of  sfW3studioCmsPlugin there is a directory called images, where are stored all 
+the images used by the template: you have to copy them into the images directory of web directory.
+
+23. Open a browser. W3studiocms has been developed using Mozilla Firefox and has not been fully tested with 
+Internet Explorer, so I suggest to use Firefox to work with this CMS.
+
+24. W3studioCMS comes with a predefinited template but you can easy change it with one made from yourself. 
+Clik the Edit site button and enter admin as username and admin as password.
+
+That's it. If you find mistakes or you don't understand something you can ask a question in the 
+[forum](/forum/index.php).

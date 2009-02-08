@@ -1,0 +1,18 @@
+button1:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/image_manager/upload.png
+  caption: Load image
+  actionParams:
+    id: w3s_file_uploader_btn
+    class: image_button
+button2:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/image_manager/delete.png
+  caption: Delete image
+  actionParams:
+    id: w3s_delete_image_btn
+    class: image_button
+button3:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/image_manager/save.png
+  caption: Insert image
+  actionParams:
+    id: w3s_insert_image_btn
+    class: image_button

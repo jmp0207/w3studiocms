@@ -1,0 +1,56 @@
+button1:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_interactive_menu/text_add.png
+  caption: 'Insert a text'
+  action: W3sContent.addContent(2)
+  imageTextRelation: 0
+  imageParams:
+    size: 32x32  
+button2:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_interactive_menu/image_add.png
+  caption: 'Insert an image'
+  action: W3sContent.addContent(3)
+  imageTextRelation: 0
+  imageParams:
+    size: 32x32 
+button3:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_interactive_menu/menu_add.png
+  caption: 'Insert a navigation menu'
+  action: W3sContent.addContent(5)
+  imageTextRelation: 0
+  imageParams:
+    size: 32x32
+button4:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_interactive_menu/flash_add.png
+  caption: 'Insert a flash movie'
+  action: alert('This option is not yet available')
+  imageTextRelation: 0
+  imageParams:
+    size: 32x32
+button5:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_interactive_menu/file_add.png
+  caption: 'Insert a script'
+  action: W3sContent.addContent(4)
+  imageTextRelation: 0
+  imageParams:
+    size: 32x32 
+button6:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_interactive_menu/file_add.png
+  caption: 'Insert languages navigation'
+  action: W3sContent.addContent(6)
+  imageTextRelation: 0
+  imageParams:
+    size: 32x32 
+button7:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_interactive_menu/gallery_add.png
+  caption: 'Insert a photogallery'
+  action: alert('This option is not yet available')
+  imageTextRelation: 0
+  imageParams:
+    size: 32x32 
+button8:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_interactive_menu/exit.png
+  action: InteractiveMenu.closeActionsMenu()
+  imageTextRelation: 0
+  caption: 'Close'
+  imageParams:
+    size: 32x32      

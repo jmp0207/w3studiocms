@@ -1,0 +1,64 @@
+/*
+ * This file is part of the w3studioCMS package library and it is distributed 
+ * under the LGPL LICENSE Version 2.1. To use this library you must leave 
+ * intact this copyright notice.
+ *  
+ * (c) 2007-2008 Giansimon Diblas <giansimon.diblas@w3studiocms.com>
+ *  
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+#w3s_button *,
+#w3s_menu_manager *,
+#w3s_im_actions *,
+#w3s_im_commands *,
+#w3s_image_manager *,
+#w3s_images_select *,
+#w3s_image_editor *,
+#w3s_menu_builder *,
+#w3s_control_panel *,
+#w3s_control_panel_languages_panel *,
+#w3s_control_panel_tabs_panel *,
+#w3s_control_panel_content_panel *,
+#w3s_page_list *,
+#w3s_slot_list *,
+#w3s_tab_3 *,
+#w3s_page_list_commands *,
+#w3s_import_templates *,
+#w3s_copyright *,
+#w3s_properties *,
+#w3s_message *,
+#w3s_message_close_section *
+{
+  width: auto;
+  height: auto;
+  position: static;
+  float: none;
+  clear: none;
+  visibility: inherit;
+  overflow: visible;
+  z-index: auto;
+  padding: 0;
+  margin: 0;
+  font-family: Verdana, Arial, Helvetica, san-serif;
+  font-size: 11px;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  font-variant: normal;
+  color: #000000;
+  text-align: left;
+  text-transform: none;
+  text-decoration: none;
+  text-indent: 0;
+  background-color: transparent;
+  background-image: none;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  list-style-image: none;
+  list-style-position: outside;
+  list-style-type: disc;
+  border:0;
+}

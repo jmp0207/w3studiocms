@@ -1,0 +1,51 @@
+button1:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/user.png
+  imageDisabled: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/user_disabled.png
+  caption: Users
+  requiredCredentials: [admin]
+  action: W3sWindow.openStandard('<?php echo sfContext::getInstance()->getController()->genUrl('sfGuardUser/list') ?>', '', 750, 600, 'yes')
+  actionParams:
+    title: Manage the users, groups and relative permissions
+button2:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/project.png
+  imageDisabled: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/project_disabled.png
+  caption: Projects  
+  requiredCredentials: [[admin, webdesigner]]
+  action: W3sTemplateImport.show()
+  actionParams:
+    title: Import your own templates project or one downloaded from W3StudioCMS website
+button3:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/structure.png
+  imageDisabled: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/structure_disabled.png
+  caption: Control-Panel  
+  action: W3sControlPanel.show()
+  actionParams:
+    title: Open the structure menu to manage languages, groups, pages and metatags
+button4:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/move.png
+  imageDisabled: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/move_disabled.png
+  caption: Move  
+  action: W3sTemplate.moveContents(true)
+  actionParams:
+    title: Enter in the Move mode to change the location and the position of every content
+button5:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/preview.png
+  imageDisabled: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/preview_disabled.png
+  caption: Preview  
+  action: W3sControlPanel.hide();InteractiveMenu.hide();W3sTemplate.loadPreviewPage();
+  actionParams:
+    title: Navigate your web site and check if everything is fine before publishing
+button6:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/publish.png
+  imageDisabled: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/publish_disabled.png
+  caption: Publish  
+  requiredCredentials: [[admin, publisher]]
+  action: W3sTemplate.publish('Do you want to publish the new version of web site? All the modifies you made will be confirmed and the previous version will be replaced')
+  actionParams:
+    title: Publish the web site
+button7:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/exit.png
+  caption: Logout  
+  action: w3studioCMS.logout()
+  actionParams:
+    title: Close W3StudioCMS and return to website

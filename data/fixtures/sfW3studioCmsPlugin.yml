@@ -1,0 +1,610 @@
+---
+W3sProject: 
+  W3sProject_1: 
+    project_name: w3s_jet_30
+W3sTemplate: 
+  W3sTemplate_1: 
+    project_id: W3sProject_1
+    template_name: jet_30_hp
+W3sGroup: 
+  W3sGroup_1: 
+    template_id: W3sTemplate_1
+    group_name: gr_home
+    edited: 1
+    to_delete: 0
+W3sPage: 
+  W3sPage_1: 
+    group_id: W3sGroup_1
+    page_name: index
+    is_home: 1
+    to_delete: 0
+W3sLanguage: 
+  W3sLanguage_1: 
+    language: english
+    main_language: 1
+    to_delete: 0
+W3sContentType: 
+  W3sContentType_1: 
+    id: 1
+    type_description: Non assegnato
+  W3sContentType_2: 
+    id: 2
+    type_description: Testo
+  W3sContentType_3: 
+    id: 3
+    type_description: Immagine
+  W3sContentType_4: 
+    id: 4
+    type_description: Script
+  W3sContentType_5: 
+    id: 5
+    type_description: Menu
+  W3sContentType_6: 
+    id: 6
+    type_description: Languages links
+  W3sContentType_99: 
+    id: 99
+    type_description: Da inserire
+W3sSlot: 
+  W3sSlot_1: 
+    template_id: W3sTemplate_1
+    slot_name: menu
+    repeated_contents: 2
+    to_delete: 0
+  W3sSlot_2: 
+    template_id: W3sTemplate_1
+    slot_name: logo
+    repeated_contents: 2
+    to_delete: 0
+  W3sSlot_3: 
+    template_id: W3sTemplate_1
+    slot_name: main-slogan
+    repeated_contents: 0
+    to_delete: 0
+  W3sSlot_4: 
+    template_id: W3sTemplate_1
+    slot_name: mini-slogan
+    repeated_contents: 0
+    to_delete: 0
+  W3sSlot_5: 
+    template_id: W3sTemplate_1
+    slot_name: icon-box
+    repeated_contents: 0
+    to_delete: 0
+  W3sSlot_6: 
+    template_id: W3sTemplate_1
+    slot_name: top-text
+    repeated_contents: 0
+    to_delete: 0
+  W3sSlot_7: 
+    template_id: W3sTemplate_1
+    slot_name: edit-site
+    repeated_contents: 2
+    to_delete: 0
+  W3sSlot_8: 
+    template_id: W3sTemplate_1
+    slot_name: left1_1
+    repeated_contents: 0
+    to_delete: 0
+  W3sSlot_9: 
+    template_id: W3sTemplate_1
+    slot_name: left1_2
+    repeated_contents: 0
+    to_delete: 0
+  W3sSlot_10: 
+    template_id: W3sTemplate_1
+    slot_name: left2_1
+    repeated_contents: 0
+    to_delete: 0
+  W3sSlot_11: 
+    template_id: W3sTemplate_1
+    slot_name: left2_2
+    repeated_contents: 0
+    to_delete: 0
+  W3sSlot_12: 
+    template_id: W3sTemplate_1
+    slot_name: left3_1
+    repeated_contents: 0
+    to_delete: 0
+  W3sSlot_13: 
+    template_id: W3sTemplate_1
+    slot_name: left3_2
+    repeated_contents: 0
+    to_delete: 0
+  W3sSlot_14: 
+    template_id: W3sTemplate_1
+    slot_name: right-middle
+    repeated_contents: 0
+    to_delete: 0
+  W3sSlot_15: 
+    template_id: W3sTemplate_1
+    slot_name: news
+    repeated_contents: 0
+    to_delete: 0
+  W3sSlot_16: 
+    template_id: W3sTemplate_1
+    slot_name: service
+    repeated_contents: 0
+    to_delete: 0
+  W3sSlot_17: 
+    template_id: W3sTemplate_1
+    slot_name: member
+    repeated_contents: 0
+    to_delete: 0
+  W3sSlot_18: 
+    template_id: W3sTemplate_1
+    slot_name: bottom-menu
+    repeated_contents: 2
+    to_delete: 0
+  W3sSlot_19: 
+    template_id: W3sTemplate_1
+    slot_name: copyright
+    repeated_contents: 2
+    to_delete: 0
+  W3sSlot_20: 
+    template_id: W3sTemplate_1
+    slot_name: xht
+    repeated_contents: 2
+    to_delete: 0
+  W3sSlot_21: 
+    template_id: W3sTemplate_1
+    slot_name: cs
+    repeated_contents: 2
+    to_delete: 0
+W3sContent: 
+  W3sContent_2: 
+    group_id: W3sGroup_1
+    page_id: W3sPage_1
+    language_id: W3sLanguage_1
+    content_type_id: W3sContentType_3
+    slot_id: W3sSlot_2
+    content: >
+      <a
+      href="webSite/english/index.html"><img
+      src="/images/logo.gif" title="Logo"
+      alt="Logo" height="72" width="249" 
+      /></a>
+    edited: 1
+    to_delete: 0
+    content_position: 1
+  W3sContent_3: 
+    group_id: W3sGroup_1
+    page_id: W3sPage_1
+    language_id: W3sLanguage_1
+    content_type_id: W3sContentType_3
+    slot_id: W3sSlot_3
+    content: >
+      <img src="/images/slogan.gif"
+      title="Type here a title for the image"
+      alt="Type here a description for the
+      image" height="32" width="484"  />
+    edited: 1
+    to_delete: 0
+    content_position: 1
+  W3sContent_5: 
+    group_id: W3sGroup_1
+    page_id: W3sPage_1
+    language_id: W3sLanguage_1
+    content_type_id: W3sContentType_3
+    slot_id: W3sSlot_5
+    content: >
+      <img src="/images/top_icon.gif"
+      title="Top icon" alt="Graphical image"
+      height="80" width="174"  />
+    edited: 1
+    to_delete: 0
+    content_position: 1
+  W3sContent_6: 
+    group_id: W3sGroup_1
+    page_id: W3sPage_1
+    language_id: W3sLanguage_1
+    content_type_id: W3sContentType_2
+    slot_id: W3sSlot_6
+    content: >
+      <p>Nam adipiscing massa quis neque
+      uisque iaculis, sapien in pulvinar
+      variusdiam turpis ultricies magna :<span
+      class="smallTxt">scipit nonummy,
+      vulputate vitae, ultricies diam
+      lectus</span></p>
+    edited: 1
+    to_delete: 0
+    content_position: 1
+  W3sContent_7: 
+    group_id: W3sGroup_1
+    page_id: W3sPage_1
+    language_id: W3sLanguage_1
+    content_type_id: W3sContentType_4
+    slot_id: W3sSlot_7
+    content: >
+      <a href="#"
+      onclick="showLoginForm('/webEditor/index',
+      1, 1)" >Edit<br />Site</a>
+    edited: 1
+    to_delete: 0
+    content_position: 1
+  W3sContent_8: 
+    group_id: W3sGroup_1
+    page_id: W3sPage_1
+    language_id: W3sLanguage_1
+    content_type_id: W3sContentType_3
+    slot_id: W3sSlot_8
+    content: >
+      <img src="/images/lft_pic1.gif"
+      title="Jet" alt="A jet" height="78"
+      width="88"  />
+    edited: 1
+    to_delete: 0
+    content_position: 1
+  W3sContent_9: 
+    group_id: W3sGroup_1
+    page_id: W3sPage_1
+    language_id: W3sLanguage_1
+    content_type_id: W3sContentType_2
+    slot_id: W3sSlot_9
+    content: >
+      <p><span class="box-title">Pharetra elit
+      arcu</span><strong>Nunc magna turpis,
+      molestie sit amet</strong>, vehicula
+      non, bibendum sagittis, quam condimentum
+      porta.</p>
+    edited: 1
+    to_delete: 0
+    content_position: 1
+  W3sContent_10: 
+    group_id: W3sGroup_1
+    page_id: W3sPage_1
+    language_id: W3sLanguage_1
+    content_type_id: W3sContentType_3
+    slot_id: W3sSlot_10
+    content: >
+      <img src="/images/lft_pic2.gif"
+      title="Chronometer" alt="Chronometer"
+      height="74" width="74"  />
+    edited: 1
+    to_delete: 0
+    content_position: 1
+  W3sContent_11: 
+    group_id: W3sGroup_1
+    page_id: W3sPage_1
+    language_id: W3sLanguage_1
+    content_type_id: W3sContentType_2
+    slot_id: W3sSlot_11
+    content: >
+      <p><span
+      class="box-title">TurpisIntegerac</span><strong>Duis
+      iaculis lobortis leo</strong>,venenatis
+      dignissim. Nam massa lorem, suscipit
+      nonummy,</p>
+    edited: 1
+    to_delete: 0
+    content_position: 1
+  W3sContent_12: 
+    group_id: W3sGroup_1
+    page_id: W3sPage_1
+    language_id: W3sLanguage_1
+    content_type_id: W3sContentType_3
+    slot_id: W3sSlot_12
+    content: >
+      <img src="/images/lft_pic3.gif"
+      title="Idea" alt="Idea" height="71"
+      width="94"  />
+    edited: 1
+    to_delete: 0
+    content_position: 1
+  W3sContent_13: 
+    group_id: W3sGroup_1
+    page_id: W3sPage_1
+    language_id: W3sLanguage_1
+    content_type_id: W3sContentType_2
+    slot_id: W3sSlot_13
+    content: >
+      <p><span class="box-title">Volutpat
+      ullamco</span><strong>Phasellus dapibus
+      odio eu</strong>,ipsum ac turpis.
+      Integer ac libero eu orci pharetra
+      eges</p>
+    edited: 1
+    to_delete: 0
+    content_position: 1
+  W3sContent_14: 
+    group_id: W3sGroup_1
+    page_id: W3sPage_1
+    language_id: W3sLanguage_1
+    content_type_id: W3sContentType_2
+    slot_id: W3sSlot_14
+    content: |
+      <h2>About Jet 30</h2>
+      <p>Jet 30 is a <span class="text-green">free, tableless, W3C-compliant</span> web design layout by Template World. This template has been tested and proven compatible with all major browser environments and operating systems. You are free to modify the design to suit your tastes in any way you like.</p>
+      <p><img style="float: right;" title="right_panel_pic.gif" src="../../images/right_panel_pic.gif" alt="right_panel_pic.gif" width="166" height="155" />We only ask you to not remove "Design by Template World" and the link http://www.templateworld.com from the footer of the template.<br /><br /> <span class="text-red">These templates are licensed under a Creative Commons Attribution 2.5 License.</span> This means that you are free to modify the design to suit your tastes in any way you like, but you must include the provided link back to Template World.</p>
+    edited: 1
+    to_delete: 0
+    content_position: 1
+  W3sContent_15: 
+    group_id: W3sGroup_1
+    page_id: W3sPage_1
+    language_id: W3sLanguage_1
+    content_type_id: W3sContentType_2
+    slot_id: W3sSlot_15
+    content: |
+      <h2>Latest News</h2>
+      <h3>On 23rd May 2007</h3>
+      <p><span class="newsTitle">euismod justo, eu pharetra elit arcu sit amet</span>quam. um ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam adipiscing</p>
+      <p><span class="newsTitle">euismod justo, eu pharetra elit arcu sit amet</span>Donec nec urna, praesent risus phasellustincidunt eu volutpat</p>
+    edited: 1
+    to_delete: 0
+    content_position: 1
+  W3sContent_16: 
+    group_id: W3sGroup_1
+    page_id: W3sPage_1
+    language_id: W3sLanguage_1
+    content_type_id: W3sContentType_2
+    slot_id: W3sSlot_16
+    content: |
+      <h2>New Services Overview</h2>
+      <h3>Finantial Services</h3>
+      <ul>
+      <li><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</a></li>
+      <li><a href="#">Fusce bibendum ultricies lorem.</a></li>
+      <li><a href="#">Nulla facilisis odio vitae neque.</a></li>
+      <li><a href="#">Etiam sit amet purus a eros viverra adipiscing.</a></li>
+      <li><a href="#">Nunc dignissim eleifend turpis</a></li>
+      </ul>
+    edited: 1
+    to_delete: 0
+    content_position: 1
+  W3sContent_17: 
+    group_id: W3sGroup_1
+    page_id: W3sPage_1
+    language_id: W3sLanguage_1
+    content_type_id: W3sContentType_2
+    slot_id: W3sSlot_17
+    content: |
+      <h2>Member Login</h2>
+      <form action="#" method="post" name="member_log_in" id="member_log_in">
+      <label>Name:</label>
+      <input type="text" name="name" class="txtBox" />
+      <label>Password:</label>
+      <input type="password" name="name2" class="txtBox" />
+      <a href="#">A registered member?</a>
+      <input type="submit" name="go" value="" class="go" />
+      <br class="spacer" />
+      </form>
+    edited: 1
+    to_delete: 0
+    content_position: 1
+  W3sContent_19: 
+    group_id: W3sGroup_1
+    page_id: W3sPage_1
+    language_id: W3sLanguage_1
+    content_type_id: W3sContentType_2
+    slot_id: W3sSlot_19
+    content: >
+      <p>&copy;2004-2008 W3StudioCMS. All
+      rights reserved.</p>
+    edited: 1
+    to_delete: 0
+    content_position: 1
+  W3sContent_20: 
+    group_id: W3sGroup_1
+    page_id: W3sPage_1
+    language_id: W3sLanguage_1
+    content_type_id: W3sContentType_2
+    slot_id: W3sSlot_20
+    content: >
+      <a
+      href="http://validator.w3.org/check?uri=referer"
+      target="_blank"></a>
+    edited: 1
+    to_delete: 0
+    content_position: 1
+  W3sContent_21: 
+    group_id: W3sGroup_1
+    page_id: W3sPage_1
+    language_id: W3sLanguage_1
+    content_type_id: W3sContentType_2
+    slot_id: W3sSlot_21
+    content: >
+      <a
+      href="http://jigsaw.w3.org/css-validator/check/referer"
+      target="_blank"></a>
+    edited: 1
+    to_delete: 0
+    content_position: 1
+  W3sContent_25: 
+    group_id: W3sGroup_1
+    page_id: W3sPage_1
+    language_id: W3sLanguage_1
+    content_type_id: W3sContentType_5
+    slot_id: W3sSlot_1
+    content: >
+      <ul><li ><a href="" >Home</a></li><li
+      ><a href="" >About</a></li><li ><a
+      href="" >Services</a></li><li ><a
+      href="" >Support</a></li><li ><a href=""
+      >Communications</a></li><li ><a href=""
+      >Why choose us</a></li><li ><a href=""
+      >News</a></li><li ><a href=""
+      >Testimonial</a></li><li ><a href=""
+      >Contact us</a></li></ul>
+    edited: 1
+    to_delete: 0
+    content_position: 2
+  W3sContent_26: 
+    group_id: W3sGroup_1
+    page_id: W3sPage_1
+    language_id: W3sLanguage_1
+    content_type_id: W3sContentType_5
+    slot_id: W3sSlot_18
+    content: >
+      <ul><li ><a href="" >Home</a></li><li
+      ><a href="" >About us</a></li><li ><a
+      href="" >Services</a></li><li ><a
+      href="" >Support</a></li><li ><a href=""
+      >Communication</a></li><li ><a href=""
+      >Why choose us</a></li><li ><a href=""
+      >News</a></li><li ><a href=""
+      >Testimonials</a></li><li ><a href=""
+      >Contact us</a></li></ul>
+    edited: 1
+    to_delete: 0
+    content_position: 2
+  W3sContent_30: 
+    group_id: W3sGroup_1
+    page_id: W3sPage_1
+    language_id: W3sLanguage_1
+    content_type_id: W3sContentType_2
+    slot_id: W3sSlot_4
+    content: >
+      <p>congue eu, aliquet eu, dignissim ac,
+      arcu. <span
+      class="txt1">Suspendisse</span> posuere
+      eleifend arcu</p>
+    edited: 1
+    to_delete: 0
+    content_position: 2
+W3sMenuElement: 
+  W3sMenuElement_1: 
+    content_id: W3sContent_25
+    page_id: 0
+    link: Home
+    external_link: 
+    image: 
+    rollover_image: 
+    position: 1
+  W3sMenuElement_2: 
+    content_id: W3sContent_25
+    page_id: 0
+    link: About
+    external_link: 
+    image: 
+    rollover_image: 
+    position: 2
+  W3sMenuElement_3: 
+    content_id: W3sContent_25
+    page_id: 0
+    link: Services
+    external_link: 
+    image: 
+    rollover_image: 
+    position: 3
+  W3sMenuElement_4: 
+    content_id: W3sContent_25
+    page_id: 0
+    link: Support
+    external_link: 
+    image: 
+    rollover_image: 
+    position: 4
+  W3sMenuElement_5: 
+    content_id: W3sContent_25
+    page_id: 0
+    link: Communications
+    external_link: 
+    image: 
+    rollover_image: 
+    position: 5
+  W3sMenuElement_6: 
+    content_id: W3sContent_25
+    page_id: 0
+    link: Why choose us
+    external_link: 
+    image: 
+    rollover_image: 
+    position: 6
+  W3sMenuElement_7: 
+    content_id: W3sContent_25
+    page_id: 0
+    link: News
+    external_link: 
+    image: 
+    rollover_image: 
+    position: 7
+  W3sMenuElement_8: 
+    content_id: W3sContent_25
+    page_id: 0
+    link: Testimonial
+    external_link: 
+    image: 
+    rollover_image: 
+    position: 8
+  W3sMenuElement_9: 
+    content_id: W3sContent_25
+    page_id: 0
+    link: Contact us
+    external_link: 
+    image: 
+    rollover_image: 
+    position: 9
+  W3sMenuElement_10: 
+    content_id: W3sContent_26
+    page_id: 0
+    link: Home
+    external_link: 
+    image: 
+    rollover_image: 
+    position: 1
+  W3sMenuElement_11: 
+    content_id: W3sContent_26
+    page_id: 0
+    link: About us
+    external_link: 
+    image: 
+    rollover_image: 
+    position: 2
+  W3sMenuElement_12: 
+    content_id: W3sContent_26
+    page_id: 0
+    link: Services
+    external_link: 
+    image: 
+    rollover_image: 
+    position: 3
+  W3sMenuElement_13: 
+    content_id: W3sContent_26
+    page_id: 0
+    link: Support
+    external_link: 
+    image: 
+    rollover_image: 
+    position: 4
+  W3sMenuElement_14: 
+    content_id: W3sContent_26
+    page_id: 0
+    link: Communication
+    external_link: 
+    image: 
+    rollover_image: 
+    position: 5
+  W3sMenuElement_15: 
+    content_id: W3sContent_26
+    page_id: 0
+    link: Why choose us
+    external_link: 
+    image: 
+    rollover_image: 
+    position: 6
+  W3sMenuElement_16: 
+    content_id: W3sContent_26
+    page_id: 0
+    link: News
+    external_link: 
+    image: 
+    rollover_image: 
+    position: 7
+  W3sMenuElement_17: 
+    content_id: W3sContent_26
+    page_id: 0
+    link: Testimonials
+    external_link: 
+    image: 
+    rollover_image: 
+    position: 8
+  W3sMenuElement_18: 
+    content_id: W3sContent_26
+    page_id: 0
+    link: Contact us
+    external_link: 
+    image: 
+    rollover_image: 
+    position: 9

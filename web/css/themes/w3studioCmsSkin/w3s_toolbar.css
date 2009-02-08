@@ -1,0 +1,48 @@
+/*
+ * This file is part of the w3studioCMS package library and it is distributed 
+ * under the LGPL LICENSE Version 2.1. To use this library you must leave 
+ * intact this copyright notice.
+ *  
+ * (c) 2007-2008 Giansimon Diblas <giansimon.diblas@w3studiocms.com>
+ *  
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+.w3s_toolbar
+{
+	width: 99% !important;
+	background-color: #333 !important;
+	padding: 3px !important;
+	background-image:url(images/w3s_toolbar/toolbar.png) !important; 
+	background-repeat: repeat-x !important;
+	border-bottom:1px solid #999 !important;
+  border-right:1px solid #999 !important;
+  border-top:1px solid #AAA !important;
+  border-left:1px solid #AAA !important;
+}
+
+.image_button
+{
+	color: #000 !important;
+  width:48px !important;
+  height:48px !important;
+  float:left !important;
+  padding:4px !important;
+  font: bold 9px/10px Verdana, Arial, Helvetica, sans-serif !important;
+  background-color:#CCCCCC !important;
+  border-top:1px solid #FFF !important;
+  border-bottom:1px solid #AAA !important;
+  border-left:1px solid #FFF !important;
+  border-right:1px solid #AAA !important;
+  text-align:center !important;
+}
+
+.w3s_toolbar a.image_button:hover{
+  color: #FFFF99 !important;
+  font: bold 9px/10px Verdana, Arial, Helvetica, sans-serif !important;
+}
+
+.w3s_toolbar a.image_button img{
+  border:0px !important;
+}

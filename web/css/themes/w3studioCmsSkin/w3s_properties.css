@@ -1,0 +1,74 @@
+/*
+ * This file is part of the w3studioCMS package library and it is distributed 
+ * under the LGPL LICENSE Version 2.1. To use this library you must leave 
+ * intact this copyright notice.
+ *  
+ * (c) 2007-2008 Giansimon Diblas <giansimon.diblas@w3studiocms.com>
+ *  
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+ #w3s_properties{
+   background-color: #FFF;
+   border: 1px solid #666;
+ }
+ 
+ #w3s_properties .header{
+    padding:4px;
+    background-color: #CCC7BA;
+    border-bottom: 1px solid #666;
+    font: bold 11px/12px Arial, Verdana, Helvetica, sans-serif;
+ }
+ 
+ #w3s_properties table{
+   width:190px;
+   font: 10px/12px Arial, Verdana, Helvetica, sans-serif;
+ }
+ 
+ #w3s_properties table th{
+   background-color: #ECE9D8;
+   border-right: 1px solid #999;
+   border-bottom: 1px solid #CCC;
+   padding:4px;
+ }
+ 
+ #w3s_properties table td{
+   width:90px;
+   border-bottom: 1px solid #CCC;
+   padding:0 2px;
+ }
+ 
+ #w3s_properties td input{
+   border: 0 !important;
+   width:130px;
+   font: 10px/12px Arial, Verdana, Helvetica, sans-serif;
+   background-color: #FFF;
+ }
+ 
+ #w3s_properties td select{
+   width:130px;
+   font: 10px/12px Arial, Verdana, Helvetica, sans-serif;
+   background-color: #FFF;
+   border: 1px solid #CCC;
+ }
+ 
+ #w3s_properties .disabled{
+   color: #666;
+ }
+
+ #w3s_properties .combined_input{
+   width:110px !important;
+ }
+
+ #w3s_properties .combined_input_disabled{
+   width:114px !important;
+   color: #666;
+ }
+
+ #w3s_properties .combined_button{
+   width:14px;
+   background-color: #CCC7BA;
+   border: 1px solid #666;
+ }
+

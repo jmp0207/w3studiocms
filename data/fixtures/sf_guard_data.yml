@@ -1,0 +1,85 @@
+sfGuardUser:
+  admin:
+    username:       admin
+    password:       admin
+    is_super_admin: true
+  editor:
+    username:       editor
+    password:       editor
+  publisher:
+    username:       pub
+    password:       pub
+  wd:
+    username:       wd
+    password:       wd
+  guest:
+    username:       guest
+    password:       guest
+
+sfGuardPermission:
+  admin:
+    name:           admin
+    description:    Administrator permission
+  wd:
+    name:           webdesigner
+    description:    WebDesigner permission
+  publisher:
+    name:           publisher
+    description:    Content editor and publish permissions
+  editor:
+    name:           editor
+    description:    Content editor permission
+  guest:
+    name:           guest
+    description:    Guest editor permission
+
+sfGuardGroup:
+  admin:
+    name:           admin
+    description:    Administrator group
+  wd:
+    name:           webdesigner
+    description:    WebDesigner permission
+  publisher:
+    name:           publisher
+    description:    Content editor and publisher group
+  editor:
+    name:           editor
+    description:    Content editor group
+  guest:
+    name:           guest
+    description:    Guest editor group
+
+sfGuardGroupPermission:
+  admin:
+    group_id:       admin
+    permission_id:  admin
+  wd:
+    group_id:       wd
+    permission_id:  wd
+  publisher:
+    group_id:       publisher
+    permission_id:  publisher
+  editor:
+    group_id:       editor
+    permission_id:  editor
+  guest:
+    group_id:       guest
+    permission_id:  guest
+
+sfGuardUserGroup:
+  admin:
+    group_id:       admin
+    user_id:        admin
+  wd:
+    group_id:       wd
+    user_id:        wd
+  publisher:
+    group_id:       publisher
+    user_id:        publisher
+  editor:
+    group_id:       editor
+    user_id:        editor
+  guest:
+    group_id:       guest
+    user_id:        guest

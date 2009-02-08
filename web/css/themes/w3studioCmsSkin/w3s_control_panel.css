@@ -1,0 +1,263 @@
+/*
+ * This file is part of the w3studioCMS package library and it is distributed 
+ * under the LGPL LICENSE Version 2.1. To use this library you must leave 
+ * intact this copyright notice.
+ *  
+ * (c) 2007-2008 Giansimon Diblas <giansimon.diblas@w3studiocms.com>
+ *  
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/* ------------------------------------ *
+    Page elements
+ * ------------------------------------ */
+#w3s_control_panel{
+  width:300px;
+  font: 10px Arial, Helvetica, sans-serif;
+  position:fixed;
+  top:0px;
+  right:1px;
+  background-color: #E4E2D5;
+  text-align:left;
+  border: 1px solid #000;
+  color: #000;
+  z-index:200;
+}
+
+#w3s_control_panel_title{
+  width:296px;
+  height:12px;
+  background-color:#CCC7BA;
+  background:url(images/control_panel/title.jpg) repeat-x;
+  font:11px Arial, Helvetica, sans-serif;
+  padding:2px;
+  border-bottom: 1px solid #000;
+}
+
+#w3s_control_panel_tabs_panel{
+  width:300px;
+  height:22px;
+  padding-top:10px;
+  background:#E4E2D5 url(images/control_panel/bg_tabs.gif) repeat-x left bottom;
+}
+
+#w3s_control_panel_tabs_panel ul{
+  margin:0;
+  padding:0;
+}
+
+#w3s_control_panel_tabs_panel ul li{
+  float:left;
+  margin-left:3px;
+  margin-right:3px;
+  list-style-type:none;
+}
+
+#w3s_control_panel_tabs_panel ul li a{
+  color:#FFF;
+  text-decoration:none;
+  font:bold 11px Arial, Helvetica, sans-serif;
+  background:url(images/control_panel/tabs.jpg) no-repeat left top;
+  display:block;
+  padding:4px;
+}
+
+#w3s_control_panel_tabs_panel ul li .w3s_active_tab{
+  background-position:100% -24px;
+  border-left:1px solid #999;
+  color:#000;
+}
+
+#w3s_control_panel_tabs_panel ul li .w3s_active_tab:hover{
+  color:#99CC00;
+}
+
+#w3s_control_panel_tabs_panel ul li a:hover{
+  color:#FFFF99;
+}
+
+#w3s_control_panel_content_panel{
+  width:292px;
+  background-color:#F5F4EF;
+  padding:4px;
+  display:none;
+}
+
+.w3s_tabs{
+  padding:4px;  
+  display:none;
+}
+
+#w3s_control_panel_languages_panel{
+  width:292px;
+  height:12px;
+  padding:4px;
+  padding-bottom:8px;
+  font:11px Arial, Helvetica, sans-serif;
+  border-bottom: 1px solid #999;
+  background-color:#E4E2D5;
+}
+
+#w3s_control_panel_languages_panel ul li a{
+  border:1px solid #AAA;
+  padding:1px;
+  background-color:#EEE;
+  color:#666;
+  text-decoration:none;
+  display:block;
+  font:10px Arial, Helvetica, sans-serif;
+}
+
+#w3s_control_panel_languages_panel ul li a:hover{
+  color:#FFCC00;
+  border:1px solid #FFCC00;
+}
+
+#w3s_page_list_commands{
+  height:10px;
+  padding-top:4px;
+  padding-bottom:8px;
+  font:normal 11px Arial, Helvetica, sans-serif;
+  color:#333;
+	margin-bottom:6px;
+}
+
+#w3s_page_list_commands ul, #w3s_control_panel_languages_panel ul{
+  margin:0;
+  padding:0;
+}
+
+#w3s_page_list_commands ul li, #w3s_control_panel_languages_panel ul li{
+  float:left;
+  padding-left:2px;
+  padding-right:2px;
+  list-style-type:none;
+}
+
+#w3s_page_list_commands ul li a{
+  color:#999;
+  text-decoration:none;
+  display:block;
+  font:bold 11px Arial, Helvetica, sans-serif;
+  color:#999;
+}
+
+#w3s_page_list_commands ul li a:hover{
+  font:bold 11px Arial, Helvetica, sans-serif;
+  color:#FFCC00;
+}
+
+#w3s_page_list_commands .w3s_right_separator{
+  border-right:1px solid #AAA;
+}
+
+#w3s_page_list_commands .w3s_left_separator{
+  border-left:1px solid #EEE;
+}
+
+#w3s_page_list_commands select, #w3s_control_panel_languages_panel select{
+  color:#666;
+  border-top:1px solid #CCC;
+  border-bottom:1px solid #AAA;
+  border-left:1px solid #CCC;
+  border-right:1px solid #AAA;
+  font:9px Arial, Helvetica, sans-serif;
+  background-color:#FFFFFF;
+}
+
+#w3s_control_panel_languages_panel select{
+  height:16px;
+  font:10px Arial, Helvetica, sans-serif;
+}
+
+#w3s_page_list, #w3s_slot_list{
+  background-color:#FFFFFF;
+  border-top:1px solid #CCC;
+  border-bottom:1px solid #999;
+  border-left:1px solid #CCC;
+  border-right:1px solid #999;
+}
+
+#w3s_page_list a, #w3s_slot_list a{
+  color:#999;
+  text-decoration:none;
+}
+
+#w3s_page_list a:hover, #w3s_slot_list a:hover{
+  color:#FFCC00;
+} 
+
+#w3s_page_list input{
+  margin:0;
+  padding:0;
+  color:#FF9900;
+  border-top:1px solid #CC6600;
+  border-bottom:1px solid #CC6633;
+  border-left:1px solid #CC6600;
+  border-right:1px solid #CC6633;
+  font:9px Arial, Helvetica, sans-serif;
+}
+
+#w3s_preview_commands{
+  width:120px;
+  height:18px;
+  padding:6px 2px;
+  background-color:#E4E2D5;
+  display:none;
+}
+
+#w3s_tab_3 input, #w3s_tab_3 textarea{
+  border: 1px solid #666;
+  background-color:#FFFFFF;
+  font: 10px Verdana, Arial, Helvetica, sans-serif;  
+}
+
+#w3s_error{
+  display: none;
+}
+
+.w3s_white_row{
+  height:12px !important;
+  background-color:#FFFFFF !important;
+  border-bottom:1px dotted #999 !important;  
+  padding:2px !important;
+}
+
+.w3s_white_row_active{
+  height:12px !important;
+  background-color:#EEEEEE !important;
+  border-bottom:1px dotted #999 !important;  
+  padding:2px !important;
+}
+
+#w3s_page_list .w3s_white_row_active a{
+  color:#666;
+  text-transform:uppercase;
+}
+
+.w3s_yellow_row{
+  height:12px !important;
+  background-color:#FFFFCE !important;
+  border-bottom:1px dotted #999 !important;  
+  padding:2px !important;
+}
+
+.w3s_yellow_row_active{
+  height:12px !important;
+  background-color:#FFFF99 !important;
+  border-bottom:1px dotted #999 !important;  
+  padding:2px !important;
+}
+
+#w3s_page_list .w3s_yellow_row_active a{
+  color:#CC6600;
+  text-transform:uppercase;
+}
+
+.w3s_blue_row{
+  height:12px !important;
+  background-color:#F3F8FC !important;
+  border-bottom:1px dotted #999 !important;  
+  padding:2px !important;
+}

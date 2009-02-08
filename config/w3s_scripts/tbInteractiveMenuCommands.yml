@@ -1,0 +1,10 @@
+button1:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_interactive_menu/add.png
+  action: InteractiveMenu.openActionsMenu()
+  imageParams:
+    size: 32x32
+button2:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_interactive_menu/remove.png
+  action: InteractiveMenu.contentDelete('<?php echo sfContext::getInstance()->getI18N()->__('Do you really want to delete this content')?>')
+  imageParams:
+    size: 32x32

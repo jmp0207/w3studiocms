@@ -1,0 +1,25 @@
+all:
+  # Standard editor values are tinyMCE / fckEditor. If you want to use another
+  # editor you can call it as you want. If you want to use the rich function
+  # leave the parameter blanc
+  webeditor: tinyMCE
+  
+  # Path to images directory 
+  images_path: %SF_WEB_DIR%/images
+  
+  # Absolute path to images directory 
+  absolute_images_path: '/images/'
+  
+  # Configuration file for loading scripts
+  w3s_scripts_dir: %SF_PLUGINS_DIR%/sfW3studioCmsPlugin/config/w3s_scripts
+  
+  # Some useful paths to sfW3studioCmsPlugin web directory
+  w3s_web_images_dir: /sfW3studioCmsPlugin/images
+  w3s_web_js_dir: /sfW3studioCmsPlugin/js
+  w3s_web_templates_dir: %SF_WEB_DIR%/sfW3studioCmsPlugin/templates
+  w3s_web_published_dir: %SF_WEB_DIR%/sfW3studioCmsPlugin/published
+  
+  # The w3studioCms skin 
+  w3s_web_window_skin_dir: %SF_W3S_WEB_CSS_DIR%/themes/window
+  w3s_web_skin_dir: %SF_W3S_WEB_CSS_DIR%/themes/%SF_W3S_SKIN%
+  w3s_web_skin_images_dir: %SF_W3S_WEB_CSS_DIR%/themes/%SF_W3S_SKIN%/images
