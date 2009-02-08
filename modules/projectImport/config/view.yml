@@ -1,0 +1,4 @@
+default:
+  has_layout:     on
+  
+  stylesheets:    [common.css]

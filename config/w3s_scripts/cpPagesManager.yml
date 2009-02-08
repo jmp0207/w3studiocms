@@ -1,0 +1,17 @@
+button1:
+  image: 
+  imageTextRelation: 4
+  caption: Add page
+  action: W3sControlPanel.showAddPageModule()
+button2:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/control_panel/button_edit.gif
+  imageTextRelation: 4
+  action: W3sControlPanel.showAddGroupModule(2)
+button3:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/control_panel/button_add.gif
+  imageTextRelation: 4
+  action: W3sControlPanel.showAddGroupModule()
+button4:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/control_panel/button_delete.gif
+  imageTextRelation: 4
+  action: W3sGroup.remove()

@@ -1,0 +1,25 @@
+button1:
+  imageTextRelation: 4
+  caption: Change
+  action: W3sTemplate.loadEditorPage($('w3s_languages_select').value)
+button2:
+  imageTextRelation: 4
+  caption: Add
+  action: W3sControlPanel.openLanguagesInterface()
+  requiredCredentials: [[admin, publisher]]
+  actionDisabledParams:
+    class: button_disabled
+button3:
+  imageTextRelation: 4
+  caption: Edit
+  action: W3sControlPanel.openLanguagesInterface($('w3s_languages_select').value)
+  requiredCredentials: [[admin, publisher]]
+  actionDisabledParams:
+    class: button_disabled
+button4:
+  imageTextRelation: 4
+  caption: Delete
+  action: W3sLanguage.remove()
+  requiredCredentials: [[admin, publisher]]
+  actionDisabledParams:
+    class: button_disabled

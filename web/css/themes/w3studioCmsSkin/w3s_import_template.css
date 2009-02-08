@@ -1,0 +1,66 @@
+/*
+ * This file is part of the w3studioCMS package library and it is distributed 
+ * under the LGPL LICENSE Version 2.1. To use this library you must leave 
+ * intact this copyright notice.
+ *  
+ * (c) 2007-2008 Giansimon Diblas <giansimon.diblas@w3studiocms.com>
+ *  
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/* ------------------------------------ *
+    Page elements
+ * ------------------------------------ */
+
+#w3s_import_templates
+{
+  width:440px;
+  font: 10px Verdana, Arial;
+  text-align:center;
+  margin:0 auto;
+}
+
+#w3s_it_contents
+{
+  width:388px;
+  height:238px;
+  border:1px solid #AAA;
+  text-align:left;
+  padding:6px;
+}
+  
+#w3s_import_templates ul
+{
+  margin:0 0 0 10px;
+  padding:0px;
+  list-style-type:none;
+}
+
+#w3s_import_templates .active
+{
+  color:#FF9900;
+}
+
+#w3s_import_templates .info_header
+{
+  font-weight: bold;
+}
+
+#w3s_import_templates .template_image
+{
+	width: 96px;
+	height: 96px;
+}
+
+#w3s_table_import td
+{
+	padding:2px;
+}
+
+
+/*
+#w3s_import_templates a{
+  color:#FF9900;
+  text-decoration:none;
+}*/

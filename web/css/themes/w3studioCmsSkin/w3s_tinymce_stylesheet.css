@@ -1,0 +1,40 @@
+	body {
+    background-color: #FFFFFF;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    scrollbar-3dlight-color: #F0F0EE;
+    scrollbar-arrow-color: #676662;
+    scrollbar-base-color: #F0F0EE;
+    scrollbar-darkshadow-color: #DDDDDD;
+    scrollbar-face-color: #E0E0DD;
+    scrollbar-highlight-color: #F0F0EE;
+    scrollbar-shadow-color: #F0F0EE;
+    scrollbar-track-color: #F5F5F5;
+  }
+
+  td {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    border:1px dotted #aaa;
+  }
+
+  pre {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 10px;
+  }
+
+  thead {
+    background-color: #FFBBBB;
+  }
+
+  tfoot {
+    background-color: #BBBBFF;
+  }
+
+  th {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 13px;
+  }
+  .txt1{  color:#fff;  background-color:#1E6887;}
+	.smallTxt{  font:normal 12px/18px Arial, Helvetica, sans-serif;  color:#FF9C3A;  background-color:inherit;  padding:0 0 0 8px;}
+	.spacer{  clear:both;   font-size:0;   line-height:0;}

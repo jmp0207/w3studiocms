@@ -1,0 +1,44 @@
+/*
+ * This file is part of the w3studioCMS package library and it is distributed 
+ * under the LGPL LICENSE Version 2.1. To use this library you must leave 
+ * intact this copyright notice.
+ *  
+ * (c) 2007-2008 Giansimon Diblas <giansimon.diblas@w3studiocms.com>
+ *  
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/* ------------------------------------ *
+    Page elements
+ * ------------------------------------ */
+ 
+#w3s_scripts_manager{
+	width:600px;
+	font: 10px Verdana, Arial, Helvetica, sans-serif;
+	text-align:left;
+	padding:4px;
+	border-top:1px solid #bbb;
+  border-left:1px solid #bbb;
+  border-bottom:1px solid #777;
+  border-right:1px solid #777;
+  background-color:#99CC66;
+} 
+
+#w3s_scripts_manager input{
+  font: 10px Verdana, Arial, Helvetica, sans-serif !important;
+  border:1px solid #aaa !important;
+  background-color:#CCC !important;
+  padding:4px !important;
+  color:#000 !important;
+  text-align:center !important;
+}
+
+#w3s_scripts_manager textarea{
+  font: 11px Courier, Verdana, Arial, Helvetica, sans-serif !important;
+  border:1px solid #aaa !important;
+  background-color:#FFF !important;
+  padding:4px !important;
+  color:#000 !important;
+}
+

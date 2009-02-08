@@ -1,0 +1,23 @@
+/*
+ * This file is part of the w3studioCMS package library and it is distributed 
+ * under the LGPL LICENSE Version 2.1. To use this library you must leave 
+ * intact this copyright notice.
+ *  
+ * (c) 2007-2008 Giansimon Diblas <giansimon.diblas@w3studiocms.com>
+ *  
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+ 
+#w3s_images_select{
+	background-color: #FFFFFF;
+}
+
+#w3s_images_select table td{
+  padding: 2px;
+  border-bottom: 1px dotted #CCCCCC;
+}
+
+#w3s_images_select .border_green{
+  border:1px solid #999900;
+}

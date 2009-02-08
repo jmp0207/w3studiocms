@@ -1,0 +1,3 @@
+paths:
+  appPath: <?php echo sfConfig::get('sf_app_config_dir')?>/w3s_scripts
+  pluginPath: <?php echo sfConfig::get('sf_plugins_dir')?>/sfW3studioCmsPlugin/config/w3s_scripts

@@ -1,0 +1,91 @@
+/*
+ * This file is part of the w3studioCMS package library and it is distributed 
+ * under the LGPL LICENSE Version 2.1. To use this library you must leave 
+ * intact this copyright notice.
+ *  
+ * (c) 2007-2008 Giansimon Diblas <giansimon.diblas@w3studiocms.com>
+ *  
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/* ------------------------------------ *
+    Page elements
+ * ------------------------------------ */
+
+#w3s_menu_manager{
+  position:fixed;
+  width:610px;
+  height:110px;
+  z-index:202;
+}
+  
+#w3s_menu_manager_left{
+  width:60px;
+  height:95px;
+  float:left;
+  background-image:url(images/w3s_menu_manager/left.png);
+  background-repeat:no-repeat;
+}
+
+#w3s_menu_manager_center{
+  width:396px;
+  height:62px;
+  float:left;
+  padding:16px;
+  background-image:url(images/w3s_menu_manager/center.png);
+  background-repeat:repeat-x;
+  text-align:center;
+}
+
+#w3s_menu_manager_center table td{
+  padding: 4px !important;
+}
+
+#w3s_menu_manager_right{
+  width:60px;
+  height:95px;
+  float:left;
+  background-image:url(images/w3s_menu_manager/right.png);
+  background-repeat:no-repeated;
+}
+
+#w3s_menu_manager img{
+  border:0px;
+}
+
+#w3s_menu_manager table td{
+  width:50px;
+  font: bold 9px Arial, Verdana;
+  color:#FFF;
+  padding:0px 4px;
+  text-align:center;
+}
+
+#w3s_menu_manager table td a{
+  color:#FFF;
+  text-decoration:none;
+  font: 11px Verdana, Arial, Helvetica, sans-serif;
+}
+
+#w3s_menu_manager table td a:hover{
+  color:#C2FFFF;
+  text-decoration:none;
+  font: bold 11px Verdana, Arial, Helvetica, sans-serif;
+}
+
+#w3s_menu_manager_hidden{
+  position: fixed;
+  width:500px;
+  height:16px;
+  background-image:url(images/w3s_menu_manager/manager_menu_hidden.png);
+  background-repeat:no-repeated;
+  text-align:center;
+  /*
+  opacity:0.3;
+  filter: alpha(opacity = 30);*/
+  font: bold 10px Arial, Verdana;
+  color:#FFF;
+  display:block;
+  z-index:202;
+}

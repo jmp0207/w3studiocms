@@ -1,0 +1,111 @@
+/*
+ * This file is part of the w3studioCMS package library and it is distributed 
+ * under the LGPL LICENSE Version 2.1. To use this library you must leave 
+ * intact this copyright notice.
+ *  
+ * (c) 2007-2008 Giansimon Diblas <giansimon.diblas@w3studiocms.com>
+ *  
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+#w3s_overlay
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  width: 100%;
+  background-color:#666;
+}
+
+.link_button{
+  color: #666 !important;
+  padding:4px 10px !important;
+  margin:8px 0 !important;
+  font: bold 11px/12px Arial, Verdana, Helvetica, sans-serif !important;
+  background-color:#CCCCCC !important;
+  border-top:1px solid #FFF !important;
+  border-bottom:1px solid #AAA !important;
+  border-left:1px solid #FFF !important;
+  border-right:1px solid #AAA !important;
+  text-align:center !important;
+  text-decoration:none !important;
+}
+
+.form_row{
+  margin:8px 0 !important;
+  text-align:left !important;
+}
+
+#w3s_message p.success_message{
+	padding:10px !important;
+  color: #339900 !important;
+  font: bold 11px Verdana, Arial, Helvetica, sans-serif !important;
+}
+
+#w3s_message p.error_message{
+	padding:10px !important;
+  color: #C20000 !important;
+  font: bold 11px Verdana, Arial, Helvetica, sans-serif !important;  
+}
+
+#w3s_message p.success_14_message{
+	padding:10px !important;
+  color: #339900 !important;
+  font: bold 14px Verdana, Arial, Helvetica, sans-serif !important;
+}
+
+/*
+p.error_message_10{
+  color: #C20000 !important;
+  font: bold 10px/11px Verdana, Arial, Helvetica, sans-serif !important;
+}*/
+
+#w3s_message_close_section{
+  margin-top:6px !important;
+	text-align: center !important;
+}
+
+#w3s_message_close_section a{
+  color: #000 !important;
+  font: bold 11px Verdana, Arial, Helvetica, sans-serif !important;
+}
+
+#w3s_message_close_section a:hover{
+  color: #FF9900 !important;
+}
+
+#w3s_uploader_support
+{
+	display: none;
+}
+
+.CloseCurrentEditor{
+  margin:3px !important;
+  text-align:right !important;
+}
+
+.CloseCurrentEditor a{
+  font-weight: bold !important;
+  color:#333300 !important;
+  padding:2px !important;
+}
+
+.align_center{
+  text-align: center !important;
+}
+
+.align_right{
+  text-align: right !important;
+}
+
+a:hover
+{
+	color: #0099CC !important;
+}
+
+.button_disabled{
+  color: #999 !important;
+  background-color:#EEEEEE !important;
+}

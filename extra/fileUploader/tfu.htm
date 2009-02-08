@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>TWG Flash Uploader 2.7</title>
+<script type="text/javascript">
+function uploadFinished(loc) {
+   // here you can do something after the upload - loc is the parameter you provide in the config!
+   // you can call e.g. a php page where you have stored infos during upload!
+   // e.g. if you want to jump to another page after upload the code could be:
+   // window.location.href=loc;
+   document.getElementById("status").innerHTML = "Status: uploadFinished(..) called. Parameter: loc=" + loc;
+}
+function previewSelect(loc,id) {
+    // here you can do something after selecting a file - loc is the parameter you provide in the config!
+    // id the number you have selected in the list!
+   // you can call e.g. a php page where you have stored infos when selecting a file!
+   document.getElementById("status").innerHTML = "Status: previewSelect(..) called. Parameter: loc=" + loc + ", id=" + id;
+}
+
+function deleteFile(loc) {
+    // here you can do something after deleting a file - loc is the parameter you provide in the config!
+     document.getElementById("status").innerHTML = "Status: deleteFile(..) called. Parameter: loc=" + loc;
+}
+
+function changeFolder(loc) {
+    // here you can do something after changing a folder - loc is the parameter you provide in the config!
+     document.getElementById("status").innerHTML = "Status: changeFolder(..) called. Parameter: loc=" + loc;
+}
+
+function createFolder(status,loc) {
+    // here you can do something after creating a folder - loc is the parameter you provide in the config!
+     if (status == "exists")     statusstr="folder exists"; 
+     else if (status == "true")  statusstr="folder created";
+     else if (status == "false") statusstr="folder not created";
+     else statusstr = "unknown status";
+     document.getElementById("status").innerHTML = "Status: changeFolder(..) called. Parameter: loc=" + loc + ", status=" + statusstr;
+}
+
+function renameFolder(status,loc) {
+    // here you can do something after renaming a folder - loc is the parameter you provide in the config!
+     if (status == "exists")     statusstr="destination folder exists"; 
+     else if (status == "true")  statusstr="folder renamed";
+     else if (status == "false") statusstr="folder not renamed";
+     else statusstr = "unknown status";
+     document.getElementById("status").innerHTML = "Status: renameFolder(..) called. Parameter: loc=" + loc + ", status=" + statusstr;
+}
+
+function deleteFolder(status,loc) {
+    // here you can do something after deleting a folder - loc is the parameter you provide in the config!
+     if (status == "true")     statusstr="folder deleted"; 
+     else if (status == "false") statusstr="folder not deleted";
+     else statusstr = "unknown status";
+     document.getElementById("status").innerHTML = "Status: deleteFolder(..) called. Parameter: loc=" + loc + ", status=" + statusstr;
+}
+
+function copymove(doCopyFolder,type,total,ok,error,exits,param) {
+  // here you can do something after copying/moving a file or folder - loc is the parameter you provide in the config!
+   // doCopyFolder = if "true" a folder action was done, "false" a file action
+   // type = "m" = move, otherwise copy
+   // total = Total number of files moved/copied
+   // ok = Files copied/moved without errors
+   // error = Files copied/moved with errors
+   // exits = Number of files that already existed and are not overwritten
+   // param = is the parameter you provide in the config!
+   targetstr = (doCopyFolder == "true") ?  "folder" : "file";
+   typestr = (type == "m") ? "move" : "copy";
+   document.getElementById("status").innerHTML = "Status: copymove(..) called. Parameter: loc=" + loc + ", target=" + targetstr + ", type=" + typestr + ", total=" + total + ", ok=" + ok + ", error=" + error + ", exists="+exists;
+}
+
+
+/**
+This function is only here to demonstrate the different languages of TWG
+Normaly you add this parameter directly like shown below in the code.
+*/
+function changeLanguage(lang) {
+   var so = new SWFObject("twg_flash_uploader.swf?lang=" + lang, "mymovie", "650", "340", "8", "#ffffff");
+   so.addParam("scale","noScale");
+   so.addParam("allowfullscreen","true");
+   so.write("flashcontent");
+}
+</script>
+
+<style type="text/css">
+.noflash { padding:10px; margin:10px; border: 1px solid #555555; background-color: #f8f8f8; text-align:center; width:330px; }
+.small {  font-size: 11px; margin:2px; }
+a { color: #000099; text-decoration: none;  font-weight: bold; }
+a visited { color: #000099;}
+a link { color: #000099;}
+a hover { color: #999999;}
+body,table { font-family : Verdana,Lucida,sans-serif; font-size: 12px; margin:10px;}
+h1 { background-color : #3333ff; font-weight: bold; font-size: 16px; border: 1px solid #9999ff; padding: 4px 4px 4px 10px; color: #FFFFFF; }
+h2 { background-color : #eeeeee; font-size: 12px; font-weight: bold; border-bottom: 1px solid #000000; padding: 2px 2px 2px 10px; }
+</style>
+</head>
+<body bgcolor="#ffffff" onLoad="document.getElementById('mymovie').focus()">
+<h1>TWG Flash Uploader Demo Page</h1>
+The TWG Flash Uploader is a very comfortable way for your users to upload file to a remote server. Because it's based on flash it can be used by almost everyone. You can simply upload files by selecting files on your hard drive andsimply press the upload button.
+For more details please go to the web page.<br>
+
+<p><b>Please check the source code of this page how to integrate TFU properly.</b></p>
+<p>You will find 2 swf's in the download: twg_flash_uploader.swf and tfu_preloader.swf. The tfu_preloader.swf does only load the main flash and shows a small percentage counter. The flash is only ~121k - therefore it's up to you if you want to provide the loading status. <br>
+By default the preloader is not enabled because if you are registered and download is enabled you get an error from the flash plugin if you download a file. If you don't enable downloads you can use the preloader without restrictions. </p>
+<h2>Requirements</h2>
+Client: Flash >= 8, Java >= 1.4.x if you want to use the file split applet<br>
+Server: php 4.x + gdlib installed.
+<h2>URL parameters</h2>
+<ul>
+   <li><b>lang</b> is the switch for the language - valid entries are de, en, fr, es, it, cn and nl e.g. ?lang=de</li>
+   <li><b>config_file_nr</b> is the number of the config file. If you use &config_file_nr=1 then the config file tfu_config1.php is used!</li>
+   <li><b>session_id</b> - you can specify a session id if you want to make the flash work without cookies too - simply pass the current session id - it will be added to every call to the server. But only very few people browse without cookies (new v2.5).</li>
+   <li><b>session_name</b> -  The default of this value is TFUSESSID. I do not use the default PHPSESSID because it you set session.use_trans_sid=off then this would be filtered and upload would fail! I recommend NOT to change this </li>
+<li><strong>base</strong> - This is only needed if you  use the flash if not all files are in one directory. Needed to load the language files properly - Read howto 8 of the TFU FAQ.</li>
+<li><strong>c_*</strong> - color settings of the flash - available if you have a professional license or above. See howto 9. <br>
+</li>
+</ul>
+<p>All other settings are done in the tfu_config.php - The parameters are explained there. Please read the faq on the web pagefor more info's.</p>
+<p>
+Available languages:
+  <select name="select" onChange="changeLanguage(this.options[this.selectedIndex].value);" class="checkbox">
+    <option value="en">English</option>
+    <option value="de">German</option>
+    <option value="es">Spanish</option>
+    <option value="fr">French</option>
+    <option value="nl">Dutch</option>
+    <option value="cn">Chinese simplified</option>
+  <option value="tw">Chinese traditional</option>
+    <option value="it">Italian</option>
+  <option value="da">Danish</option>
+  <option value="no">Norway</option>
+  <option value="pt">Portuguese</option>
+  <option value="sk">Slovak</option>
+  <option value="pl">Polish</option>
+  </select>
+  <br>
+  <br>
+  The flash does now show  language flags too - check the tfu_config.php : $language_dropdown and read the documantation there to configure it properly!
+<noscript>
+&nbsp;(Please activate Javascript to enable the switch to another language)
+</noscript>
+</p>
+<br>
+<center>
+<!--
+
+
+Here Is the code how to include the flash!
+
+
+-->
+<!-- include with javascript - best solution because otherwise you get the "klick to activate border in IE" -->
+<script type="text/javascript" src="swfobject.js"></script>
+<script type="text/javascript">
+   document.write('<div id="flashcontent"><div class="noflash">TWG Flash Uploader requires at least Flash 8.<br>Please update your browser.</div></div>');
+   var so = new SWFObject("twg_flash_uploader.swf", "mymovie", "650", "340", "8", "#ffffff");
+   // Use this if you want to use the preloader
+   // var so = new SWFObject("tfu_preloader.swf", "mymovie", "650", "340", "8", "#ffffff");
+   // needed that fullscreen works!
+   so.addParam("scale","noScale");
+   so.addParam("allowfullscreen","true");
+    
+   // - The following 3 lines would make a blue header bar with white text if you have a professional license or above
+   // so.addVariable("c_header_bg", "7777FF");
+   // so.addVariable("c_header_bg_2", "0000FF");
+   // so.addVariable("c_text_header", "FFFFFF");
+   
+   so.write("flashcontent");
+</script>
+<!-- end include with Javascript -->
+<!-- static html include -->
+<noscript>
+<object name="mymovie" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="650" height="340"  align="middle">
+<param name="allowScriptAccess" value="sameDomain" />
+<param name="movie" value="twg_flash_uploader.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><param name="scale" value="noScale" /><param name="allowFullScreen" value="true" /><embed src="twg_flash_uploader.swf" name="mymovie" quality="high" bgcolor="#ffffff" width="650" height="340" align="middle" scale="noScale" allowfullscreen="true" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+</object>
+</noscript>
+<!-- end static html include -->
+<!--
+
+
+End of include code
+
+
+-->
+<div class="small" id="status">Here a status is displayed if you have Javascript events defined and a license file exists.</div>
+</center>
+<p align=center>
+Please note: TFU has to be installed on a web server because it reads all it's setting from the server! If you only open the tfu.htm file from you local hard drivethe flash displays an error.</p>
+</p> Have fun using TFU.
+<h2>Server settings</h2>
+<p>By calling the tfu_config.php directly you get some server settings displayed. This are the limitations of your server - not of TFU. Please read the TFU FAQ on the website how to change this (php.ini). You can open this page by clicking <a href="tfu_config.php">here</a>.
+</p>
+<h2>Registration &amp; Help </h2>
+Please go to <a href="http://www.tinywebgallery.com">www.tinywebgallery.com</a> to register TFU and to get some help if you have a problem using/installing TFU. Check the TFU FAQ first if you have any problems. If this does not solve your problem please use the forum. 
+<h2>Password encryption</h2>
+<p>I have added a small password generator in the file<a href="tfu_password_generator.php"> tfu_password_generator.php</a>. I have included this generator below in a small iframe ;).</p>
+<center><iframe src="tfu_password_generator.php" width="500" height="260" scrolling="auto" frameborder="0"></iframe></center>
+<h2>TFU file split applet</h2>
+<p>Many servers have a very small upload limit and this does not allow
+to upload images or movies in the original size.</p>
+The TFU file split applet is a small Java applet where you can split your files into smaller pieces and store it back on your hard disk.
+You can then upload these pieces with TFU and they are merged in the backend.
+ If you want your user to get around this limit you can offer them this applet. Not all server do support files that are bigger than the upload size (e.g. files can't be opened after upload although they are merged ok- see the File Split Applet page how you can test this). <br>
+<p>You need <b><a href="http://java.sun.com/javase/downloads/index.jsp" target="_blank">JDK >= 1.4</a></b> installed to use this applet.
+The applet needs access to your hard disk to read/write the files.
+This is only possible with a signed applet. If you open the applet you get a warning:</p>
+<p align="center">"The application's digital signature is invalid. Do you want to run the application"</p>
+This is because this is a <b>selfsigned applet</b>. If you want to verify that this is the original applet that
+comes from the TinyWebGallery web site click <a target="_blank" href="http://www.tinywebgallery.com/index_tfufsa.htm">here</a> for instructions how to verify the signature manually.
+<p>
+<center>
+<div class="noflash"><a href="fsa_signed.htm">Open the TFU File Split Applet page</a></div>
+</center>
+<p>The applet is open source and released under the LGPL. Please go to <a target="_blank" href="http://www.tinywebgallery.com/index_tfufsa.htm">www.tinywebgallery.com/index_tfufsa.htm</a> if you want
+to download the sources.</p>
+<p>&nbsp;
+</p>
+<h1><a name="faq"></a>FAQ</h1>
+<p>The FAQ for TFU can be found at <a href="http://www.tinywebgallery.com" target="_blank">www.tinywebgallery.com/index_tfu_faq.htm</a></p>
+<p>&nbsp;</p>
+<center><small>TWG Flash Uploader - Copyright (c) 2004-2007 TinyWebGallery.</small></center>
+</body>
+</html>

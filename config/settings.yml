@@ -1,0 +1,7 @@
+all:
+  w3s_skin: w3studioCmsSkin
+  w3s_web_css_dir: /sfW3studioCmsPlugin/css
+  
+prod:
+  .settings:
+    cache: off

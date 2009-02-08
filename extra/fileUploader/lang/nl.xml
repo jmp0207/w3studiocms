@@ -1,0 +1,159 @@
+<!--
+TWG Flash Uploader 2.7 - netherland language file 
+
+If you make any changes make sure to save the file as UTF-8! Otherwise special characters
+are not displayed properly!
+ -->
+<TFU>
+	<!-- Menu items -  - be carefull with the length - menu is not resized if the text is too long! -->
+	<LANG><KEY>menu_refresh</KEY><VALUE>Verversen</VALUE></LANG>
+	<LANG><KEY>menu_create_folder</KEY><VALUE>Maak map</VALUE></LANG>
+	<LANG><KEY>menu_delete_folder</KEY><VALUE>Verwijder map</VALUE></LANG>
+	<LANG><KEY>menu_rename_folder</KEY><VALUE>Hernoem map</VALUE></LANG>
+	<LANG><KEY>menu_download_file</KEY><VALUE>Download bestand</VALUE></LANG>
+	<LANG><KEY>menu_rename_file</KEY><VALUE>Hernoem bestand</VALUE></LANG>
+	<!-- Buttons - be carefull with the lenght - buttons are not resized if the text is too long! -->
+	<LANG><KEY>bt_login</KEY><VALUE>Inloggen</VALUE></LANG>
+	<LANG><KEY>bt_refresh</KEY><VALUE>Verversen</VALUE></LANG>
+	<LANG><KEY>bt_refresh_wait</KEY><VALUE>Even wachten aub...</VALUE></LANG>
+	<LANG><KEY>bt_rename</KEY><VALUE>Hernoem</VALUE></LANG>
+	<LANG><KEY>bt_delete</KEY><VALUE>Verwijder</VALUE></LANG>
+	<LANG><KEY>bt_Upload</KEY><VALUE>Upload</VALUE></LANG>
+	<LANG><KEY>bt_add</KEY><VALUE>Toevoegen</VALUE></LANG>
+	<LANG><KEY>bt_remove</KEY><VALUE>Verwijderen</VALUE></LANG>
+	<LANG><KEY>bt_create</KEY><VALUE>Maak</VALUE></LANG>
+	<LANG><KEY>bt_cancel</KEY><VALUE>Afbreken</VALUE></LANG>
+	<LANG><KEY>bt_extras</KEY><VALUE>Opties</VALUE></LANG>
+	<LANG><KEY>bt_download</KEY><VALUE>Download</VALUE></LANG>
+	<!-- Text in the frontend -->
+	<LANG><KEY>status_txt</KEY><VALUE>Status:</VALUE></LANG>
+	<LANG><KEY>upload_folder</KEY><VALUE>Upload map</VALUE></LANG>
+	<LANG><KEY>txt_resize</KEY><VALUE>Verklein</VALUE></LANG>
+	<LANG><KEY>txt_progress</KEY><VALUE>Progressie</VALUE></LANG>
+	<LANG><KEY>txt_queue</KEY><VALUE>Uploadlijst</VALUE></LANG>
+	<LANG><KEY>txt_create_folder</KEY><VALUE>Geef mapnaam</VALUE></LANG>
+	<LANG><KEY>txt_delete_folder</KEY><VALUE>De map op de server verwijderen?</VALUE></LANG>
+	<LANG><KEY>txt_new_foldername</KEY><VALUE>Nieuwe mapnaam: </VALUE></LANG>
+	<LANG><KEY>txt_new_filename</KEY><VALUE>Nieuwe bestandsnaam: </VALUE></LANG>
+	<LANG><KEY>txt_preview</KEY><VALUE>Voorvertoning</VALUE></LANG>
+	<LANG><KEY>txt_remote</KEY><VALUE>Server</VALUE></LANG>
+	<LANG><KEY>txt_remote_files</KEY><VALUE>bestanden</VALUE></LANG>
+	<LANG><KEY>grid_name</KEY><VALUE>Naam</VALUE></LANG>
+	<LANG><KEY>grid_size</KEY><VALUE>Grootte</VALUE></LANG>
+	<LANG><KEY>grid_date</KEY><VALUE>Datum</VALUE></LANG>
+	<LANG><KEY>upload_files</KEY><VALUE>(%s bestanden)</VALUE></LANG>
+	<LANG><KEY>upload_file</KEY><VALUE>(1 bestand)</VALUE></LANG>
+	<LANG><KEY>upload_size</KEY><VALUE>Upload grootte: %s</VALUE></LANG>
+	<!-- text of the login panel -->
+	<LANG><KEY>login_titel</KEY><VALUE>Inloggen</VALUE></LANG>
+	<LANG><KEY>login_username</KEY><VALUE>Gebruikersnaam</VALUE></LANG>
+	<LANG><KEY>login_password</KEY><VALUE>Wachtwoord</VALUE></LANG>
+	<LANG><KEY>login_message</KEY><VALUE>U probeert de TWG Upload Flash te gebruiken zonder bevestiging, het inloggen bij de server is niet gelukt, de sessie is verlopen of de configuratie kan niet worden bevestigd!</VALUE></LANG>
+	<LANG><KEY>login_message_server</KEY><VALUE>Uw registratiebestand is niet geldig voor dit domein (%s). Zorg voor een registratebestand voor dit domein. TWG Flash Uploader draait nu in freeware modus!</VALUE></LANG>
+	<LANG><KEY>login_message_lic</KEY><VALUE>Uw registratiebestand is corrupt of niet geldig meer. Zorg voor een geldig registratiebestand voor %s. TWG Flash Uploader draait nu in freeware modus!</VALUE></LANG>
+	<!-- info dialog -->
+	<LANG><KEY>message</KEY><VALUE>Bestanden op de Uploadlijst staan al op de server. Indien u ze daadwerkelijk upload worden de bestaande bestanden overschreven. De reeds bestaande bestanden zijn ge-highlite. Indien u 'bestanden verplaatsen' kiest kunt u deze verwijderen.</VALUE></LANG>
+	<LANG><KEY>please_login</KEY><VALUE>Inloggen alstublieft</VALUE></LANG>
+	<LANG><KEY>wrong_username</KEY><VALUE>Verkeerde gebruikersnaam/wachtwoord.</VALUE></LANG>
+	<!-- dropdown of the file select dialog -->
+	<LANG><KEY>dropdown_all_supported</KEY><VALUE>geaccepteerde bestandstypen</VALUE></LANG>
+	<LANG><KEY>dropdown_all</KEY><VALUE>Alle bestanden</VALUE></LANG>
+	<!-- everything below here shows up in the status line! -->
+	<!-- status messages - please keep all spaces because some text is merged sometimes -->
+	<LANG><KEY>create_folder_savemode</KEY><VALUE>Voor deze map geld geen bewerk recht (+ veiligheidsmodus is actief). Alle acties zijn uitgeschakeld.</VALUE></LANG>
+	<LANG><KEY>create_folder_permissions</KEY><VALUE>Voor deze map geld geen bewerk recht. Alle acties zijn uitgeschakeld</VALUE></LANG>		
+	<LANG><KEY>create_text_permissions</KEY><VALUE>U heeft geen rechten om mappen aan te maken. Deze functie is uitgeschakeld.</VALUE></LANG>		
+	<LANG><KEY>max_file_size</KEY><VALUE> Maximale bestandgrootte upload(per bestand): %s. </VALUE></LANG>
+	<LANG><KEY>select_files</KEY><VALUE>Selecteer de bestanden om te uploaden.</VALUE></LANG>
+	<LANG><KEY>upload_started</KEY><VALUE>Gestart met uploaden. Wachten alstublieft...</VALUE></LANG>
+	<LANG><KEY>upload_started_resize</KEY><VALUE>Gestart met uploaden. De afbeeldingen verkleinen duurt even na het uploaden . Wachten alstublieft...</VALUE></LANG>
+	<LANG><KEY>download_completed</KEY><VALUE>Klaar met downloaden.</VALUE></LANG>
+	<LANG><KEY>download_started</KEY><VALUE>Gestart met download. Wachten alstublieft...</VALUE></LANG>
+	<LANG><KEY>upload_files_in_queue</KEY><VALUE>%s bestanden stonden al klaar om te uploaden.</VALUE></LANG>
+	<LANG><KEY>upload_file_in_queue</KEY><VALUE>1 bestand (%s) stond al klaar om te uploaden.</VALUE></LANG>
+	<LANG><KEY>delete_queue</KEY><VALUE>%s bestand(en) verwijderd uit de Uploadlijst.</VALUE></LANG>
+	<LANG><KEY>wrong_extension</KEY><VALUE>Niet geaccepteerde bestands-extensie: %s. </VALUE></LANG>
+	<LANG><KEY>smaller_size</KEY><VALUE>Gebruik kleinere bestanden! De limiet is %s. </VALUE></LANG>
+	<LANG><KEY>remote_updated</KEY><VALUE>De lijst met bestanden op de server is bijgewerkt.</VALUE></LANG>
+	<LANG><KEY>freeware</KEY><VALUE>De freeware versie heeft een upload limiet van %s MB. Verwijder enkele bestanden.</VALUE></LANG>
+	<LANG><KEY>max_upload_size</KEY><VALUE>De beheerder heeft een uploadlimiet ingesteld van %s MB. Verwijder enkele bestanden.</VALUE></LANG>
+	<LANG><KEY>max_upload_files</KEY><VALUE>De beheerder heeft een uploadlimiet ingesteld van %s bestanden. Verwijder enkele bestanden.</VALUE></LANG>
+	<LANG><KEY>upload_error</KEY><VALUE>Uploaden niet gelukt. %s van de %s bestanden konden niet worden geüpload.</VALUE></LANG>
+	<LANG><KEY>upload_error_mem</KEY><VALUE>%s van de %s bestanden zijn niet geüpload. Voor %s is te weinig server geheugen om te verkleinen!</VALUE></LANG>
+	<LANG><KEY>upload_completed</KEY><VALUE>Klaar met uploaden. </VALUE></LANG>
+	<LANG><KEY>upload_completed_note</KEY><VALUE>Let op: Grote bestanden opslaan op de server kan even duren!</VALUE></LANG>
+	<LANG><KEY>loading</KEY><VALUE>Laden </VALUE></LANG>
+	<LANG><KEY>file_selected</KEY><VALUE>Geselecteerd item: '%s'.</VALUE></LANG>
+	<LANG><KEY>file_selected_url</KEY><VALUE>Directe link:  %s</VALUE></LANG>
+	<LANG><KEY>file_selected_error</KEY><VALUE>Selected item: '%s'. Preview not available.</VALUE></LANG>
+	<LANG><KEY>folder_deleted</KEY><VALUE>map '%s' verwijderd.</VALUE></LANG>
+	<LANG><KEY>folder_not_deleted</KEY><VALUE>map '%s' kan niet worden verwijderd.</VALUE></LANG>
+	<LANG><KEY>file_deleted</KEY><VALUE>Bestand '%s' verwijderd.</VALUE></LANG>
+	<LANG><KEY>file_not_deleted</KEY><VALUE>Bestand '%s' kan niet worden verwijderd.</VALUE></LANG>
+	<LANG><KEY>file_deleted_permissions</KEY><VALUE>Bestand '%s' kan niet worden verwijderd. Controleer rechten.</VALUE></LANG>
+	<LANG><KEY>folder_created</KEY><VALUE>map '%s' aan gemaakt.</VALUE></LANG>
+	<LANG><KEY>folder_exists</KEY><VALUE>map '%s' bestaat reeds.</VALUE></LANG>
+	<LANG><KEY>folder_not_created</KEY><VALUE>map '%s' kan niet worden gemaakt.</VALUE></LANG>
+	<LANG><KEY>action_cancled</KEY><VALUE>Actie afgebroken.</VALUE></LANG>
+	<LANG><KEY>action_cancled_upload</KEY><VALUE>Actie afgebroken. Ververs de lijst met bestanden. U kunt de deels geüploade bestanden verwijderen!</VALUE></LANG>
+	<LANG><KEY>files_added</KEY><VALUE>%s bestand(en) toegevoegd. </VALUE></LANG>
+	<LANG><KEY>folder_rename_to</KEY><VALUE>map kon niet worden hernoemt naar '%s'.</VALUE></LANG>
+	<LANG><KEY>folder_rename</KEY><VALUE>Huidige map is hernoemt naar '%s'.</VALUE></LANG>
+	<LANG><KEY>folder_rename_empty</KEY><VALUE>Naamveld voor nieuwe map mag niet leeg zijn.</VALUE></LANG>
+	<LANG><KEY>folder_rename_root</KEY><VALUE>map kan niet worden hernoemt want het is de root(hoofd)map.</VALUE></LANG>
+	<LANG><KEY>file_rename_exists</KEY><VALUE>Deze map '%s' bestaat reeds. Kies een andere naam</VALUE></LANG>
+	<LANG><KEY>file_rename_empty</KEY><VALUE>U dient een nieuwe bestandsnaam op te geven.</VALUE></LANG>
+	<LANG><KEY>file_rename_exists</KEY><VALUE>Het bestand '%s' kan niet worden hernoemt. Dit bestand bestaat reeds.</VALUE></LANG>
+	<LANG><KEY>file_rename_error</KEY><VALUE>Het bestand '%s' kan niet worden hernoemt.</VALUE></LANG>
+	<LANG><KEY>file_rename_permissions</KEY><VALUE>Het bestand '%s' kan niet worden hernoemt. Controleer rechten.</VALUE></LANG>
+	<LANG><KEY>file_extension_error_rename</KEY><VALUE>Het bestand kan niet worden hernoemt. Het is niet toegestaan de extensie te wijzigen!</VALUE></LANG>
+	<LANG><KEY>file_rename_to</KEY><VALUE>Bestand '%s' hernoemt naar '%s'.</VALUE></LANG>
+	<LANG><KEY>dir_limit</KEY><VALUE>Het maximale aantal bestanden in een map is %s. Verwijder %s bestand(en) uit de Uploadlijst.</VALUE></LANG>
+	<LANG><KEY>dir_limit_2</KEY><VALUE>Het maximale aantal bestanden in een map is %s. Verwijder %s niet bestaande bestand(en).</VALUE></LANG>
+	<LANG><KEY>loading_preview</KEY><VALUE>Bezig met laden voorvertoning van '%s'.</VALUE></LANG>
+	<LANG><KEY>loading_big_preview</KEY><VALUE>Bezig met laden grote voorvertoning van '%s'.</VALUE></LANG>
+	<!-- error messages -->
+	<LANG><KEY>error</KEY><VALUE>Fout</VALUE></LANG>
+	<LANG><KEY>error_:</KEY><VALUE>Fout : %s</VALUE></LANG>
+	<LANG><KEY>error_http</KEY><VALUE>Fout : %s - %s</VALUE></LANG>
+	<LANG><KEY>error_406</KEY><VALUE>Fout Http 403/406: Kopieer de meegeleverde .htaccess naar de map van de twg_flash_uploader.swf.</VALUE></LANG>
+	<LANG><KEY>download_progress</KEY><VALUE>Gedownload %s / %s</VALUE></LANG>
+	<LANG><KEY>upload_progress</KEY><VALUE>%s / %s</VALUE></LANG>
+	<LANG><KEY>big_preview</KEY><VALUE> Klik op de miniatuur afbeelding voor een vergroting.</VALUE></LANG>
+	<LANG><KEY>download_wait</KEY><VALUE>Eén moment; voorbereiden download.</VALUE></LANG>
+	<!-- new 2.6 -->
+	<LANG><KEY>files_deleted</KEY><VALUE>%s bestanden verwijders.</VALUE></LANG>
+	<LANG><KEY>files_not_deleted</KEY><VALUE>%s bestanden konden niet worden verwijderd.</VALUE></LANG>
+	<LANG><KEY>files_deleted_permissions</KEY><VALUE>%s bestanden niet verwijderd. Controleer de permissies.</VALUE></LANG>	
+	<LANG><KEY>menu_copy_file</KEY><VALUE>Verplaats/Kopieer Bestand(en)</VALUE></LANG>
+	<LANG><KEY>menu_copy_folder</KEY><VALUE>Verplaats Folder</VALUE></LANG>
+	<LANG><KEY>select_copy_text</KEY><VALUE>Selecteer doel folder</VALUE></LANG>
+	<LANG><KEY>copymove_copy</KEY><VALUE>gekopieerd</VALUE></LANG>
+	<LANG><KEY>copymove_move</KEY><VALUE>verplaatst</VALUE></LANG>
+	<LANG><KEY>copymove_error</KEY><VALUE>%s bestand(en) van %s konden niet worden %s. AUB Folder permissies controleren.</VALUE></LANG> 
+	<LANG><KEY>copymove_ok</KEY><VALUE>%s bestand(en) zijn succesvol %s.</VALUE></LANG>
+	<LANG><KEY>copymove_some</KEY><VALUE>%s bestand(en) van %s %s.</VALUE></LANG>
+	<LANG><KEY>copymove_exists</KEY><VALUE>%s bestand(en) van %s %s. %s bestand(en) bestaan al.</VALUE></LANG>
+	<LANG><KEY>bt_copy</KEY><VALUE>Kopieer</VALUE></LANG>
+	<LANG><KEY>bt_move</KEY><VALUE>Verplaat</VALUE></LANG>
+	<LANG><KEY>ck_overwrite</KEY><VALUE>Overschrijven</VALUE></LANG>
+	<LANG><KEY>move_folder_ok</KEY><VALUE>Folder sucesvol %s.</VALUE></LANG>
+	<LANG><KEY>move_folder_error1</KEY><VALUE>Folder niet %s. Bronfolder is doelfolder.</VALUE></LANG>
+	<LANG><KEY>move_folder_error2</KEY><VALUE>Folder niet %s. Doelfolder is een subfolder van de bronfolder.</VALUE></LANG>
+	<LANG><KEY>move_folder_error3</KEY><VALUE>Folder niet %s. Folder bestaat al.</VALUE></LANG>
+	<LANG><KEY>move_folder_error4</KEY><VALUE>Folder niet %s. Controleer aub de folder permissies.</VALUE></LANG>
+	<LANG><KEY>progress_time</KEY><VALUE>Resterende tijd: %s.</VALUE></LANG>
+	<LANG><KEY>progress_time_m</KEY><VALUE>min</VALUE></LANG>
+	<LANG><KEY>progress_time_s</KEY><VALUE>sec</VALUE></LANG>
+	<LANG><KEY>copymove_dest</KEY><VALUE>Geselecteerde doelfolder: %s.</VALUE></LANG>
+	<LANG><KEY>menu_delete_file</KEY><VALUE>Verwijder bestand(en)</VALUE></LANG>
+	<!-- new 2.7 -->
+	<LANG><KEY>bt_save</KEY><VALUE>Bewaar</VALUE></LANG>
+	<LANG><KEY>bt_view</KEY><VALUE>Bekijk</VALUE></LANG>
+	<LANG><KEY>bt_edit</KEY><VALUE>Bewerk</VALUE></LANG>
+	<LANG><KEY>loading</KEY><VALUE>Bestand laden ...</VALUE></LANG>
+	<LANG><KEY>saved</KEY><VALUE>Bestand '%s' bewaard.</VALUE></LANG>
+	<LANG><KEY>not_writable</KEY><VALUE>niet beschrijfbaar</VALUE></LANG>
+	<LANG><KEY>loaded</KEY><VALUE>Bestand '%s' geladen.</VALUE></LANG>
+	<LANG><KEY>txt_delete_file</KEY><VALUE>Do you want to delete this file(s)?</VALUE></LANG>
+</TFU>

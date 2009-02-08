@@ -1,0 +1,16 @@
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        W3StudioCMS - Ajax Content Management based on symfony framework
+    robots:       index, follow
+    description:  
+    keywords:     
+    language:     en
+
+  stylesheets:    []
+  javascripts:    []
+
+  has_layout:     on
+  layout:         layout

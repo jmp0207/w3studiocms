@@ -1,0 +1,353 @@
+---
+ #
+ # This file is part of the w3studioCMS package library and it is distributed
+ # under the LGPL LICENSE Version 2.1. To use this library you must leave 
+ # intact this copyright notice.
+ #  
+ # (c) 2007-2008 Giansimon Diblas <giansimon.diblas@w3studiocms.com>
+ #  
+ # For the full copyright and license information, please view the LICENSE
+ # file that was distributed with this source code.
+ #
+propel:
+  _attributes:      { package: plugins.sfW3studioCmsPlugin.lib.model }
+  w3s_content: 
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    group_id: 
+      type: INTEGER
+      required: true
+      foreignTable: w3s_group
+      foreignReference: id
+      onDelete: CASCADE
+    page_id: 
+      type: INTEGER
+      required: true
+      foreignTable: w3s_page
+      foreignReference: id
+      onDelete: CASCADE
+    language_id: 
+      type: INTEGER
+      required: true
+      foreignTable: w3s_language
+      foreignReference: id
+      onDelete: CASCADE
+    content_type_id: 
+      type: INTEGER
+      required: true
+      default: 1
+      foreignTable: w3s_content_type
+      foreignReference: id
+      onDelete: CASCADE
+    slot_id:
+      type: INTEGER
+      required: true
+      foreignTable: w3s_slot
+      foreignReference: id
+      onDelete: CASCADE
+    content: 
+      type: LONGVARCHAR
+      required: true
+    edited:
+      type: INTEGER
+      required: true
+      default: 0
+    to_delete:
+      type: INTEGER
+      required: true
+      default: 0
+    content_position: 
+      type: INTEGER
+      required: true
+      default: 1
+    _indexes:
+      I_PAGE:
+        - page_id
+      I_GROUP: 
+        - group_id
+      I_LANGUAGE: 
+        - language_id
+      I_CONTENT_TYPE: 
+        - content_type_id
+      I_SLOT:
+        - slot_id
+  w3s_content_type: 
+    _attributes: 
+      idMethod: native
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+    type_description: 
+      type: VARCHAR
+      size: 50
+      required: true
+      default: 
+  w3s_group: 
+    _attributes: 
+      idMethod: native
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    template_id:
+      type: INTEGER
+      required: true
+      foreignTable: w3s_template
+      foreignReference: id
+      onDelete: CASCADE
+    group_name: 
+      type: VARCHAR
+      size: 255
+      required: true
+    edited:
+      type: INTEGER
+      required: true
+      default: 0
+    to_delete:
+      type: INTEGER
+      required: true
+      default: 0
+    _indexes: 
+      id_group_2: 
+        - id
+      I_TEMPLATE: 
+        - template_id
+    _uniques: 
+      id_group: 
+        - id
+  w3s_language: 
+    _attributes: 
+      idMethod: native
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    language: 
+      type: VARCHAR
+      size: 50
+      required: true
+      default: 
+    main_language: 
+      type: CHAR
+      required: true
+      default: 0
+    to_delete:
+      type: INTEGER
+      required: true
+      default: 0
+    _indexes: 
+      id_language_2: 
+        - id
+    _uniques: 
+      id_language: 
+        - id
+  w3s_menu_element: 
+    _attributes: 
+      idMethod: native
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    content_id: 
+      type: INTEGER
+      required: true
+      default: 0
+      foreignTable: w3s_content
+      foreignReference: id
+      onDelete: CASCADE
+    page_id: 
+      type: INTEGER
+      required: true
+      default: 0
+    link:
+      type: LONGVARCHAR
+      required: true
+    external_link:
+      type: LONGVARCHAR
+      required: true
+    image:
+      type: LONGVARCHAR
+      required: true
+    rollover_image: 
+      type: LONGVARCHAR
+      required: true
+    position: 
+      type: SMALLINT
+      required: true
+      default: 0
+    _indexes: 
+      id_menu_detail_2: 
+        - id
+        - content_id
+        - page_id
+    _uniques: 
+      id_menu_detail: 
+        - id
+  w3s_page: 
+    _attributes: 
+      idMethod: native
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    group_id: 
+      type: INTEGER
+      required: true
+      foreignTable: w3s_group
+      foreignReference: id
+      onDelete: CASCADE
+    page_name: 
+      type: VARCHAR
+      size: 255
+      required: true
+    is_home: 
+      type: INTEGER
+      required: true
+    to_delete:
+      type: INTEGER
+      required: true
+    _indexes: 
+      I_GROUP: 
+        - group_id
+  w3s_project: 
+    _attributes: 
+      idMethod: native
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    project_name: 
+      type: VARCHAR
+      size: 255
+      required: true
+      default:
+    _indexes: 
+      id_progetto_2: 
+        - id
+    _uniques: 
+      id_progetto: 
+        - id
+  w3s_search_engine: 
+    _attributes: 
+      idMethod: native
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    page_id: 
+      type: INTEGER
+      required: true
+      default: 0
+      foreignTable: w3s_page
+      foreignReference: id
+      onDelete: CASCADE
+    language_id: 
+      type: INTEGER
+      required: true
+      default: 0
+      foreignTable: w3s_language
+      foreignReference: id
+      onDelete: CASCADE
+    meta_title: 
+      type: LONGVARCHAR
+      required: true
+    meta_description: 
+      type: LONGVARCHAR
+      required: true
+    meta_keywords: 
+      type: LONGVARCHAR
+      required: true
+    sitemap_changefreq: 
+      type: LONGVARCHAR
+      required: true
+    sitemap_lastmod: 
+      type: LONGVARCHAR
+      required: true
+    sitemap_priority: 
+      type: LONGVARCHAR
+      required: true
+    _indexes: 
+      id_search_engine_2: 
+        - id
+        - page_id
+        - language_id
+    _uniques: 
+      id_search_engine: 
+        - id
+  w3s_semaphore:
+    sf_guard_user_id:
+      type: INTEGER
+      required: true
+      default: 0
+      foreignTable: sf_guard_user
+      foreignReference: id
+      primaryKey: true
+    operation: 
+      type: VARCHAR
+      size: 255
+      required: true
+      primaryKey: true
+    created_at:
+  w3s_slot:
+    _attributes: 
+      idMethod: native
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    template_id:
+      type: INTEGER
+      required: true
+      foreignTable: w3s_template
+      foreignReference: id
+      onDelete: CASCADE
+    slot_name:
+      type: VARCHAR
+      size: 255
+      required: true
+      default:
+    repeated_contents:
+      type: INTEGER
+      required: true
+    to_delete:
+      type: INTEGER
+      required: true
+      default: 0
+  w3s_template: 
+    _attributes: 
+      idMethod: native
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    project_id: 
+      type: INTEGER
+      required: true
+      default: 0
+      foreignTable: w3s_project
+      foreignReference: id
+      onDelete: CASCADE
+    template_name: 
+      type: VARCHAR
+      size: 255
+      required: true
+      default: 
+    _indexes: 
+      id_template_2: 
+        - id
+        - project_id
+    _uniques: 
+      id_template: 
+        - id

@@ -1,0 +1,190 @@
+09.21.2008 19:23:16 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 152: opendir(/images) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.21.2008 19:23:16 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.21.2008 19:23:16 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.21.2008 19:24:10 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 152: opendir(../../../images) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.21.2008 19:24:10 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.21.2008 19:24:10 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.21.2008 19:25:23 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 152: opendir(../../../images) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.21.2008 19:25:23 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.21.2008 19:25:23 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.21.2008 19:25:44 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 152: opendir(../../../../images) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.21.2008 19:25:44 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.21.2008 19:25:44 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.21.2008 19:26:58 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 152: opendir(/images) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.21.2008 19:26:58 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.21.2008 19:26:58 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.21.2008 19:27:34 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 152: opendir(/images) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.21.2008 19:27:34 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.21.2008 19:27:34 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.21.2008 19:30:37 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 152: opendir(/images) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.21.2008 19:30:37 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.21.2008 19:30:37 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:34:24 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 152: opendir(./images) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.22.2008 20:34:24 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:34:24 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:34:50 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 152: opendir(../images) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.22.2008 20:34:50 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:34:50 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:35:37 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 152: opendir(images) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.22.2008 20:35:37 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:35:37 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:37:55 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 152: opendir(/home/giansimon/www/w3studioCMS/plugins/sfW3studioCmsPlugin/web/js/fileUploader/../../../images) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.22.2008 20:37:55 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:37:55 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:38:32 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 152: opendir(/home/giansimon/www/w3studioCMS/plugins/sfW3studioCmsPlugin/web/js/fileUploader../../../images) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.22.2008 20:38:32 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:38:32 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:38:55 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 152: opendir(../../../images) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.22.2008 20:38:55 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:38:55 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:39:22 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 152: opendir(/../../../images) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.22.2008 20:39:22 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:39:22 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:39:43 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 152: opendir(/home/giansimon/www/w3studioCMS/plugins/sfW3studioCmsPlugin/web/js/fileUploader../../../images) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.22.2008 20:39:43 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:39:43 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:40:47 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 152: opendir(../../../../../../images) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.22.2008 20:40:47 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:40:47 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:41:02 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 152: opendir(../../../../../../../images) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.22.2008 20:41:02 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:41:02 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:41:22 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 152: opendir(../../../../../images) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.22.2008 20:41:22 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:41:22 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:44:16 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 152: opendir(../../../../../../web/images) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.22.2008 20:44:16 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:44:16 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:44:37 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 152: opendir(../../../../../../../web/images) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.22.2008 20:44:37 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:44:37 - ERROR 2 in ugin/web/js/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:59:40 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 152: opendir(../../images) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.22.2008 20:59:40 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.22.2008 20:59:40 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.22.2008 21:01:16 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 152: opendir(../../images) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.22.2008 21:01:16 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.22.2008 21:01:16 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.23.2008 18:45:46 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 152: opendir(../../templates) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.23.2008 18:45:46 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.23.2008 18:45:46 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.23.2008 18:46:40 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 152: opendir(../../../../web/templates) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.23.2008 18:46:40 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.23.2008 18:46:40 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.23.2008 18:46:55 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 152: opendir(../../../../web/templates) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.23.2008 18:46:55 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.23.2008 18:46:55 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.23.2008 18:46:59 - ERROR 2 in Plugin/extra/fileUploader/tfu_upload.php, line 73: move_uploaded_file(../../../../web/templates/w3s_jet_30.zip) [<a href='function.move-uploaded-file'>function.move-uploaded-file</a>]: failed to open stream: No such file or directory
+
+09.23.2008 18:46:59 - ERROR 2 in Plugin/extra/fileUploader/tfu_upload.php, line 73: move_uploaded_file() [<a href='function.move-uploaded-file'>function.move-uploaded-file</a>]: Unable to move '/tmp/phpQRAzzN' to '../../../../web/templates/w3s_jet_30.zip'
+
+09.23.2008 18:46:59 - ERROR 2 in Plugin/extra/fileUploader/tfu_upload.php, line 80: move_uploaded_file(../../../../web/templates/w3s_jet_30.zip) [<a href='function.move-uploaded-file'>function.move-uploaded-file</a>]: failed to open stream: No such file or directory
+
+09.23.2008 18:46:59 - ERROR 2 in Plugin/extra/fileUploader/tfu_upload.php, line 80: move_uploaded_file() [<a href='function.move-uploaded-file'>function.move-uploaded-file</a>]: Unable to move '/tmp/phpQRAzzN' to '../../../../web/templates/w3s_jet_30.zip'
+
+09.23.2008 18:46:59 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 152: opendir(../../../../web/templates) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.23.2008 18:46:59 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.23.2008 18:46:59 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.23.2008 18:49:15 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 152: opendir(../../../../web/templates) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.23.2008 18:49:15 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.23.2008 18:49:15 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.23.2008 18:49:43 - ERROR 2 in Plugin/extra/fileUploader/tfu_upload.php, line 73: move_uploaded_file(../../../../web/templates/w3s_jet_30.zip) [<a href='function.move-uploaded-file'>function.move-uploaded-file</a>]: failed to open stream: No such file or directory
+
+09.23.2008 18:49:43 - ERROR 2 in Plugin/extra/fileUploader/tfu_upload.php, line 73: move_uploaded_file() [<a href='function.move-uploaded-file'>function.move-uploaded-file</a>]: Unable to move '/tmp/phpBmSmEd' to '../../../../web/templates/w3s_jet_30.zip'
+
+09.23.2008 18:49:43 - ERROR 2 in Plugin/extra/fileUploader/tfu_upload.php, line 80: move_uploaded_file(../../../../web/templates/w3s_jet_30.zip) [<a href='function.move-uploaded-file'>function.move-uploaded-file</a>]: failed to open stream: No such file or directory
+
+09.23.2008 18:49:43 - ERROR 2 in Plugin/extra/fileUploader/tfu_upload.php, line 80: move_uploaded_file() [<a href='function.move-uploaded-file'>function.move-uploaded-file</a>]: Unable to move '/tmp/phpBmSmEd' to '../../../../web/templates/w3s_jet_30.zip'
+
+09.23.2008 18:49:43 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 152: opendir(../../../../web/templates) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.23.2008 18:49:43 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.23.2008 18:49:43 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+
+09.23.2008 18:49:43 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 152: opendir(../../../../web/templates) [<a href='function.opendir'>function.opendir</a>]: failed to open dir: No such file or directory
+
+09.23.2008 18:49:43 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 156: readdir(): supplied argument is not a valid Directory resource
+
+09.23.2008 18:49:43 - ERROR 2 in lugin/extra/fileUploader/tfu_readDir.php, line 183: closedir(): supplied argument is not a valid Directory resource
+

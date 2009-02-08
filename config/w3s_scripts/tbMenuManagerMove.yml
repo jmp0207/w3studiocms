@@ -1,0 +1,40 @@
+button1:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/user.png
+  imageDisabled: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/user_disabled.png
+  caption: Users
+  enabled: false
+button2:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/project.png
+  imageDisabled: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/project_disabled.png
+  caption: Projects  
+  enabled: false
+button3:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/structure.png
+  imageDisabled: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/structure_disabled.png
+  caption: Control-Panel  
+  action: W3sControlPanel.show()
+  actionParams:
+    title: Open the structure menu to manage languages, pages and preferences
+button4:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/return_editor.png
+  caption: Editor  
+  action: W3sTemplate.moveContents(false)
+  actionParams:
+    title: Return to Editor mode
+button5:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/preview.png
+  imageDisabled: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/preview_disabled.png
+  caption: Preview  
+  enabled: false
+button6:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/publish.png
+  imageDisabled: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/publish_disabled.png
+  caption: Publish  
+  requiredCredentials: [[admin, publisher]]
+  enabled: false
+button7:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/exit.png
+  caption: Logout  
+  action: w3studioCMS.logout()
+  actionParams:
+    title: Close W3StudioCMS and return to website

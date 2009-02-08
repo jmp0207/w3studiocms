@@ -1,0 +1,5 @@
+caption: 'Close'
+action: currentEditor.close(); return false;
+actionParams:
+  id: w3s_btn_close
+  

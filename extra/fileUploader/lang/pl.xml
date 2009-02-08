@@ -1,0 +1,156 @@
+<!--
+TWG Flash Uploader 2.7 - polish language file 
+-->
+<TFU>
+	<!-- Menu items -  - be carefull with the length - menu is not resized if the text is too long! -->
+	<LANG><KEY>menu_refresh</KEY><VALUE>Odśwież</VALUE></LANG>
+	<LANG><KEY>menu_create_folder</KEY><VALUE>Utwórz katalog</VALUE></LANG>
+	<LANG><KEY>menu_delete_folder</KEY><VALUE>Usuń katalog</VALUE></LANG>
+	<LANG><KEY>menu_rename_folder</KEY><VALUE>Zmień nazwę</VALUE></LANG>
+	<LANG><KEY>menu_download_file</KEY><VALUE>Pobierz plik</VALUE></LANG>
+	<LANG><KEY>menu_rename_file</KEY><VALUE>Zmień nazwę</VALUE></LANG>
+	<!-- Buttons - be carefull with the lenght - buttons are not resized if the text is too long! -->
+	<LANG><KEY>bt_login</KEY><VALUE>Zaloguj</VALUE></LANG>
+	<LANG><KEY>bt_refresh</KEY><VALUE>Odśwież</VALUE></LANG>
+	<LANG><KEY>bt_refresh_wait</KEY><VALUE>Proszę czekać...</VALUE></LANG>
+	<LANG><KEY>bt_rename</KEY><VALUE>Zmień</VALUE></LANG>
+	<LANG><KEY>bt_delete</KEY><VALUE>Usuń</VALUE></LANG>
+	<LANG><KEY>bt_Upload</KEY><VALUE>Wyślij</VALUE></LANG>
+	<LANG><KEY>bt_add</KEY><VALUE>Dodaj</VALUE></LANG>
+	<LANG><KEY>bt_remove</KEY><VALUE>Usuń</VALUE></LANG>
+	<LANG><KEY>bt_create</KEY><VALUE>Utwórz</VALUE></LANG>
+	<LANG><KEY>bt_cancel</KEY><VALUE>Anuluj</VALUE></LANG>
+	<LANG><KEY>bt_extras</KEY><VALUE>Opcje</VALUE></LANG>
+	<LANG><KEY>bt_download</KEY><VALUE>Pobierz</VALUE></LANG>
+	<!-- Text in the frontend -->
+	<LANG><KEY>status_txt</KEY><VALUE>Status:</VALUE></LANG>
+	<LANG><KEY>upload_folder</KEY><VALUE>Katalog docelowy</VALUE></LANG>
+	<LANG><KEY>txt_resize</KEY><VALUE>Rozmiar</VALUE></LANG>
+	<LANG><KEY>txt_progress</KEY><VALUE>Postęp</VALUE></LANG>
+	<LANG><KEY>txt_queue</KEY><VALUE>Kolejka</VALUE></LANG>
+	<LANG><KEY>txt_create_folder</KEY><VALUE>Podaj nazwę katalogu</VALUE></LANG>
+	<LANG><KEY>txt_delete_folder</KEY><VALUE>Czy chcesz usunąć zdalny katalog?</VALUE></LANG>
+	<LANG><KEY>txt_new_foldername</KEY><VALUE>Nazwa katalogu: </VALUE></LANG>
+	<LANG><KEY>txt_new_filename</KEY><VALUE>Nazwa pliku: </VALUE></LANG>
+	<LANG><KEY>txt_preview</KEY><VALUE>Podgląd</VALUE></LANG>
+	<LANG><KEY>txt_remote</KEY><VALUE>Zdalny</VALUE></LANG>
+	<LANG><KEY>txt_remote_files</KEY><VALUE>pliki</VALUE></LANG>
+	<LANG><KEY>grid_name</KEY><VALUE>Nazwa</VALUE></LANG>
+	<LANG><KEY>grid_size</KEY><VALUE>Rozmiar</VALUE></LANG>
+	<LANG><KEY>grid_date</KEY><VALUE>Data</VALUE></LANG>
+	<LANG><KEY>upload_files</KEY><VALUE>(%s plików)</VALUE></LANG>
+	<LANG><KEY>upload_file</KEY><VALUE>(1 plik)</VALUE></LANG>
+	<LANG><KEY>upload_size</KEY><VALUE>Do wysłania: %s</VALUE></LANG>
+	<!-- text of the login panel -->
+	<LANG><KEY>login_titel</KEY><VALUE>Login</VALUE></LANG>
+	<LANG><KEY>login_username</KEY><VALUE>Użytkownik</VALUE></LANG>
+	<LANG><KEY>login_password</KEY><VALUE>Hasło</VALUE></LANG>
+	<LANG><KEY>login_message</KEY><VALUE>Próbujesz użyć TWG Upload Flash bez autentykacji, użytkownik nie jest poprawny, konto wygasło lub konfiguracja nie jest poprawna!</VALUE></LANG>
+	<LANG><KEY>login_message_server</KEY><VALUE>Plik licencji nie jest poprawny dla tej domeny (%s). Zdobądź plik rejestracyjny dla tej domeny. TWG Flash Uploader pracuje w trybie freeware!</VALUE></LANG>
+	<LANG><KEY>login_message_lic</KEY><VALUE>Plik licencji jest uszkodzony lub wygasł. Zdobądź poprawny plik rejestracyjny dla %s. TWG Flash Uploader pracuje w trybie freeware!</VALUE></LANG>
+	<!-- info dialog -->
+	<LANG><KEY>message</KEY><VALUE>Wybrane do wysłania pliki istnieją w katalogu docelowym. Jeśli zdecydujesz się na wysłanie - zostaną nadpisane. Istniejące pliki zostały podświetlone, wciśnij 'Usuń plik(i)' aby ich nie wysyłać.</VALUE></LANG>
+	<LANG><KEY>please_login</KEY><VALUE>Zaloguj się</VALUE></LANG>
+	<LANG><KEY>wrong_username</KEY><VALUE>Niepoprawny użytkownik/hasło.</VALUE></LANG>
+	<!-- dropdown of the file select dialog
+	<LANG><KEY>dropdown_all_supported</KEY><VALUE>Dozwolone typy plików</VALUE></LANG>
+	<LANG><KEY>dropdown_all</KEY><VALUE>Wszystkie pliki</VALUE></LANG>
+	<!-- everything below here shows up in the status line!  -->
+	<!-- status messages - please keep all spaces because some text is merged sometimes  -->
+	<LANG><KEY>create_folder_savemode</KEY><VALUE>Brak praw do zapisu w katalogu (lub aktywny jest tryb safemode). Wszystkie operacje są wyłączone.</VALUE></LANG>
+	<LANG><KEY>create_folder_permissions</KEY><VALUE>Brak praw do zapisu w katalogu. Wszystkie operacje są wyłączone.</VALUE></LANG>		
+	<LANG><KEY>create_text_permissions</KEY><VALUE>Nie masz uprawnień do tworzenia katalogów. Funkcja wyłączona.</VALUE></LANG>		
+	<LANG><KEY>max_file_size</KEY><VALUE> Maksymalny rozmiar pliku do wysłania: %s. </VALUE></LANG>
+	<LANG><KEY>select_files</KEY><VALUE>Proszę wybrać pliki do wysłania.</VALUE></LANG>
+	<LANG><KEY>upload_started</KEY><VALUE>Trwa wysyłanie. Proszę czekać ...</VALUE></LANG>
+	<LANG><KEY>upload_started_resize</KEY><VALUE>Trwa wysyłanie. Nastąpi też zmiana rozmiaru obrazów! Proszę czekać ...</VALUE></LANG>
+	<LANG><KEY>download_completed</KEY><VALUE>Pobieranie zakończone.</VALUE></LANG>
+	<LANG><KEY>download_started</KEY><VALUE>Pobieranie rozpoczęte. Proszę czekać ...</VALUE></LANG>
+	<LANG><KEY>upload_files_in_queue</KEY><VALUE>%s plików w kolejce.</VALUE></LANG>
+	<LANG><KEY>upload_file_in_queue</KEY><VALUE>1 plik (%s) znajdował się w kolejce.</VALUE></LANG>
+	<LANG><KEY>delete_queue</KEY><VALUE>%s plik(i) zostały usunięte z kolejki.</VALUE></LANG>
+	<LANG><KEY>wrong_extension</KEY><VALUE>Niedozwolone rozszerzenia: %s. </VALUE></LANG>
+	<LANG><KEY>smaller_size</KEY><VALUE>Proszę wybrać mniejsze pliki! Limit rozmiaru to %s. </VALUE></LANG>
+	<LANG><KEY>remote_updated</KEY><VALUE>Lista plików odświeżona.</VALUE></LANG>
+	<LANG><KEY>freeware</KEY><VALUE>Wersja freeware pozwala wysłać %s MB danych. Proszę usunąć część plików.</VALUE></LANG>
+	<LANG><KEY>max_upload_size</KEY><VALUE>Administrator ustawił limit wysyłanych danych na %s MB. Proszę usunąć część plików.</VALUE></LANG>
+	<LANG><KEY>max_upload_files</KEY><VALUE>Administrator ustawił limit liczby wysyłanych plików na %s. Proszę usunąć część plikow.</VALUE></LANG>
+	<LANG><KEY>upload_error</KEY><VALUE>Wysyłanie nie powiodło się. %s plik(ów) z %s nie zostało wysłanych.</VALUE></LANG>
+	<LANG><KEY>upload_error_mem</KEY><VALUE>%s plik(ów) z %s nie zostało wysłanych. Dla %s plików zabrakło pamięci na serwerze do ich przeskalowania!</VALUE></LANG>
+	<LANG><KEY>upload_completed</KEY><VALUE>Wysyłanie zakończone. </VALUE></LANG>
+	<LANG><KEY>upload_completed_note</KEY><VALUE>Uwaga: Wysyłanie dużych plików może trwać długo!</VALUE></LANG>
+	<LANG><KEY>loading</KEY><VALUE>Ładowanie </VALUE></LANG>
+	<LANG><KEY>file_selected</KEY><VALUE>Wybrany element: '%s'.</VALUE></LANG>
+	<LANG><KEY>file_selected_error</KEY><VALUE>Wybrany element: '%s'. Podgląd nie jest dostępny.</VALUE></LANG>
+	<LANG><KEY>file_selected_url</KEY><VALUE>Link:  %s</VALUE></LANG>
+	<LANG><KEY>folder_deleted</KEY><VALUE>Katalog '%s' został usunięty.</VALUE></LANG>
+	<LANG><KEY>folder_not_deleted</KEY><VALUE>Katalog '%s' nie mógł być usunięty.</VALUE></LANG>
+	<LANG><KEY>file_deleted</KEY><VALUE>Plik '%s' został usunięty.</VALUE></LANG>
+	<LANG><KEY>file_not_deleted</KEY><VALUE>Plik '%s' nie mógł być usunięty.</VALUE></LANG>
+	<LANG><KEY>file_deleted_permissions</KEY><VALUE>Plik '%s' nie mógł być usunięty. Proszę sprawdzić uprawnienia.</VALUE></LANG>
+	<LANG><KEY>folder_created</KEY><VALUE>Katalog '%s' został utworzony.</VALUE></LANG>
+	<LANG><KEY>folder_exists</KEY><VALUE>Katalog '%s' już istnieje.</VALUE></LANG>
+	<LANG><KEY>folder_not_created</KEY><VALUE>Katalog '%s' nie mógł być utworzony.</VALUE></LANG>
+	<LANG><KEY>action_cancled</KEY><VALUE>Operacja anulowana.</VALUE></LANG>
+	<LANG><KEY>action_cancled_upload</KEY><VALUE>Operacja anulowana. Proszę odświeżyć listę plików. Możesz usunąć częściowo wysłane pliki!</VALUE></LANG>
+	<LANG><KEY>files_added</KEY><VALUE>%s plik(i) dodany(e). </VALUE></LANG>
+	<LANG><KEY>folder_rename_to</KEY><VALUE>Nazwa katalogu nie mogła być zmieniona na '%s'.</VALUE></LANG>
+	<LANG><KEY>folder_rename</KEY><VALUE>Nazwa aktualnego katalogu została zmieniona na '%s'.</VALUE></LANG>
+	<LANG><KEY>folder_rename_empty</KEY><VALUE>Nazwa katalogu nie może być pusta.</VALUE></LANG>
+	<LANG><KEY>folder_rename_root</KEY><VALUE>Nazwa katalogu nie może być zmieniona ponieważ jest to katalog główny.</VALUE></LANG>
+	<LANG><KEY>file_rename_exists</KEY><VALUE>Katalog '%s' istnieje. Proszę wybrać inną nazwę</VALUE></LANG>
+	<LANG><KEY>file_rename_empty</KEY><VALUE>Nazwa pliku nie może być pusta.</VALUE></LANG>
+	<LANG><KEY>file_rename_exists</KEY><VALUE>Nazwa pliku '%s' nie może być zmieniona. Plik już istnieje.</VALUE></LANG>
+	<LANG><KEY>file_rename_error</KEY><VALUE>Nazwa pliku '%s' nie może być zmieniona.</VALUE></LANG>
+	<LANG><KEY>file_rename_permissions</KEY><VALUE>Nazwa pliku '%s' nie może być zmieniona. Proszę sprawdzić uprawnienia.</VALUE></LANG>
+	<LANG><KEY>file_extension_error_rename</KEY><VALUE>Nazwa pliku nie może być zmienona ponieważ niedozwolona jest zmiana rozszerzenia!</VALUE></LANG>
+	<LANG><KEY>file_rename_to</KEY><VALUE>Nazwa pliku '%s' została zmieniona na '%s'.</VALUE></LANG>
+	<LANG><KEY>dir_limit</KEY><VALUE>Maksymalna liczba plików w katalogu to %s. Proszę usunąć %s plik(i) z kolejki.</VALUE></LANG>
+	<LANG><KEY>dir_limit_2</KEY><VALUE>Maksymalna liczba plików w katalogu to %s. Proszę usunąć %s nie powtarzających się plik(ów).</VALUE></LANG>
+	<LANG><KEY>loading_preview</KEY><VALUE>Ładowanie miniatury '%s'.</VALUE></LANG>
+	<LANG><KEY>loading_big_preview</KEY><VALUE>Ładowanie podglądu '%s'.</VALUE></LANG>
+	<!-- error messages  -->
+	<LANG><KEY>error</KEY><VALUE>Błąd</VALUE></LANG>
+	<LANG><KEY>error_:</KEY><VALUE>Błąd : %s</VALUE></LANG>
+	<LANG><KEY>error_http</KEY><VALUE>Błąd : %s - %s</VALUE></LANG>
+	<LANG><KEY>error_406</KEY><VALUE>Błąd Http 403/406: Proszę skopiować plik .htaccess do katalogu z plikiem twg_flash_uploader.swf.</VALUE></LANG>
+	<LANG><KEY>download_progress</KEY><VALUE>Pobrano %s / %s</VALUE></LANG>
+	<LANG><KEY>upload_progress</KEY><VALUE>%s / %s</VALUE></LANG>
+	<LANG><KEY>big_preview</KEY><VALUE> Aby powiększyć kliknij w miniaturę.</VALUE></LANG>
+	<LANG><KEY>download_wait</KEY><VALUE>Proszę czekać. Trwa przygotowywanie pobierania.</VALUE></LANG>
+	<!-- new 2.6 -->
+	<LANG><KEY>files_deleted</KEY><VALUE>Usuniętych plików: %s.</VALUE></LANG>
+	<LANG><KEY>files_not_deleted</KEY><VALUE>Nie powiodło się usunięcie %s pliku(ów).</VALUE></LANG>
+	<LANG><KEY>files_deleted_permissions</KEY><VALUE>Nie powiodło się usunięcie %s pliku(ów). Sprawdź uprawnienia.</VALUE></LANG>	
+	<LANG><KEY>menu_copy_file</KEY><VALUE>Przenieś/Kopiuj plik(i)</VALUE></LANG>
+	<LANG><KEY>menu_copy_folder</KEY><VALUE>Przenieś katalog</VALUE></LANG>
+	<LANG><KEY>select_copy_text</KEY><VALUE>Wybierz katalog docelowy</VALUE></LANG>
+	<LANG><KEY>copymove_copy</KEY><VALUE>skopiowany</VALUE></LANG>
+	<LANG><KEY>copymove_move</KEY><VALUE>przeniesiony</VALUE></LANG>
+	<LANG><KEY>copymove_error</KEY><VALUE>%s plik(i) z %s nie został(y) %s(e). Proszę sprawdzić uprawnienia.</VALUE></LANG> 
+	<LANG><KEY>copymove_ok</KEY><VALUE>%s plik(i) poprawnie %s(e).</VALUE></LANG>
+	<LANG><KEY>copymove_some</KEY><VALUE>%s plik(i) z %s %s.</VALUE></LANG>
+	<LANG><KEY>copymove_exists</KEY><VALUE>%s plik(i) z %s %s. %s plik(i) już istnieje(ą).</VALUE></LANG>
+	<LANG><KEY>bt_copy</KEY><VALUE>Kopiuj</VALUE></LANG>
+	<LANG><KEY>bt_move</KEY><VALUE>Przenieś</VALUE></LANG>
+	<LANG><KEY>ck_overwrite</KEY><VALUE>Nadpisz</VALUE></LANG>
+	<LANG><KEY>move_folder_ok</KEY><VALUE>Katalog został pomyślnie %s.</VALUE></LANG>
+	<LANG><KEY>move_folder_error1</KEY><VALUE>Katalog nie został %s. Katalog źródłowy jest taki sam jak katalog docelowy.</VALUE></LANG>
+	<LANG><KEY>move_folder_error2</KEY><VALUE>Katalog nie został %s. Katalog docelowy jest podkatalogiem katalogu źródłowego.</VALUE></LANG>
+	<LANG><KEY>move_folder_error3</KEY><VALUE>Katalog nie został %s. Katalog już istnieje.</VALUE></LANG>
+	<LANG><KEY>move_folder_error4</KEY><VALUE>Katalog nie został %s. Sprawdź uprawnienia.</VALUE></LANG>
+	<LANG><KEY>progress_time</KEY><VALUE>Pozostały czas: %s.</VALUE></LANG>
+	<LANG><KEY>progress_time_m</KEY><VALUE>min</VALUE></LANG>
+	<LANG><KEY>progress_time_s</KEY><VALUE>sek</VALUE></LANG>
+	<LANG><KEY>copymove_dest</KEY><VALUE>Katalog docelowy: %s.</VALUE></LANG>
+	<LANG><KEY>menu_delete_file</KEY><VALUE>Delete File(s)</VALUE></LANG>
+	<!-- new 2.7 -->
+	<LANG><KEY>bt_save</KEY><VALUE>Save</VALUE></LANG>
+	<LANG><KEY>bt_view</KEY><VALUE>View</VALUE></LANG>
+	<LANG><KEY>bt_edit</KEY><VALUE>Edit</VALUE></LANG>
+	<LANG><KEY>loading</KEY><VALUE>Loading file ...</VALUE></LANG>
+	<LANG><KEY>saved</KEY><VALUE>File '%s' saved.</VALUE></LANG>
+	<LANG><KEY>not_writable</KEY><VALUE>not writeable</VALUE></LANG>
+	<LANG><KEY>loaded</KEY><VALUE>File '%s' loaded.</VALUE></LANG>
+	<LANG><KEY>txt_delete_file</KEY><VALUE>Do you want to delete this file(s)?</VALUE></LANG>
+</TFU>

@@ -1,0 +1,8 @@
+all:
+  is_secure: on
+
+showChangePageGroupModule:
+  credentials: [[admin, webdesigner]]
+
+changeGroupPage:
+  credentials: [[admin, webdesigner]]

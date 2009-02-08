@@ -1,0 +1,169 @@
+# W3StudioCMS 0.8.0.1 Beta #
+
+## Overview ##
+
+W3StudioCMS is a powerful, flexible and fully customizable Content Management System based on Ajax technology. 
+
+* Full Ajax CMS
+* Unlimited pages
+* Create different areas with different templates
+* Easy import of xhtml templates with the Template Engine technology
+* Multilanguage
+* Users and credentials
+* Widgets from other websites
+* Dynamic contents.
+* Fully extendable
+* Fully Configurable
+
+I'm very proud to annunce the release of the first beta version of W3StudioCMS plugin.
+The W3sCore library is now ready with all the objects needed to manage the CMS and it's
+pretty stable but it needs a lot of test to became really stable. This is the next step.
+I will appreciate if someone will help me.
+
+I have been working very hard since the release of W3StudioCMS 0.6.2 to refactor the 
+code and make it fully extensible and overridable to give every developer the ability 
+to customize every part of the CMS. I have introduced some configuration scripts to 
+easily manage some parts of the application like the command buttons. You will find the 
+objects under the w3sCore directory in the plugin's lib directory and the command 
+scripts replaced under the w3s_script directory in the plugin's config directory.
+
+## What's new ##
+0.8.2
+1. Fixed some bugs.
+
+0.8.0
+1. Everything is now OOP.
+2. The name of some modules has been changed so you have to update your enable modules.
+3. The move system has been reviewed.
+4. The projects import interface has been reviewed.
+5. When you create a new template you can omit the three empty fields groupId:, pageId:, languageId:
+6. Every project can be integrated with an extra directory that have to be called info, 
+   where you can create a yml file with some useful information about your template. You
+   can also add an image to give a preview of the template. A detailed tutorial will be publish.
+
+0.8.0.1
+1. Fixed a bug that occours when you save a menu with the "Set the class on each page" option
+   checked.
+2. Fixed some problems related to usability with the Menu Builder editor.
+
+## Information ##
+
+If you have troubles with pear package, you can download the zipped version from [here](http://www.w3studiocms.com/english/download.html).
+
+Read the LICENSE document to learn your rights using this plugin, or click [here](http://www.w3studiocms.com/english/license.html).
+
+Read the INSTALL document to find the instruction to setup the plugin, or click [here]( http://www.w3studiocms.com/english/how_to_install.html).
+
+Learn how to use W3studioCMS plugin, reading the [quick start guide](http://www.w3studiocms.com/english/quick_start.html).
+
+Learn how to use a custom template with w3studioCMS, reading the [template import guide](http://www.w3studiocms.com/english/templates_import.html).
+
+Learn how to customize W3studioCMS plugin, reading the [api guide](http://api.w3studiocms.com).
+
+## How to customize w3studioCMS ##
+
+Let's assume that you want to add a new content to insert a raw text and, because of this, a new editor to manage it. To create a new content type, add a new class in the lib directory of your application and call it w3sContentManagerRawText.class.php. Open that file and add the following code:
+
+    class w3sContentManagerRawText extends w3sContentManager
+    { 
+      public function getDefaultText()
+      {
+        return 'Raw text';           
+      }
+    }
+
+This class extends the base class w3sContentManager that manages the page's contents and defines the required function **getDefaultText()**, which defines the default value returned, when a new content is added.
+
+Every content is instanced by a class which uses a factory design pattern to create the right Content from the required content type. This class is called w3sContentManagerFactory.class.php and it is stored in the **w3sCore/lib/content directory**. To add the new content type, copy this file into your lib directory. In this way you will replace the standard class with the one you have defined. 
+
+Add the following case to the create function:
+
+    case 100: 
+    return new w3sContentManagerMyEditor($type, $content);
+    break;
+
+This will return an instance of your new object. Your new content type is defined by the value 100 to prevent conflicts with new contents added to CMS in the future. The new content have to be declared in the database, so add a new row to the table w3s_content_type to declare it. The id field will have the value 100 and the type_description field will have the value Raw content.
+
+To create a new editor add a new class under the lib directory of your application and call it w3sRawContentEditor.class.php. This class will extend the w3sEditor class, which is the base class to add a content editor.
+
+    <?php
+    class w3sRawContentEditor extends w3sEditor
+    {
+    }
+
+You have to define a protected variable called $editorSkeleton where is defined the new editor's skeleton. If you forget to define this variable an exception will be throwned. The skeleton needed to edit the content is made by a simple textarea control and a submit button which will save the text. Add this code to set the editorSkeleton variable.
+
+    $editorSkeleton = 						
+      '<table cellspacing="4">
+        <tbody>
+          <tr>
+	      <td align="left"><textarea id="myEditor" rows="20" cols="70">%s</textarea></td>
+	    </tr>
+	    <tr>
+	      <td align="left"><input type="submit" value="%s" onclick="%s" /></td>
+	    </tr>          
+    	  <tbody>
+       </table>'; 
+
+Now you have to define the required public function drawEditor. This function is called by the renderEditor function in the w3sEditor class, the function that renders the editor.
+
+    protected function draweditor()
+    {
+      return sprintf($this->editorSkeleton, $this->content->getContent(), sfContext::getInstance()->getI18N()->__('Save'), 'editContent(\'' . sfContext::getInstance()->getController()->genUrl('contentsManager/edit') .'\', $(\'myEditor\').value)'); 
+    }
+
+This function fills the $editorSkeleton placeholders with the needed values. **editContent** is the ajax function that saves the content. Notice that this javascript function will be redefined in the future.
+
+Exactly as we made for the contents object, all the editors are instanced by a factory class, so we need to redefine the factory class. Copy the w3sEditorFactory.class.php into the application's lib directory and add the following code to the function Create:
+
+    case 100: 
+    return new w3sRawContentEditor($content, 'w3s_my_editor');
+    break;	
+
+The second parameter is the editor's id.
+
+The last operation you have to do is adding the button to the actions menu. This command will insert the new content in the web page. There are some parts of the w3studioCMS' interface that are managed by yml files and one of this is the actions menu. These scripts are stored in the w3s_scripts folder, which is placed in the config directory of the sfW3studioCms plugin. Obviously these scripts can be overrided to fit your needs.
+
+Create a new directory in the config directory of your application, call it w3s_scripts and copy the tbInteractiveMenuActions.yml into that folder.
+
+Add this code before the button8:
+
+    button9:
+      image: <?php echo sfConfig::get('app_w3s_web_images_dir')?>/interactive_menu/[your button]
+      caption: 'Insert a raw content'
+      action: addContent('<?php echo sfContext::getInstance()->getController()->genUrl('contentsManager/add') ?>', 100)
+      imageTextRelation: 0
+      imageParams:
+        size: 32x32
+
+Change the *[your button]* parameter with the link to the image that represents your button. The action parameter is the javascript function that is executed by clicking the button. 
+
+
+**Note:** Every w3studioCMS' button is managed through the w3sButton.class.php object: see it definition to learn how to implement your commands.
+
+Clear the cache and reload your page. Clicking the content's add button you will have the new content available and the related editor to manage it. Is that easy, isn't it?
+
+That's all! Obviously you can extend and override every class of the w3sCore to fit your needs.
+
+## Notes ##
+
+This is the first beta version: you can carefully start to use it for your web sites. I hope that can be used in production as soon as possibile.
+
+## Todo ##
+
+Write the unit test to verify the CMS' core classes
+
+
+Last minute bug
+
+
+When you add a new project, the templates', you have to reload the page to make
+the new project ready to use, because the CSS are loaded when the page is fully loaded.
+
+
+## Help ##
+
+I know that my English is not very good, but I want to reach how many peole I can. hope someone will help me to correct the mistakes I made. :-)
+
+I hope you will find useful this plugin.
+Giansimon
