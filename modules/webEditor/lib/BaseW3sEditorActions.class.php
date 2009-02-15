@@ -41,34 +41,46 @@ class BaseW3sEditorActions extends sfActions
     $this->managerMenu = new w3sMenuManager('w3s_menu_manager', 'tbMenuManager.yml', $this->getUser());
     $this->interactiveMenu = new w3sMenuInteractive('w3s_interactive_menu');
     $this->commands = new w3sMenuVertical('w3s_im_commands', 'tbInteractiveMenuCommands.yml');    
-    $this->actions = new w3sMenuVertical('w3s_im_actions', 'tbInteractiveMenuActions.yml');
+    $this->actions = new w3sMenuVertical('w3s_im_actions', 'tbInteractiveMenuActions.yml');    
   }
   
   /**
    * Executes loadPage action
    *
    */
-  public function executeLoadPage()
+  public function executeLoadPage($request)
   {    
-    $this->status = 0; 
-    if ($this->getUser()->isAuthenticated())
-    { 
-      $this->template = new w3sTemplateEngineEditor($this->getRequestParameter('lang'), $this->getRequestParameter('page'));
-      if($this->template->getIdLanguage() != -1 && $this->template->getIdPage() != -1){
-	      $prevPage = ($this->getRequestParameter('prevPage') != '') ? $this->getRequestParameter('prevPage') : null;
-	      $this->status = ($this->template->isPageFree($prevPage)) ? 1 : 4;     
+    if ($request->hasParameter('prevPage'))
+    {
+      $this->status = 0;
+      if ($this->getUser()->isAuthenticated())
+      {
+        $this->template = new w3sTemplateEngineEditor($this->getRequestParameter('lang'), $this->getRequestParameter('page'));
+        if ($this->template->getIdLanguage() != -1 && $this->template->getIdPage() != -1)
+        {
+          //$prevPage = ($this->getRequestParameter('prevPage') != '') ? $this->getRequestParameter('prevPage') : null;
+          //$this->status = ($prevPage == null || $this->template->isPageFree($prevPage)) ? 1 : 4;
+          $this->status = ($this->template->isPageFree($this->getRequestParameter('prevPage'))) ? 1 : 4;         
+        }
+        else
+        {
+          $this->status = 8;
+        }
       }
-      else{
-      	$this->status = 8;
-      } 
-    }    
+      else
+      {
+        $this->status = 2;
+      }
+
+      if ($this->status != 1) $this->getResponse()->setStatusCode(404);
+      $this->getResponse()->setHttpHeader('X-JSON', sprintf('([["status", "%s"], ["stylesheet", "%s"]])', $this->status, $this->template->retrieveTemplateStylesheets()));
+    }
     else
     {
-      $this->status = 2;
+      $this->status = 16;
+      $this->getResponse()->setStatusCode(404);
+      $this->getResponse()->setHttpHeader('X-JSON', sprintf('([["status", "%s"]])', $this->status));
     }
-    
-    if($this->status != 1) $this->getResponse()->setStatusCode(404);
-    $this->getResponse()->setHttpHeader('X-JSON', sprintf('([["status", "%s"], ["stylesheet", "%s"]])', $this->status, $this->template->retrieveTemplateStylesheets()));
   }
   
   public function executePreview()

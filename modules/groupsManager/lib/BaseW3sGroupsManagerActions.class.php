@@ -26,33 +26,20 @@ class BaseW3sGroupsManagerActions extends sfActions
   /**
    * Saves the group
    */
-  public function executeAdd()
+  public function executeAdd($request)
   {
-    /*
-    if (trim($this->getRequestParameter('groupName')) != ''){
-	    if (W3sGroupPeer::getFromName($this->getRequestParameter('groupName')) == null)
-	    {
-		    $group = new w3sGroupManager();
-		    $result = $group->add($this->getRequestParameter('groupName'), $this->getRequestParameter('idTemplate'));		    
-	    }
-	    else
-	    {
-		    // Group name exists
-		    $result = 2;
-		    $this->getResponse()->setStatusCode(404);
-	    }
+	  if($request->hasParameter('groupName') && $request->hasParameter('idTemplate'))
+    {
+		  $group = new w3sGroupManager();
+		  $result = $group->add($this->getRequestParameter('groupName'), $this->getRequestParameter('idTemplate'));
+		  if($result != 1) $this->getResponse()->setStatusCode(404);
+		  return $this->renderPartial('add', array('result' => $result));
+    }
+	  else
+	  {
+	  	$this->getResponse()->setStatusCode(404);
+    	return $this->renderText(w3sCommonFunctions::toI18n('A required parameter misses.'));
 	  }
-	  else{
-	  
-	    // Group name is empty
-	    $result = 4;
-	    $this->getResponse()->setStatusCode(404);
-	  }*/
-	  $group = new w3sGroupManager();
-		$result = $group->add($this->getRequestParameter('groupName'), $this->getRequestParameter('idTemplate'));
-	  if($result != 1) $this->getResponse()->setStatusCode(404);
-	  
-	  return $this->renderPartial('add', array('result' => $result));
   }
 
   /**
@@ -71,8 +58,13 @@ class BaseW3sGroupsManagerActions extends sfActions
   {
     if ($this->getRequest()->hasParameter('idGroup'))
     { 
-      $group = new w3sGroupManager(DbFinder::from('W3sGroup')->findPK($this->getRequestParameter('idGroup')));
-      $result = $group->delete(); 
+      $result = 0;
+      $group = DbFinder::from('W3sGroup')->findPK($this->getRequestParameter('idGroup'));
+      if (!empty($group))
+      {      
+        $groupManager = new w3sGroupManager($group);
+        $result = $groupManager->delete();
+      }
       if ($result != 1) $this->getResponse()->setStatusCode(404);
     } 
     else{

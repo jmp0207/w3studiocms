@@ -17,7 +17,7 @@ class BaseW3sPagesManagerActions extends sfActions
 	/**
    * Shows the module for page add
    */
-  public function executeShowAddModule()
+  public function executeShow()
   {    
     $this->pageEditor = new w3sPageEditor();
   }
@@ -25,48 +25,96 @@ class BaseW3sPagesManagerActions extends sfActions
   /**
    * Adds the page
    */
-  public function executeAdd()
+  public function executeAdd($request)
   {
-    $page = new w3sPageManager();
-    $result = $page->add($this->getRequestParameter('pageName'), $this->getRequestParameter('idGroup'));
-    
-    if ($result != 1) $this->getResponse()->setStatusCode(404);
-    return $this->renderPartial('add', array('result' => $result));
+    if($request->hasParameter('pageName') && $request->hasParameter('idGroup'))
+    {
+      $page = new w3sPageManager();
+      $result = $page->add($this->getRequestParameter('pageName'), $this->getRequestParameter('idGroup'));
+
+      if ($result != 1) $this->getResponse()->setStatusCode(404);
+      return $this->renderPartial('add', array('result' => $result));
+    }
+    else
+	  {
+	  	$this->getResponse()->setStatusCode(404);
+    	return $this->renderText(w3sCommonFunctions::toI18n('One or more required parameter are missing.'));
+	  }
   }
 
   /**
    * Lists pages
    */
-  public function executeShowPages()
+  public function executeShowPages($request)
   {
-    $fileManager = new w3sFileManager($this->getRequestParameter('curLang'), $this->getRequestParameter('curPage'));
-    return $this->renderPartial('listPages', array('fileManager' => $fileManager));
+    if ($request->hasParameter('curLang') && $request->hasParameter('curPage'))
+    {
+      $fileManager = new w3sFileManager($this->getRequestParameter('curLang'), $this->getRequestParameter('curPage'));
+      return $this->renderPartial('listPages', array('fileManager' => $fileManager));
+    }
+    else
+	  {
+	  	$this->getResponse()->setStatusCode(404);
+    	return $this->renderText(w3sCommonFunctions::toI18n('One or more required parameter are missing.'));
+	  }
   }
 
   /**
    * Deletes the page
    */
-  public function executeDelete()
-  {
-    $page = new w3sPageManager(DbFinder::from('W3sPage')->findPK($this->getRequestParameter('idPage')));
-    $page->delete();
+  public function executeDelete($request)
+  {    
+    if ($request->hasParameter('idPage') && $request->hasParameter('curLang') && $request->hasParameter('curPage'))
+    {
+      $result = 0;
+      $page = DbFinder::from('W3sPage')->findPK($this->getRequestParameter('idPage'));
+      if ($page != null)
+      {
+        $pageManager = new w3sPageManager($page);
+        $pageManager->delete();
 
-		$fileManager = new w3sFileManager($this->getRequestParameter('curLang'), $this->getRequestParameter('curPage'));
-    return $this->renderPartial('listPages', array('fileManager' => $fileManager));
+        $fileManager = new w3sFileManager($this->getRequestParameter('curLang'), $this->getRequestParameter('curPage'));
+        return $this->renderPartial('listPages', array('fileManager' => $fileManager));
+      }
+      else
+      {
+        $this->getResponse()->setStatusCode(404);
+        return $this->renderText(w3sCommonFunctions::toI18n('The requested page does not exists anymore.'));
+      }
+    }
+    else
+	  {
+	  	$this->getResponse()->setStatusCode(404);
+    	return $this->renderText(w3sCommonFunctions::toI18n('One or more required parameter are missing.'));
+	  }
   }
 
   /**
    * Renames the page
    */
-  public function executeRename()
+  public function executeRename($request)
   {
-    $page = W3sPagePeer::retrieveByPk($this->getRequestParameter('idPage'));
-    if ($page != null){
-      $page->setPageName($this->getRequestParameter('newName'));
-      $page->save();
-    }
+    if ($request->hasParameter('idPage') && $request->hasParameter('newName'))
+    {
+      $page = W3sPagePeer::retrieveByPk($this->getRequestParameter('idPage'));
+      if ($page != null)
+      {
+        $page->setPageName($this->getRequestParameter('newName'));
+        $page->save();
 
-    $fileManager = new w3sFileManager($this->getRequestParameter('curLang'), $this->getRequestParameter('curPage'));
-    return $this->renderPartial('listPages', array('fileManager' => $fileManager));
+        $fileManager = new w3sFileManager($this->getRequestParameter('curLang'), $this->getRequestParameter('curPage'));
+        return $this->renderPartial('listPages', array('fileManager' => $fileManager));
+      }
+      else
+      {
+        $this->getResponse()->setStatusCode(404);
+        return $this->renderText(w3sCommonFunctions::toI18n('The requested page does not exists anymore.'));
+      }
+    }
+    else
+	  {
+	  	$this->getResponse()->setStatusCode(404);
+    	return $this->renderText(w3sCommonFunctions::toI18n('One or more required parameter are missing.'));
+	  }
   }
 }

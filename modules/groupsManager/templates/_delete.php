@@ -18,14 +18,14 @@
   $type = 'error';
 	switch($result){
 	  case 0:
-	    $message = __('An error occoured while deleting record: try again.');
+	    $message = __('An error occoured while deleting record.');
 	    break;
 	  case 1:
 	  	$type = 'success_14';
-	    $message = __('Group deleted succesfully!');
+	    $message = __('The group has been succesfully deleted!');
 	    break;
 	  case 2:
-	    $message = __('WARNING: A serious error occoured. A required parameter has not been initialized.');
+	    $message = __('WARNING: A serious error occoured. A required parameter misses. The group cannot be deleted.');
 	    break;      
 	}
   

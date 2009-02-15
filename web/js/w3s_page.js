@@ -44,7 +44,7 @@ var w3sPage = Class.create({
     return false;
   },
 
-  remove: function(idPage, curPage, sConfirmMessage)
+  remove: function(idPage, sConfirmMessage)
 	{
     if(sConfirmMessage == null) sConfirmMessage = 'WARNING: If you delete this page, W3Studio will also delete all contents and metatags related with it: do you want to continue with deleting?';
     if (confirm(sConfirmMessage)) {

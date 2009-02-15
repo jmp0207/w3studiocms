@@ -39,9 +39,8 @@ class sfGuardAuthActions extends BasesfGuardAuthActions
       $idUser = $this->getUser()->getGuardUser()->getId();
       $this->getUser()->signOut();
   
-      $oSemaphore = new W3sSemaphore(); 
-      $operation = 'Page requested:' . $this->getRequestParameter('page');
-      $oSemaphore->deleteOperation($idUser, $operation);
+      $operation = $this->getRequestParameter('lang') . $this->getRequestParameter('page');
+      semaphore::deleteOperation($idUser, $operation);
     }
 
     $oPage = W3sPagePeer::retrieveByPk($this->getRequestParameter('page'));

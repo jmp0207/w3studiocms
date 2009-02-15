@@ -45,7 +45,8 @@ class w3sControlPanel
 			  <li>%s</li>
 				<li>%s</li>
 			</ul>';
-	
+
+  //TODO: Rivedere $currentUser
 	public function __construct($idLanguage = 0, $currentPage = 0, $currentUser)
   {
   	$this->idLanguage = $idLanguage;

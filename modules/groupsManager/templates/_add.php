@@ -35,7 +35,7 @@
       $message = __('This Group already exists in the web site: use another name.');
       break;
     case 4:
-      $message = __('You must provide a name for the new Group.');
+      $message = __('You must provide a name for the new group.');
       break;
     case 8:
       $message = __('The template you want to associate to the new group doesn\'t exist anymore');

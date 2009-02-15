@@ -125,9 +125,25 @@ class BaseW3sContentsManagerActions extends sfActions
    */
   public function executeMove($request)
   {
-    $slotManager = new w3sContentsMove($this->getRequestParameter('language'), $this->getRequestParameter('page'), $this->getRequestParameter('slotId'));
+    //print_r($request->getParameterHolder()->getAll());
+    $slotManager = new w3sContentsMove($this->getRequestParameter('language'), 
+    																	 $this->getRequestParameter('page'), 
+    																	 $this->getRequestParameter('slotId'));
     $slotContents = ($request->hasParameter($this->getRequestParameter('slotName'))) ? $this->getRequestParameter($this->getRequestParameter('slotName')) : array();    
-    $result = $slotManager->moveContents($slotContents);
+    //echo $slotContents; // is_array($slotContents) ? "OK" : "no";
+    /*
+    echo $request->getRequestParameter($this->getRequestParameter('slotName'));
+    if($request->hasParameter($this->getRequestParameter('slotName')))
+    { 
+    	echo "Q";
+    	$slotContents = $this->getRequestParameter($this->getRequestParameter('slotName'));
+    }
+    else
+    {
+    	echo "A";
+    	$slotContents = array();
+    }*/
+    $result = $slotManager->moveContents($slotContents); //  print_r($slotContents);  echo $this->getRequestParameter('slotName');
     
     if ($result != 1) $this->getResponse()->setStatusCode(404);
     return $this->renderPartial('move', array('result' => $result));

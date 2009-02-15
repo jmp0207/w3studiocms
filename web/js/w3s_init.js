@@ -49,7 +49,7 @@ var W3studioCMS = Class.create({
 	// Loads the editor page from webSite/index
 	W3StudioCMSLoader: function (){ 
 	  try{
-	    var sActionPath = this.frontController + 'webEditor/loadPage?lang=' + this.language + '&page=' + this.page;
+	    var sActionPath = this.frontController + 'webEditor/loadPage?lang=' + this.language + '&page=' + this.page + '&prevPage=';
 	    
 	    // We need a DIV to store an eventually error that may occoured during loading. Here it is creating dinamically
 	    var objBody = document.getElementsByTagName("body").item(0);
