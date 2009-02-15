@@ -28,8 +28,7 @@
       $message =  __('This language already exists in the web site: use another name.');
       break;
     case 4:      
-      $message =  __('WARNING: A serious error occoured. A required parameter has not been initialized.');
-      $message .= __('You can try to change page, reenter in this page and redo the operation you made.<br /><br />If problem persists you can try to logout, signin again and redo the operation you made.<br /><br />If problem persists too, reports the error to W3StudioCMS web site \'s forum.');
+      $message =  __('The name of the language is required.');
       break;
   }
   

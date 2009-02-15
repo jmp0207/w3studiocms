@@ -18,7 +18,7 @@ class BaseW3sLanguagesManagerActions extends sfActions
    * Executes show action
    *
    */
-  public function executeShow()
+  public function executeShow($request)
   {
   	$language = ($this->getRequestParameter('idLanguage') > 0) ? DbFinder::from('W3sLanguage')->findPK($this->getRequestParameter('idLanguage')) : null;
   	$languagesEditor = new w3sLanguagesEditor($language);
@@ -29,17 +29,15 @@ class BaseW3sLanguagesManagerActions extends sfActions
    * Executes add action
    *
    */
-  public function executeAdd()
+  public function executeAdd($request)
   {
-    if (
-    		$this->getRequest()->hasParameter('languageName') &&
-        $this->getRequest()->hasParameter('isMain')
-       )
+    if ($request->hasParameter('languageName'))
     {
       $language = W3sLanguagePeer::getFromLanguageName($this->getRequestParameter('languageName'));
       if ($language == null)
       {
-      	$params = array("isMain" => $this->getRequestParameter('isMain'), 
+      	$isMain = ($request->hasParameter('isMain')) ? $this->getRequestParameter('isMain') : 0;
+        $params = array("isMain" => $isMain,
       									"languageName" => $this->getRequestParameter('languageName'));
       	$language = new w3sLanguageManager();
       	$result = $language->add($params);
@@ -62,18 +60,15 @@ class BaseW3sLanguagesManagerActions extends sfActions
    * Executes edit action
    *
    */
-  public function executeEdit()
+  public function executeEdit($request)
   {
-    if (
-    		$this->getRequest()->hasParameter('idLanguage') &&
-        $this->getRequest()->hasParameter('languageName') &&
-        $this->getRequest()->hasParameter('isMain')
-       )
+    if ($request->hasParameter('idLanguage') && $request->hasParameter('languageName'))
     {
       $language = DbFinder::from('W3sLanguage')->findPK($this->getRequestParameter('idLanguage'));
      	if ($language != null)
      	{
-     		$params = array("isMain" => $this->getRequestParameter('isMain'), 
+     		$isMain = ($request->hasParameter('isMain')) ? $this->getRequestParameter('isMain') : 0;
+        $params = array("isMain" => $isMain,
       									"languageName" => $this->getRequestParameter('languageName'));
 		  	$language = new w3sLanguageManager($language);
 		  	$result = $language->edit($params);
@@ -95,7 +90,7 @@ class BaseW3sLanguagesManagerActions extends sfActions
    * Executes delete action
    *
    */
-  public function executeDelete()
+  public function executeDelete($request)
   {
     $language = DbFinder::from('W3sLanguage')->findPK($this->getRequestParameter('idLanguage'));
     

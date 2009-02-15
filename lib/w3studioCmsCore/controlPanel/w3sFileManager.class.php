@@ -99,16 +99,17 @@ class w3sFileManager
 	    	$changePageFunction = '';
 	    	$renamePageFunction = '';
 	    }
-	    $result .= sprintf($this->rowSkeleton, $this->idLanguage . $idPage,
-	    																			$class,
-	    																			$idPage,
-	    																			link_to_function(w3sCommonFunctions::setStringMaxWidth($page->getPageName(), 20), $changePageFunction),
-	    																			$idPage,	    																			
-																						$this->drawPageEditor($page),
-																						link_to_function(w3sCommonFunctions::setStringMaxWidth($page->getW3sGroup()->getGroupName(), 14), $changePageFunction, 'style="color:#FF9900;"'),
-	    																			($edited > 0) ? image_tag(sfConfig::get('app_w3s_web_skin_images_dir') . '/control_panel/button_edited.gif') : '&nbsp;',
-	    																			link_to_function(image_tag(sfConfig::get('app_w3s_web_skin_images_dir') . '/control_panel/button_edit.gif', 'alt=' . __('Rename current page') . ' size=14x14'), $renamePageFunction),
-	    																			($this->idLanguage.$idPage != $this->currentPage) ? link_to_function(image_tag(sfConfig::get('app_w3s_web_skin_images_dir') . '/control_panel/button_delete.gif', 'alt=' . __('Delete current page') . ' size=14x14'), 'W3sPage.remove(' . $idPage . ', \'' . __('If you delete this page, W3Studio will also delete all contents and metatags related with it: do you want to continue with deleting?') . '\')') : image_tag(sfConfig::get('app_w3s_web_skin_images_dir') . '/control_panel/button_delete_disabled.gif'));
+	    $result .= sprintf($this->rowSkeleton,
+                        $this->idLanguage . $idPage,
+                        $class,
+                        $idPage,
+                        link_to_function(w3sCommonFunctions::setStringMaxWidth($page->getPageName(), 20), $changePageFunction),
+                        $idPage,
+                        $this->drawPageEditor($page),
+                        link_to_function(w3sCommonFunctions::setStringMaxWidth($page->getW3sGroup()->getGroupName(), 14), $changePageFunction, 'style="color:#FF9900;"'),
+                        ($edited > 0) ? image_tag(sfConfig::get('app_w3s_web_skin_images_dir') . '/control_panel/button_edited.gif') : '&nbsp;',
+                        link_to_function(image_tag(sfConfig::get('app_w3s_web_skin_images_dir') . '/control_panel/button_edit.gif', 'alt=' . __('Rename current page') . ' size=14x14'), $renamePageFunction),
+                        ($this->idLanguage.$idPage != $this->currentPage) ? link_to_function(image_tag(sfConfig::get('app_w3s_web_skin_images_dir') . '/control_panel/button_delete.gif', 'alt=' . __('Delete current page') . ' size=14x14'), 'W3sPage.remove(' . $idPage . ', \'' . __('If you delete this page, W3Studio will also delete all contents and metatags related with it: do you want to continue with deleting?') . '\')') : image_tag(sfConfig::get('app_w3s_web_skin_images_dir') . '/control_panel/button_delete_disabled.gif'));
 	     $i++;				
 	  }
 	  

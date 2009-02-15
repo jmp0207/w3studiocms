@@ -12,10 +12,11 @@
 var w3sTemplate = Class.create({
 	
 	// Loads the editor page from webEditor/index
-	loadEditorPage: function(newlanguage, newPage){
+	loadEditorPage: function(newlanguage, newPage){ 
 	  if (newlanguage == undefined) newlanguage = w3studioCMS.language;
 	  if (newPage == undefined) newPage = w3studioCMS.page;
-	  var paramPrevPage = (w3studioCMS.page != undefined) ? '&prevPage=' + w3studioCMS.page : '';
+	  //var paramPrevPage = (w3studioCMS.page != undefined) ? '&prevPage=' + w3studioCMS.page : '&prevPage="a"';
+    var prevPageValue = (w3studioCMS.page != undefined) ? w3studioCMS.page : '';
 	  var sActionPath = w3studioCMS.frontController + 'webEditor/loadPage';	  
 	  new Ajax.Updater({success:'w3s_cms',failure:'w3s_error'}, sActionPath,
 	      {asynchronous:true,
@@ -56,7 +57,7 @@ var w3sTemplate = Class.create({
 	          },
 	        parameters:'page=' + newPage +
 	                   '&lang=' + newlanguage +
-	                   paramPrevPage});
+                     '&prevPage=' + prevPageValue});
 	  return false;
 	},
 	

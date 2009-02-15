@@ -68,7 +68,7 @@ var w3sControlPanel = Class.create({
   },
 
   showAddPageModule: function(){ 
-		var sActionPath = w3studioCMS.frontController + 'pagesManager/showAddModule';
+		var sActionPath = w3studioCMS.frontController + 'pagesManager/show';
     var sAjaxOptions = {asynchronous:true,
                         evalScripts:false,
                         method:'get'

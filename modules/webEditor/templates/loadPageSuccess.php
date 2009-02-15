@@ -28,4 +28,12 @@
       $message = __('The page you have requested is in use. Please open the structure menu and choose another one from the File Manager tab.');      
       echo w3sCommonFunctions::displayMessage($message);      
       break;
+    case 8:
+      $message = __('The page or the language you have requested does not exists anymore in the website.');      
+      echo w3sCommonFunctions::displayMessage($message);      
+      break;
+    case 16:
+      $message = __('Previous visited page param has not been setted. This problem can be fixed passing the prevPage param to action loadPage.');
+      echo w3sCommonFunctions::displayMessage($message);
+      break;
   }

@@ -109,7 +109,8 @@ abstract class w3sTemplateEngine
     return $this->pageName;
   }
   
-  public function getPageContents(){
+  public function getPageContents()
+  {
     return $this->pageContents;  
   }
   
@@ -120,11 +121,11 @@ abstract class w3sTemplateEngine
    * @param int  The previous page id
    *
    */   
-  public function isPageFree($prevPage){
-    $oSemaphore = new W3sSemaphore(); 
-    $operation = 'Page requested:' . $this->idPage;      
-    $prevOperation = 'Page requested:' . $prevPage;      
-    return $oSemaphore->setRequestedOperation(sfContext::getInstance()->getUser()->getGuardUser()->getId(), $operation, $prevOperation);
+  public function isPageFree($prevPage)
+  {
+    $operation = $this->idLanguage . $this->idPage;
+    $prevOperation = $this->idLanguage . $prevPage;
+    return semaphore::setRequestedOperation(sfContext::getInstance()->getUser()->getGuardUser()->getId(), $operation, $prevOperation);
   }
 
 	/**
