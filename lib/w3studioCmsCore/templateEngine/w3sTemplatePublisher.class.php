@@ -106,6 +106,12 @@ class w3sTemplateEnginePublisher extends w3sTemplateEngine
 	   		}
 	    }
     }
+    else
+    {
+      return 0;
+    }
+
+    return 1;
   }
   
   /** 

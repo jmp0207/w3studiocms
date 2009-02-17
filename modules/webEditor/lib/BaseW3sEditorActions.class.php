@@ -168,7 +168,7 @@ class BaseW3sEditorActions extends sfActions
    * Publish the website. 
    */
   public function executePublish()
-  { 
-    $this->template = new w3sTemplateEnginePublisher($this->getRequestParameter('lang'), $this->getRequestParameter('page'));
+  {
+    $this->template = new w3sTemplateEnginePublisher();
   }
 }
