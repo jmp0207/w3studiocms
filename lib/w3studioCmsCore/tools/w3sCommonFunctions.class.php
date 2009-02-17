@@ -37,29 +37,36 @@ class w3sCommonFunctions
     
     return $result[1];
   }
-  
-  public static function loadScript($fileName){
-  	if (sfConfig::get('app_w3s_scripts_dir') == null){
+
+  public static function getConfigurationFilePath($fileName)
+  {
+    if (sfConfig::get('app_w3s_scripts_dir') == null){
 			throw new exception('Error: The w3s_scripts_dir constant is not defined. Please define it in your app.yml file');
 		}
-		
+
 		$w3sScriptFile = self::checkLastDirSeparator(sfConfig::get('app_w3s_scripts_dir')) . 'w3sPaths.yml';
 		if (!is_file($w3sScriptFile))
 		{
 			throw new exception(sprintf('%s is not a valid file.', $w3sScriptFile));
 		}
-		
+
 		$searchPaths = sfYaml::load(self::checkLastDirSeparator(sfConfig::get('app_w3s_scripts_dir')) . 'w3sPaths.yml');
 
-		$file = '';
+		$result = '';
 		foreach($searchPaths['paths'] as $searchPath){
 			$searchPath = self::checkLastDirSeparator($searchPath);
 			if (is_file($searchPath. $fileName))
 			{
-				$file = $searchPath.$fileName;
+				$result = $searchPath;
 				break;
 			}
 		}
+
+    return $result;
+  }
+  
+  public static function loadScript($fileName){
+  	$file = self::getConfigurationFilePath($fileName) . $fileName;
 		
 		if ($file == ''){
 			throw new exception(sprintf('Error: The file %s does not exist in any of the paths you specified in the w3sPaths.yml configuration file.', $fileName));

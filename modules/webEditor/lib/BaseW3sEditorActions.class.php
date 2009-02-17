@@ -83,22 +83,37 @@ class BaseW3sEditorActions extends sfActions
     }
   }
   
-  public function executePreview()
+  public function executePreview($request)
   {
-    $this->status = 0; 
-    if ($this->getUser()->isAuthenticated())
-    { 
-      $this->template = new w3sTemplateEnginePreview($this->getRequestParameter('lang'), $this->getRequestParameter('page'));
-      $prevPage = ($this->getRequestParameter('prevPage') != '') ? $this->getRequestParameter('prevPage') : null;
-      $this->status = ($this->template->isPageFree($prevPage)) ? 1 : 4;   
-    }    
+    if ($request->hasParameter('prevPage'))
+    {
+      $this->status = 0;
+      if ($this->getUser()->isAuthenticated())
+      {
+        $this->template = new w3sTemplateEnginePreview($this->getRequestParameter('lang'), $this->getRequestParameter('page'));
+        if ($this->template->getIdLanguage() != -1 && $this->template->getIdPage() != -1)
+        {
+          $this->status = ($this->template->isPageFree($this->getRequestParameter('prevPage'))) ? 1 : 4;
+        }
+        else
+        {
+          $this->status = 8;
+        }
+      }
+      else
+      {
+        $this->status = 2;
+      }
+
+      if($this->status != 1) $this->getResponse()->setStatusCode(404);
+      $this->getResponse()->setHttpHeader('X-JSON', sprintf('([["status", "%s"], ["stylesheet", "%s"]])', $this->status, $this->template->retrieveTemplateStylesheets()));
+    }
     else
     {
-      $this->status = 2;
+      $this->status = 16;
+      $this->getResponse()->setStatusCode(404);
+      $this->getResponse()->setHttpHeader('X-JSON', sprintf('([["status", "%s"]])', $this->status));
     }
-    
-    if($this->status != 1) $this->getResponse()->setStatusCode(404);
-    $this->getResponse()->setHttpHeader('X-JSON', sprintf('([["status", "%s"], ["stylesheet", "%s"]])', $this->status, $this->template->retrieveTemplateStylesheets()));    
   }
   
   /**
@@ -114,12 +129,17 @@ class BaseW3sEditorActions extends sfActions
    * Executes loadMenuManager action
    *
    */
-  public function executeLoadMenuManager()
-  { 
-  	$mode = $this->getRequestParameter('mode');
-  	$mode = (empty($mode) || $mode == '') ? 'full' : $this->getRequestParameter('mode');
-    $menu = new w3sMenuManager('w3s_menu_manager', $this->getRequestParameter('toolbarFile') . '.yml', $this->getUser());
+  public function executeLoadMenuManager($request)
+  {   	
+    $toolbarFile = ($request->hasParameter('toolbarFile')) ? $this->getRequestParameter('toolbarFile') : 'tbMenuManager';
     
+    if ($toolbarFile == '') $toolbarFile = 'tbMenuManager';
+    if (substr($toolbarFile, strlen($toolbarFile) - 4, 4) != '.yml') $toolbarFile .= '.yml';
+    if ($toolbarFile != '' && !file_exists(w3sCommonFunctions::getConfigurationFilePath($toolbarFile) . $toolbarFile)) $toolbarFile = 'tbMenuManager.yml';
+    $mode = ($request->hasParameter('mode')) ? $this->getRequestParameter('mode') : 'full';
+    if ($mode == '') $mode = 'full';
+    $menu = new w3sMenuManager('w3s_menu_manager',  $toolbarFile, $this->getUser());
+
     return $this->renderText($menu->renderMenuManager($mode));
   }
 
@@ -127,21 +147,10 @@ class BaseW3sEditorActions extends sfActions
    * Executes openEditor action
    *
    */
-  public function executeOpenEditor()
+  public function executeOpenEditor($request)
   { 
     // The parameters passed to the forwarded action are already setted in the javascript
-    /*
-    if ($this->getRequest()->hasParameter('language') &&
-        $this->getRequest()->hasParameter('page') &&
-        $this->getRequest()->hasParameter('idSlot') &&
-        $this->getRequest()->hasParameter('idContent') &&
-        $this->getRequestParameter('language') > 0 &&
-        $this->getRequestParameter('page') > 0 &&
-        $this->getRequestParameter('idSlot') > 0 &&
-        $this->getRequestParameter('idContent') > 0)
-    {*/   
-    if ($this->getRequest()->hasParameter('idContent') &&
-        $this->getRequestParameter('idContent') > 0)
+    if ($request->hasParameter('idContent') && $this->getRequestParameter('idContent') > 0)
     { 
       $content = W3sContentPeer::retrieveByPk($this->getRequestParameter('idContent'));
       if ($content != null)
