@@ -21,7 +21,6 @@
       $message = __('An error occoured while saving record: try again.');       
       break;
     case 1:
-      //echo select_tag('w3s_languages_select', objects_for_select($languageOptions, 'getId', 'getLanguage'));
       $message = __('The language has been correctly edited.');
       $type = "success_14";
       break;

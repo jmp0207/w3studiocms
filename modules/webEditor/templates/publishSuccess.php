@@ -12,5 +12,16 @@
  * For extra documentation and help please visit http://www.w3studiocms.com
  */ 
  
- use_helper('Javascript'); 
- $template->publish();
+ use_helper('Javascript', 'I18N');
+ $result = $template->publish();
+
+ switch($result)
+ {
+   case 0:
+		  $message = __('An error occoured during the db update operation.');
+  		break;
+   case 1:
+		  $message = __('Website has been correctly published.');      
+  		break;
+ }
+ echo w3sCommonFunctions::displayMessage($message);
