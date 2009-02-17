@@ -21,7 +21,8 @@
  * 
  * @author     Giansimon Diblas <giansimon.diblas@w3studiocms.com>
  */
-class w3sMenuManager extends w3sMenuHorizontal{
+class w3sMenuManager extends w3sMenuHorizontal
+{
   protected $partialSkeleton = 
 			'<table id="w3s_menu_manager_commands" border="0" cellpadding="0" cellspacing="0">%s</table>';
 		   
@@ -33,7 +34,8 @@ class w3sMenuManager extends w3sMenuHorizontal{
    * @param object  A reference to current user
    *
    */ 
-  public function __construct($menuId, $toolbarFile, $user = null){ 
+  public function __construct($menuId, $toolbarFile, $user = null)
+  {
 		$this->skeleton = 
 			'<div id="w3s_menu_manager_left_controller" style="width:30px;height:95px;float:left;"></div>
 		   <div id="w3s_menu_manager_left">&nbsp;</div>
@@ -49,7 +51,8 @@ class w3sMenuManager extends w3sMenuHorizontal{
 		parent::__construct($menuId, $toolbarFile, $user);
 	}
 	
-	public function renderMenuManager($mode='full'){
+	public function renderMenuManager($mode='full')
+  {
   	return ($mode == 'full') ? sprintf('<div id="%s">%s</div>', $this->menuId, $this->drawMenu()) : $this->drawPartialMenu(); 
 	}
 	
@@ -59,7 +62,8 @@ class w3sMenuManager extends w3sMenuHorizontal{
    * @return string - The rendered menu
    *
    */ 
-	protected function drawPartialMenu(){ 
+	protected function drawPartialMenu()
+  {
 		$toolbar = new w3sToolbarHorizontal($this->user); 
     $toolbar->fromYml($this->toolbarFile);
     
