@@ -27,9 +27,15 @@
     case 2:
       $message =  __('You have been tried to edit a language that doesn\'t exists anymore in the website.');
       break;
-    case 4:      
+    case 4:
+      $message =  __('The main language cannot be directly resetted.');
+      break;
+    case 8:
       $message =  __('WARNING: A serious error occoured. A required parameter has not been initialized.');
       $message .= __('You can try to change page, reenter in this page and redo the operation you made.<br /><br />If problem persists you can try to logout, signin again and redo the operation you made.<br /><br />If problem persists too, reports the error to W3StudioCMS web site \'s forum.');
+      break;
+    case 16:
+      $message =  __('No params has been passed to action: nothing to do.');
       break;
   }
   

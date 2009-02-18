@@ -157,28 +157,43 @@ class w3sLanguageManager
    */
   public function edit($params)
   {
-    try{	    
-	    if($this->language != null){
+    try
+    {
+	    if($this->language != null)
+      {
 	    	$con = Propel::getConnection();
 	  
 		    // We assure that all the operations W3StudioCMS makes will be successfully done
 		    $bRollBack = false;
 		    $con = w3sPropelWorkaround::beginTransaction($con); 
-	    
-	    	
-	      if(isset($params["languageName"]) && $this->language->getLanguage() != $params["languageName"]) $this->language->setLanguage($params["languageName"]);
-	      if(isset($params["isMain"]) && $this->language->getMainLanguage() != $params["isMain"])
-	      { 
-	      	// If the language is declared as main, resets the previuos
-	      	if ($params["isMain"] == 1) $bRollBack = !$this->resetMain();
-	      	$this->language->setMainLanguage($params["isMain"]);
-	      }
-	      $result = $this->language->save();
-	      if ($this->language->isModified() && $result == 0) $bRollBack = true;
-	      
+
+        if(isset($params["isMain"]))
+        {         
+          if($this->language->getMainLanguage() != $params["isMain"] && $params["isMain"] == 1)
+          {
+            
+            // If the language is declared as main, resets the previuos
+            $bRollBack = !$this->resetMain();
+            if (!$bRollBack) $this->language->setMainLanguage($params["isMain"]);
+          }
+          else
+          {
+            w3sPropelWorkaround::rollBack($con);
+            return 4;
+          }
+        }
+
+        if (!$bRollBack)
+        {
+          if(isset($params["languageName"]) && $this->language->getLanguage() != $params["languageName"]) $this->language->setLanguage($params["languageName"]);
+
+          $result = $this->language->save(); 
+          if ($this->language->isModified() && $result == 0) $bRollBack = true;
+        }
+        
 	      if (!$bRollBack){   // Everything was fine so W3StudioCMS commits to database
 		      $con->commit();
-		      $result = 1;
+		      $result = 1; 
 		    }
 		    else{               // Something was wrong so W3StudioCMS aborts the operation and restores to previous status
 		      w3sPropelWorkaround::rollBack($con);
@@ -295,9 +310,9 @@ class w3sLanguageManager
   	$result = true;
   	if ($mainLanguage == null) $mainLanguage = W3sLanguagePeer::getMainLanguage();
   	$mainLanguage->setMainLanguage(0);
-	  $result = $mainLanguage->save();
+	  $result = $mainLanguage->save(); 
 	  if ($mainLanguage->isModified() && $result == 0) $result = false;
-	  
+
 	  return $result;
   }
   

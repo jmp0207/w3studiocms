@@ -62,16 +62,23 @@ class BaseW3sLanguagesManagerActions extends sfActions
    */
   public function executeEdit($request)
   {
-    if ($request->hasParameter('idLanguage') && $request->hasParameter('languageName'))
+    if ($request->hasParameter('idLanguage'))
     {
       $language = DbFinder::from('W3sLanguage')->findPK($this->getRequestParameter('idLanguage'));
      	if ($language != null)
      	{
-     		$isMain = ($request->hasParameter('isMain')) ? $this->getRequestParameter('isMain') : 0;
-        $params = array("isMain" => $isMain,
-      									"languageName" => $this->getRequestParameter('languageName'));
-		  	$language = new w3sLanguageManager($language);
-		  	$result = $language->edit($params);
+     		$params = array();
+        if($request->hasParameter('isMain')) $params["isMain"] = $this->getRequestParameter('isMain');
+        if($request->hasParameter('languageName')) $params["languageName"] = $this->getRequestParameter('languageName');
+		  	if (count($params) > 0)
+        {
+          $language = new w3sLanguageManager($language);
+          $result = $language->edit($params); 
+        }
+        else
+        {
+          $result = 16;
+        }
      	}
       else
       {
@@ -79,7 +86,7 @@ class BaseW3sLanguagesManagerActions extends sfActions
       }  
     }
     else{
-      $result = 4;        
+      $result = 8;
     }
     
     if ($result != 1) $this->getResponse()->setStatusCode(404);
@@ -92,12 +99,23 @@ class BaseW3sLanguagesManagerActions extends sfActions
    */
   public function executeDelete($request)
   {
-    $language = DbFinder::from('W3sLanguage')->findPK($this->getRequestParameter('idLanguage'));
+    if ($request->hasParameter('idLanguage'))
+    {
+      $language = DbFinder::from('W3sLanguage')->findPK($this->getRequestParameter('idLanguage'));
+      if ($language != null)
+      {
+        $language = new w3sLanguageManager($language);
+        $result = $language->delete();
+      }
+      else
+      {
+        $result = 4;
+      }
+	  }
+    else{
+      $result = 8;
+    }
     
-    $language = new w3sLanguageManager($language);
-    $result = $language->delete();
-	  
-	  
 	  if ($result != 1) $this->getResponse()->setStatusCode(404);
 	  return $this->renderPartial('delete', array('result' => $result));
   }
