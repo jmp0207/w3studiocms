@@ -54,39 +54,79 @@ class BaseW3sMenuBuilderActions extends BaseW3sContentsManagerActions
 	 */
   public function executeShowImages()
   {
-    $imagesList = w3sCommonFunctions::buildFilesList(sfConfig::get('app_images_path'), '', array('gif', 'jpg', 'jpeg', 'png'));
-    $imageList = new w3sImageListMenuBuilder($imagesList, $this->getRequestParameter('property')); 
-    
-		return $this->renderText($imageList->renderImageList(), $this->getRequestParameter('property'));
+    try
+    {
+      $imagesList = w3sCommonFunctions::buildFilesList(sfConfig::get('app_images_path'), '', array('gif', 'jpg', 'jpeg', 'png'));
+      $imageList = new w3sImageListMenuBuilder($imagesList, $this->getRequestParameter('property'));
+
+      return $this->renderText($imageList->renderImageList(), $this->getRequestParameter('property'));
+    }
+    catch(Exception $e)
+    {
+      return $this->renderText('Something was wrong while refreshing images lists.');
+    }
   }
 
 	/**
 	 * Adds a link to the current menu
 	 */
-  public function executeAddLink()
+  public function executeAddLink($request)
   { 
-    $this->menuEditor = new w3sMenuEditor(DbFinder::from('W3sContent')->findPK($this->getRequestParameter('idContent')),5);
-    $this->menuEditor->saveLinks($this->getRequest()->getParameterHolder()->getAll());
-    $this->result = $this->menuEditor->saveMenuLink($this->getContext()->getI18N()->__('This is a link'));    
-    
-    if ($this->result != 0){   
-      $this->clearCache($this->getRequestParameter('idContent'));
+    if ($request->hasParameter('idContent'))
+    {
+      $this->menuEditor = new w3sMenuEditor(DbFinder::from('W3sContent')->findPK($this->getRequestParameter('idContent')), 5);
+      //$this->menuEditor->saveLinks($this->getRequest()->getParameterHolder()->getAll());
+      $this->result = $this->menuEditor->saveMenuLink($this->getContext()->getI18N()->__('This is a link'));
+
+      if ($this->result != 0)
+      {
+        $this->clearCache($this->getRequestParameter('idContent'));
+      }
+      else
+      {
+        $this->getResponse()->setStatusCode(404);
+      }
     }
-    else{
+    else
+    {
       $this->getResponse()->setStatusCode(404);
+      return $this->renderText('A required parameter misses.');
     }
   }
 
 	/**
 	 * Deletes a link from the current menu
 	 */
-  public function executeDeleteLink()
+  public function executeDeleteLink($request)
   {
-    $this->menuEditor = new w3sMenuEditor(DbFinder::from('W3sContent')->findPK($this->getRequestParameter('idContent')),5);
-    $this->menuEditor->saveLinks($this->getRequest()->getParameterHolder()->getAll());
-    $menu = DbFinder::from('W3sMenuElement')->findPK($this->getRequestParameter('idMenu'));
-    $menu->delete();    
-    $this->clearCache($this->getRequestParameter('idContent'));    
+    if ($request->hasParameter('idContent') && $this->getRequestParameter('idMenu'))
+    {
+      $this->menuEditor = new w3sMenuEditor(DbFinder::from('W3sContent')->findPK($this->getRequestParameter('idContent')), 5);
+      
+      $menu = DbFinder::from('W3sMenuElement')->findPK($this->getRequestParameter('idMenu'));
+      $position = $menu->getPosition();
+      $menu->delete();
+      
+      $menuElements =  DbFinder::from('W3sMenuElement')->
+                       where('contentId', $this->getRequestParameter('idContent'))->
+                       where('Position', '>', $position)->
+                       orderBy('Position', 'ASC')->
+                       find(); print_R($menuElements);
+      foreach($menuElements as $menuElement)
+      {
+        echo $position."\n";
+        $menuElement->setPosition($position);
+        $menuElement->save();
+        $position++;
+      }
+
+      $this->clearCache($this->getRequestParameter('idContent'));
+    }
+    else
+    {
+      $this->getResponse()->setStatusCode(404);
+      return $this->renderText('A required parameter misses.');
+    }
   }
   
   /**

@@ -21,7 +21,8 @@ class W3sMenuElementPeer extends BaseW3sMenuElementPeer
    * 
    * @return     obj The related menu
    */
-  public static function getContentMenu($idContent){
+  public static function getContentMenu($idContent)
+  {
     return DbFinder::from('W3sMenuElement')->
 									   where('contentId', $idContent)->
 									   orderBy('Position', 'ASC')->

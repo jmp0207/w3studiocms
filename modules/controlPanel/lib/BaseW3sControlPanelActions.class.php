@@ -35,7 +35,6 @@ class BaseW3sControlPanelActions extends sfActions
    *
    */
   public function executeLoadMetas(){
-    // Checks that all the required parameters exists 
     $metatag = W3sSearchEnginePeer::getFromPageAndLanguage($this->getRequestParameter('lang'), $this->getRequestParameter('page'));
     $metatagManager = new w3sMetatagsManager($metatag);
     return $this->renderPartial('metatagsInterface', array('metatagManager' => $metatagManager));
@@ -46,9 +45,7 @@ class BaseW3sControlPanelActions extends sfActions
    *
    */
   public function executeSaveMetas(){
-    // Checks that all the required parameters exists 
-    if ($this->getRequest()->hasParameter('lang') &&
-        $this->getRequest()->hasParameter('page'))
+    if ($this->getRequest()->hasParameter('lang') && $this->getRequest()->hasParameter('page'))
     {
       $oMetas = W3sSearchEnginePeer::getFromPageAndLanguage($this->getRequestParameter('lang'), $this->getRequestParameter('page'));
       

@@ -32,9 +32,16 @@ class w3sImage{
    * @param string  The image
    *
    */   
-  public function __construct($image){
+  public function __construct($image)
+  {
+  	if (!is_string($image))
+    {
+      throw new InvalidArgumentException(get_class($this) . ' requires a string as parameter');
+    }
+	    	
+    $image = trim($image);
     if ($image != '')
-    {       
+    { 
       // Retrieves the image from an existing HTML image or from an image file
       if (htmlentities($image) != $image)
       { 
@@ -43,6 +50,10 @@ class w3sImage{
       else{
         $this->imageFromFile($image);
       } 
+    }
+    else
+    {
+    	throw new InvalidArgumentException( get_class($this) . ' requires a not null string as parameter');
     }
   }
   
@@ -75,9 +86,9 @@ class w3sImage{
    *
    */ 
   public function setImagePreview($previewWidth, $previewHeight)
-  {
-    // If required, resizes the image to fit in the preview window, otherwise set canvas to 100
-    if (($this->attributes["realWidth"] > $previewWidth) || ($this->attributes["realHeight"] > $previewHeight)){
+  {  
+    if (($this->attributes["realWidth"] > $previewWidth) || ($this->attributes["realHeight"] > $previewHeight))
+    {
       $canvas = $this->calulateCanvas($this->attributes["realWidth"], $this->attributes["realHeight"], $previewWidth, $previewHeight);
       
       // Changes image's width and height.
@@ -88,7 +99,8 @@ class w3sImage{
       // Sets the image with the new dimensions
       $this->image = sprintf('<img src="%s" alt="%s" title="%s" style="width:%spx;height:%spx" />', $this->attributes["src"], $this->attributes["alt"], $this->attributes["title"], $this->attributes["width"], $this->attributes["height"]);  
     }
-    else{
+    else
+    {
       $this->attributes["canvas"] = '100';
     }
   }
@@ -167,6 +179,16 @@ class w3sImage{
   protected function calulateCanvas($imageWidth, $imageHeight, $previewWidth, $previewHeight)
   {
 
+    if($previewWidth == null || $previewWidth == 0)
+    {
+      throw new RuntimeException('The width of the preview window cannot be null or zero.');
+    }
+
+    if($previewHeight == null || $previewHeight == 0)
+    {
+      throw new RuntimeException('The height of the preview window cannot be null or zero.');
+    }
+      
     // Set the canvas to maximum and the picture resized dimensions to picture dimensions
     $canvas = 100;
     $resizedWidth = $imageWidth;
@@ -178,15 +200,18 @@ class w3sImage{
     $max = max($diffPreviewWidth, $diffPreviewHeight);
 
     // If the max value is not negative we have to resize
-    if ($max == abs($max)){
-      if ($max == $diffPreviewWidth){
+    if ($max == abs($max))
+    {
+      if ($max == $diffPreviewWidth)
+      {
 
         // The max side is the width side
         $canvas = $previewWidth/$imageWidth;
         $resizedHeight = intval($imageHeight * $canvas);
         $resizedWidth = ($diffPreviewWidth > 0) ? $imageWidth * $canvas : $imageWidth;
       }
-      elseif($max == $diffPreviewHeight){
+      elseif($max == $diffPreviewHeight)
+      {
 
         // The max side is the height side
         $canvas = $previewHeight/$imageHeight;

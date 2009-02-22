@@ -402,10 +402,10 @@ class w3sCommonFunctions
       while (false !== ($file = readdir($handle))){
         if ($file != '.' && $file != '..'){
           if (is_dir($sourceDir . '/' . $file)){
-
-            if (!in_array($file, $ignore)){
+            if (!in_array($file, $ignore))
+            {
               self::deleteDirectoryRecursive($sourceDir . '/' . $file, $ignore);
-              @rmdir($sourceDir . '/' . $file);
+              rmdir($sourceDir . '/' . $file);
             }
           }
           else{
@@ -525,5 +525,31 @@ class w3sCommonFunctions
   	}
   	
 	  return $result;
-  } 
+  }
+
+  // code derived from http://php.vrana.cz/vytvoreni-pratelskeho-url.php
+  static public function slugify($text)
+  {
+    // replace non letter or digits by -
+    $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
+
+    // trim
+    $text = trim($text, '-');
+
+    // transliterate
+    $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+
+    // lowercase
+    $text = strtolower($text);
+
+    // remove unwanted characters
+    $text = preg_replace('~[^-\w]+~', '', $text);
+
+    if (empty($text))
+    {
+      return 'n-a';
+    }
+
+    return $text;
+  }
 }

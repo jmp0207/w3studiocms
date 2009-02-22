@@ -36,8 +36,8 @@ var MenuBuilder = Class.create({
     objMenuBuilder.objMenu[this.idMenu] = $('w3s_properties_form').serialize(true);		
   },
 
-  addLink: function(){
-    var params = this.setLinks();
+  addLink: function()
+  {
     var sActionPath = w3studioCMS.frontController + 'menuBuilder/addLink';
 		
     new Ajax.Updater({success:'w3s_mb_menu', failure:'w3s_feedback'}, sActionPath,
@@ -51,17 +51,18 @@ var MenuBuilder = Class.create({
             {
               $('w3s_feedback').innerHTML = '&nbsp;';
             },
-         parameters:params + 
-         			'idContent='+InteractiveMenu.idContent
+         parameters:'idContent='+InteractiveMenu.idContent
 				});
     return false;
   },
 
-  deleteLink: function(sConfirmMessage){
-    var params = this.setLinks();
-    if (this.idMenu != 0){
+  deleteLink: function(sConfirmMessage)
+  {
+    if (this.idMenu != 0)
+    {
       if(sConfirmMessage == undefined) sConfirmMessage = 'Do you want to delete the selected link?';
-      if (confirm(sConfirmMessage)) {
+      if (confirm(sConfirmMessage))
+      {
 				var sActionPath = w3studioCMS.frontController + 'menuBuilder/deleteLink';
         new Ajax.Updater({success:'w3s_mb_menu',failure:'w3s_feedback'}, sActionPath,
           {asynchronous:true,
@@ -74,12 +75,12 @@ var MenuBuilder = Class.create({
               {
                 $('w3s_feedback').innerHTML = '';
               },
-           parameters:params + 
-           			  'idMenu=' + this.idMenu +
-                  '&idContent='+InteractiveMenu.idContent});
+           parameters:'idMenu=' + this.idMenu +
+                      '&idContent='+InteractiveMenu.idContent});
       }
     }
-    else{
+    else
+    {
       alert('You must select a link')
     }
   },

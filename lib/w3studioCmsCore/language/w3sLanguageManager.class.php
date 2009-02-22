@@ -79,7 +79,8 @@ class w3sLanguageManager
 		    if (!$bRollBack){
 	        
 	        // Saves the language
-	        $this->language->setLanguage($params["languageName"]);
+          $languageName = w3sCommonFunctions::slugify($params["languageName"]);
+	        $this->language->setLanguage($languageName);
 	        $this->language->setMainLanguage($params["isMain"]);
 	        $result = $this->language->save();
 	        if ($this->language->isModified() && $result == 0)

@@ -45,10 +45,13 @@ class w3sContentManagerFactory
 				return new w3sContentManagerMenu($type, $content);
 				break;
 		  case 6: 
-				return new w3sContentManagerLanguages($type, $content);
+				return new w3sContentManagerLanguagesByImageLinks($type, $content);
 				break;
 			case 7: 
 				return new w3sContentManagerFlash($type, $content);
+				break;
+      case 8:
+				return new w3sContentManagerLanguagesByTextualLinks($type, $content);
 				break;
 		  default: 
 				return new w3sContentManagerText($type, $content);
