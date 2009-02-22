@@ -35,19 +35,26 @@ button5:
     size: 32x32 
 button6:
   image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_interactive_menu/file_add.png
-  caption: 'Insert languages navigation'
+  caption: 'Insert languages navigation made by images'
   action: W3sContent.addContent(6)
   imageTextRelation: 0
   imageParams:
     size: 32x32 
 button7:
   image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_interactive_menu/gallery_add.png
+  caption: 'Insert languages navigation made by links'
+  action: W3sContent.addContent(8)
+  imageTextRelation: 0
+  imageParams:
+    size: 32x32 
+button8:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_interactive_menu/gallery_add.png
   caption: 'Insert a photogallery'
   action: alert('This option is not yet available')
   imageTextRelation: 0
   imageParams:
     size: 32x32 
-button8:
+button9:
   image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_interactive_menu/exit.png
   action: InteractiveMenu.closeActionsMenu()
   imageTextRelation: 0

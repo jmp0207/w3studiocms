@@ -60,6 +60,7 @@ class w3sPageManager
 	    if ($pageName != '')
 	    {
 		    // Checks if page already exists
+        $pageName = w3sCommonFunctions::slugify($pageName);
 		    $oPage = W3sPagePeer::getFromPageName($pageName);
 		    if ($oPage == null)
 		    {
