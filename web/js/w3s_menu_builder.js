@@ -11,7 +11,8 @@
 
 //var objMenu = Array();
 
-var MenuBuilder = Class.create({
+var MenuBuilder = Class.create(
+{
   initialize: function()
   {
     this.idMenu = 0;
@@ -19,7 +20,8 @@ var MenuBuilder = Class.create({
     this.objMenu = Array();
   },
   
-  loadMenuProperties: function(idMenu){
+  loadMenuProperties: function(idMenu)
+  {
     this.idMenu = idMenu;
     if (this.currentSelectedLink != '') Element.removeClassName($(this.currentSelectedLink), 'currentSelectedLink');
     this.currentSelectedLink = 'item_' + this.idMenu;
@@ -31,7 +33,8 @@ var MenuBuilder = Class.create({
     });
   },
 
-  saveMenuLinkImage: function(updateList){ 
+  saveMenuLinkImage: function(updateList)
+  {
     if (updateList == 1) $('item_text_' + this.idMenu).innerHTML = $('w3s_ppt_link').value;
     objMenuBuilder.objMenu[this.idMenu] = $('w3s_properties_form').serialize(true);		
   },

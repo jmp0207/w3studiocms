@@ -59,11 +59,11 @@ class w3sFileManager
 	      <li>%s</li>
 	    </ul>';
       
-  public function __construct($idLanguage = 0, $currentPage = 0, $currentUser = null)
+  public function __construct($currentUser = null, $idLanguage = 0, $currentPage = 0)
   {
-  	$this->idLanguage = $idLanguage;
-  	$this->currentPage = $currentPage;
   	$this->currentUser = $currentUser;
+    $this->idLanguage = $idLanguage;
+  	$this->currentPage = $currentPage;  	
   }
   
   public function render()

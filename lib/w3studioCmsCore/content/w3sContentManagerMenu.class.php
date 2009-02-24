@@ -150,62 +150,7 @@ class w3sContentManagerMenu extends w3sContentManager{
 
     return $result;
   }
-  
-  /*
-  protected function renderMenu($params = array()){
-    $result = '';
     
-    // Retrieves the menu, the language name and the page name from the current content 
-    $menu = W3sMenuElementPeer::getContentMenu($this->content->getId());
-    $language = $this->content->getW3sLanguage()->getLanguage();
-    $classForPage = $this->content->getW3sPage()->getPageName();
-    $assignedTo = (array_key_exists('w3s_assigned_to', $params)) ? $params['w3s_assigned_to'] : 'li';   
-    $className = (array_key_exists('w3s_assigned_class', $params)) ? $params['w3s_assigned_class'] : 'w3sNone';
-    
-    // Cycles the menu elements
-    foreach($menu as $menuRow){
-      $idPage = $menuRow->getPageId();
-      
-      // Checks if link is internal or external 
-      if ($idPage != 0){
-        
-        // Checks if page exists
-        $oPage = DbFinder::from('W3sPage')->findPK($idPage);
-        if ($oPage != null){ 
-          $pageName = $oPage->getPageName();
-          $class = ($className != 'w3sNone' && $classForPage == $pageName) ? sprintf('class="%s"', $className) : '';
-          $link = sprintf('/webSite/%s/%s.html', $language, $pageName);
-          $onclickEvent = '';
-        }
-        else{
-          $class = '';
-          $link = '#';
-          $onclickEvent = 'onclick="alert(\'This page has been removed from the website\')"';
-        }
-      }
-      else{
-      	$class = '';
-      	$onclickEvent = '';
-        $link = $menuRow->getExternalLink();        
-      }
-
-			// Link name or image
-      if ($menuRow->getImage() != ''){
-        $rollover = ($menuRow->getRolloverImage() != '') ? sprintf('onmouseover="this.src=\'/images/%s\'" onmouseout="this.src=\'/images/%s\'"', $menuRow->getRolloverImage(), $menuRow->getImage()) : '';
-        $linkText =  sprintf('<img src="/images/%s" %s />', $menuRow->getImage(), $rollover);
-      }
-      else{
-        $linkText = $menuRow->getLink();
-      }
-      $result .= sprintf('<li %s><a href="%s" %s %s>%s</a></li>', ($assignedTo == 'li') ? $class : '', $link, $onclickEvent, ($assignedTo == 'a') ? $class : '', $linkText);
-      
-    }
-    $result = sprintf('<ul>%s</ul>', $result);
-
-    return $result;
-  }
-  */
-  
   /**
    * Format content to display the image on the web page, using the image's properties
    * edited by user at runtime. Overrides the same function of w3sContentManager  

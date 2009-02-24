@@ -14,13 +14,15 @@
 
 class BaseW3sProjectImportActions extends sfActions
 {
-  public function executeShow(){
+  public function executeShow()
+  {
   	$project = new w3sProjectImport();
   	
   	return $this->renderPartial('show', array('project' => $project));
   }
   
-  public function executeAdd(){
+  public function executeAdd()
+  {
   	$project = new w3sProjectImport();
   	$result = $project->add($this->getRequestParameter('projectName'));
   	
@@ -36,14 +38,20 @@ class BaseW3sProjectImportActions extends sfActions
   	}
   }
   
-  public function executeExtract(){    
-    if ($handle = opendir(sfConfig::get('app_w3s_web_templates_dir'))){
-      while (false !== ($file = readdir($handle))){
+  public function executeExtract()
+  {
+    if ($handle = opendir(sfConfig::get('app_w3s_web_templates_dir')))
+    {
+      while (false !== ($file = readdir($handle)))
+      {
         $currentFile = sfConfig::get('app_w3s_web_templates_dir') . DIRECTORY_SEPARATOR . $file;
-        if (is_file($currentFile)){
+        if (is_file($currentFile))
+        {
           $fileInfo = pathinfo($currentFile);
-          if ($fileInfo['extension'] == 'zip'){
-            if (w3sCommonFunctions::extractZipFile($currentFile, sfConfig::get('app_w3s_web_templates_dir'))){
+          if ($fileInfo['extension'] == 'zip')
+          {
+            if (w3sCommonFunctions::extractZipFile($currentFile, sfConfig::get('app_w3s_web_templates_dir')))
+            {
               unlink($currentFile);               
             }  
           }  

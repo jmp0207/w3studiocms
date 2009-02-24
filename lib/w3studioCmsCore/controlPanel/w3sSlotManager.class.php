@@ -69,10 +69,10 @@ class w3sSlotManager
           break;
       }
 	    $result .= sprintf($this->rowSkeleton, $this->idLanguage . $idSlot,
-	    																			$class,
-	    																			$idSlot,
-	    																			link_to_function($slot->getSlotName(), 'W3sControlPanel.showRepeatedContentsForm(' . $idSlot . ');', 'onmouseover="W3sControlPanel.highlightSlot(\'' . $slot->getSlotName() . '\', ' . $slot->getRepeatedContents() . ')"'),
-	    																			image_tag(sfConfig::get('app_w3s_web_skin_images_dir') . '/control_panel/button_slot_' . $repeatedColor . '.jpg', 'title=' . $repeatedAlt . ' size=14x14'));
+	    																			 $class,
+	    																			 $idSlot,
+	    																			 link_to_function($slot->getSlotName(), 'W3sControlPanel.showRepeatedContentsForm(' . $idSlot . ');', 'onmouseover="W3sControlPanel.highlightSlot(\'' . $slot->getSlotName() . '\', ' . $slot->getRepeatedContents() . ')"'),
+	    																			 image_tag(sfConfig::get('app_w3s_web_skin_images_dir') . '/control_panel/button_slot_' . $repeatedColor . '.jpg', 'title=' . $repeatedAlt . ' size=14x14'));
 	     $i++;																
     }
     

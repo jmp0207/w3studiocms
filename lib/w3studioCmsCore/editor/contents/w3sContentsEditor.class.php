@@ -38,7 +38,7 @@ abstract class w3sContentsEditor implements w3sEditor
    * @param string  The id of the editor
    * 
    */    
-	public function __construct($content, $editorId)
+	public function __construct($content, $editorId = '')
 	{ 
 		$this->content = $content;
 		$this->idEditor = $editorId;
