@@ -46,8 +46,7 @@ class w3sControlPanel
 				<li>%s</li>
 			</ul>';
 
-  //TODO: Rivedere $currentUser
-	public function __construct($idLanguage = 0, $currentPage = 0, $currentUser)
+  public function __construct($currentUser = null, $idLanguage = 0, $currentPage = 0)
   {
   	$this->idLanguage = $idLanguage;
   	$this->currentPage = $currentPage;
@@ -88,7 +87,7 @@ class w3sControlPanel
 	
 	protected function drawTabsPanel()
 	{
-		$tabs = w3sCommonFunctions::loadScript('w3sTabs.yml');
+		$tabs = w3sCommonFunctions::loadScript('cpTabs.yml');
 		$result = '';
 		foreach ($tabs as $key => $tab)
 		{
@@ -99,14 +98,14 @@ class w3sControlPanel
 	
 	protected function drawContentsTabs()
 	{
-		$tabs = w3sCommonFunctions::loadScript('w3sTabs.yml');
+		$tabs = w3sCommonFunctions::loadScript('cpTabs.yml');
 		$result = '';
 		foreach ($tabs as $key => $tab)
 		{
 			$content = '';
 			if ($key == 1)
 			{
-				$fileManager = new w3sFileManager($this->idLanguage, $this->currentPage, $this->currentUser);
+				$fileManager = new w3sFileManager($this->currentUser, $this->idLanguage, $this->currentPage);
 				$content = $fileManager->render();
 			}
 			$result .= sprintf('<div id="w3s_tab_%s" class="w3s_tabs">%s</div>', $key, $content);

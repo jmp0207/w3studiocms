@@ -59,7 +59,8 @@ class BaseW3sContentsManagerActions extends sfActions
 	    }
 	    
 	    $result = $this->content->add($param);
-	    if ($result != 1){     	
+	    if ($result != 1)
+      {
 	    	$this->getResponse()->setStatusCode(404);
 	    	return $this->renderText($this->content->displayError($result, true));
 	    }

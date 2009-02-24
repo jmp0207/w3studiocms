@@ -25,24 +25,26 @@ class w3sMetatagsManager
   protected
   	$metatag,
   	$skeleton = 						
-     '<table width="100%%" border="0" cellpadding="4" cellspacing="2">
-			  <tr>
-			    <td valign="top">%s</td>
-			    <td>%s</td>
-			  </tr>
-			  <tr>
-			    <td valign="top">%s</td>
-			    <td>%s</td>
-			  </tr>
-			  <tr>
-			    <td valign="top">%s</td>
-			    <td>%s</td>
-			  </tr>
-			  <tr>
-			    <td></td>
-			    <td valign="top">%s</td>
-			  </tr>
-			</table>';
+     '<div id="w3s_metatags">
+        <table width="100%%" border="0" cellpadding="4" cellspacing="2">
+          <tr>
+            <td valign="top">%s</td>
+            <td>%s</td>
+          </tr>
+          <tr>
+            <td valign="top">%s</td>
+            <td>%s</td>
+          </tr>
+          <tr>
+            <td valign="top">%s</td>
+            <td>%s</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td valign="top">%s</td>
+          </tr>
+        </table>
+      </div>';
       
   public function __construct($metatag=null)
   {

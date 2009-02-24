@@ -49,7 +49,7 @@ class BaseW3sPagesManagerActions extends sfActions
   {
     if ($request->hasParameter('curLang') && $request->hasParameter('curPage'))
     {
-      $fileManager = new w3sFileManager($this->getRequestParameter('curLang'), $this->getRequestParameter('curPage'));
+      $fileManager = new w3sFileManager(null, $this->getRequestParameter('curLang'), $this->getRequestParameter('curPage'));
       return $this->renderPartial('listPages', array('fileManager' => $fileManager));
     }
     else
