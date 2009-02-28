@@ -26,11 +26,13 @@ class w3sTemplateEngineEditor extends w3sTemplateEngine
 		$interactiveMenuEvents = '',
 		$sortables = '';							
 	
-	public function getInteractiveMenuEvents(){
+	public function getInteractiveMenuEvents()
+  {
     return $this->interactiveMenuEvents;  
   }
   
-  public function getSortables(){
+  public function getSortables()
+  {
     return $this->sortables;  
   }
   
@@ -43,28 +45,39 @@ class w3sTemplateEngineEditor extends w3sTemplateEngine
   public function renderPage()
   {
     $slotNames = '';
-    $slotContents = $this->getSlotContents($this->idLanguage, $this->idPage);    
-    foreach ($slotContents as $slot){ 
-      $slotNames .= sprintf('"%s",', $slot['slotName']);
-      $contents = $this->drawSlot($slot);      
-      $this->pageContents = ereg_replace('\<\?php include_slot\(\'' . $slot['slotName'] . '\'\)\?\>', $contents, $this->pageContents);   
+    if ($this->idLanguage != -1 && $this->idPage != -1)
+    {
+      $slotContents = $this->getSlotContents($this->idLanguage, $this->idPage);
+      foreach ($slotContents as $slot)
+      {
+        $slotNames .= sprintf('"%s",', $slot['slotName']);
+        $contents = $this->drawSlot($slot);
+        $this->pageContents = ereg_replace('\<\?php include_slot\(\'' . $slot['slotName'] . '\'\)\?\>', $contents, $this->pageContents);
+      }
+
+      $this->setSortables($slotContents);
+    }
+    else
+    {
+      $this->pageContents = w3sCommonFunctions::displayMessage('The page or the language requested does not exist anymore in the website');
     }
     
-    $this->setSortables($slotContents);
-    
-    // Renders the W3StudioCMS Copyright button. Please do not remove. See the function to 
-    // learn the best way to implement it in your web site. Thank you
+    // Renders the W3StudioCMS Copyright button. Please do not remove, neither when
+    // you override this function. See the function to learn the best way to implement
+    // it in your web site. Thank you.
     $this->pageContents = $this->renderCopyright($this->pageContents);
     
     return $this->pageContents;
   }
   
-  public function setSortables($slotContents = null)
+  public function setSortables()
   {
-  	$this->sortables = '';
+    $this->sortables = '';
   	$listOptions = '';
-  	if ($slotContents == null) $slotContents = $this->getSlotContents($this->idLanguage, $this->idPage);
-  	foreach ($slotContents as $slot){ 
+
+    $slotContents = $this->getSlotContents($this->idLanguage, $this->idPage);
+  	foreach ($slotContents as $slot)
+    {
       $listOptions .= sprintf('"%s",', $slot['slotName']);
     }
     $listOptions = sprintf('dropOnEmpty:true,containment:[%s],constraint:false,', substr($listOptions, 0, strlen($listOptions)-1));
@@ -84,8 +97,34 @@ class w3sTemplateEngineEditor extends w3sTemplateEngine
    * @return string  The contents that belong to slot formatted as string
    * 
    */
-  public function drawSlot($slot){ 
-    $result = ''; 
+  public function drawSlot($slot)
+  {
+
+    $result = '';
+   
+    $validParam = true;
+    $defaultParams = array('0' => 'contents', '1' => 'idSlot', '2' => 'slotName', '3' => 'isRepeated', '4' => 'setEventForRedraw');
+    if (is_array($slot))
+    {
+      if (array_diff(array_keys($slot), $defaultParams))
+	    {
+	      $validParam = false;
+	    }
+      else
+      {
+        if (($slot['contents'][0] != null) && (!$slot['contents'][0] instanceof W3sContent))
+        {
+          throw new RuntimeException('Contents param have to be an instance of W3sContent');
+        }
+      }
+    }
+    else
+    {
+      $validParam = false;
+    }
+
+    if (!$validParam) throw new RuntimeException(sprintf('DrawSlot requires an array with the following options: %s', array_values($defaultParams)));
+ 
     foreach ($slot['contents'] as $content)
     {
     	if ($slot['contents'][0] != null)

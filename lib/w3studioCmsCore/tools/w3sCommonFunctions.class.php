@@ -28,15 +28,16 @@ class w3sCommonFunctions
     
     return $result;
   }
-  
-  public static function getPageElementsId($projectName, $templateName){
+  /*
+  public static function getPageElementsId($projectName, $templateName)
+  {
     ob_start();
     include(sfConfig::get('app_w3s_web_templates_dir') . '/' . $projectName . '/' . $templateName . '/' . $templateName . '.php');
     $template = ob_get_clean();
     preg_match_all('/id\s*=\s*["|\'](.*?)["|\']/', $template, $result);
     
     return $result[1];
-  }
+  }*/
 
   public static function getConfigurationFilePath($fileName)
   {
@@ -68,7 +69,8 @@ class w3sCommonFunctions
   public static function loadScript($fileName){
   	$file = self::getConfigurationFilePath($fileName) . $fileName;
 		
-		if ($file == ''){
+		if (!is_file($file))
+    {
 			throw new exception(sprintf('Error: The file %s does not exist in any of the paths you specified in the w3sPaths.yml configuration file.', $fileName));
 		}
 		

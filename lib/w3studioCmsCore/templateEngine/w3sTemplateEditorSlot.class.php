@@ -16,7 +16,7 @@
  * Template class represents the page's template.
  *
  * @package    sfW3studioCMSPlugin
- * @subpackage w3sTemplateEngineEditor
+ * @subpackage w3sSlotTemplateEditor
  * @author     Giansimon Diblas <giansimon.diblas@w3studiocms.com>
  */
  

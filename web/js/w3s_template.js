@@ -12,7 +12,7 @@
 var w3sTemplate = Class.create({
 	
 	// Loads the editor page from webEditor/index
-	loadEditorPage: function(newlanguage, newPage){ 
+	loadEditorPage: function(newlanguage, newPage){  
 	  if (newlanguage == undefined) newlanguage = w3studioCMS.language;
 	  if (newPage == undefined) newPage = w3studioCMS.page;
 	  //var paramPrevPage = (w3studioCMS.page != undefined) ? '&prevPage=' + w3studioCMS.page : '&prevPage="a"';

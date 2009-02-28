@@ -106,7 +106,7 @@ class BaseW3sContentsManagerActions extends sfActions
     if($request->hasParameter('idContent'))
     {
 	    $currentContent = W3sContentPeer::retrieveByPk($this->getRequestParameter('idContent'));
-	    $this->content = w3sContentManagerFactory::create($currentContent->getContentTypeId(), $currentContent);
+      $this->content = w3sContentManagerFactory::create($currentContent->getContentTypeId(), $currentContent);
 	    $result = $this->content->delete();
 	    if ($result != 1){     	
 	    	$this->getResponse()->setStatusCode(404);

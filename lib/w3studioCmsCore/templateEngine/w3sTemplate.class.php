@@ -47,34 +47,53 @@ abstract class w3sTemplateEngine
   public function __construct($language, $page)
   {
     
-    // Checks that the two parameters are integers values
-    $this->idLanguage = (int)$language;  
-    $this->idPage = (int)$page;
-    
-    // Languages check. When the value is zero it means that the language name is passed 
-    if ($this->idLanguage == 0)
+    // When language is null, main language is retrieved
+    if ($language == null) $language = 'none';
+
+    // When page is null, home page is retrieved
+    if ($page == null) $page = 'none';
+
+    // Checks that the two parameters are integers values    
+    if ((int)($language) == 0)
     {
-    	$oLanguage = ($language != '') ? W3sLanguagePeer::getFromLanguageName($language) : W3sLanguagePeer::getMainLanguage();
-    	$this->idLanguage = ($oLanguage != null) ? $oLanguage->getId() : -1; 
+    	$oLanguage = ($language != 'none') ? W3sLanguagePeer::getFromLanguageName($language) : W3sLanguagePeer::getMainLanguage();
+    }
+    else
+    { 
+      $oLanguage = DbFinder::from('W3sLanguage')->findPk($language); //W3sLanguagePeer::getMainLanguage();
+    }
+    
+    if ($oLanguage != null)
+    {
+      $this->idLanguage = $oLanguage->getId();
+      $this->languageName = $oLanguage->getLanguage();
     }
     else
     {
-    	$oLanguage = W3sLanguagePeer::getMainLanguage();    	
+      $this->idLanguage = -1;
+      $this->languageName = 'none';
     }
-    $this->languageName = ($oLanguage != null) ? strtolower($oLanguage->getLanguage()) : 'none';
     
-    // Pages check. When the value is zero it means that the page name is passed 
-    if ($this->idPage == 0)
+    if ((int)($page) == 0)
     {    	
-    	$oPage = ($page != '') ? W3sPagePeer::getFromPageName($page) : W3sPagePeer::getHomePage();
-    	$this->idPage = ($oPage != null) ? $oPage->getId() : -1;
+    	$oPage = ($page != 'none') ? W3sPagePeer::getFromPageName($page) : W3sPagePeer::getHomePage();
     }
     else
     {    	
-    	$oPage = W3sPagePeer::getHomePage();
+    	$oPage = DbFinder::from('W3sPage')->findPk($page);
     }
-    $this->pageName = ($oPage != null) ? strtolower($oPage->getPageName()) : 'none';
     
+    if ($oPage != null)
+    {
+      $this->idPage = $oPage->getId();
+      $this->pageName = $oPage->getPageName();
+    }
+    else
+    {
+      $this->idPage = -1;
+      $this->pageName = 'none';
+    }
+
     // Gets the template information
     $page = DbFinder::from('W3sPage')->
                       with('W3sTemplate', 'W3sProject')->  
@@ -125,6 +144,7 @@ abstract class w3sTemplateEngine
   {
     $operation = $this->idLanguage . $this->idPage;
     $prevOperation = $this->idLanguage . $prevPage;
+    
     return semaphore::setRequestedOperation(sfContext::getInstance()->getUser()->getGuardUser()->getId(), $operation, $prevOperation);
   }
 
@@ -143,7 +163,7 @@ abstract class w3sTemplateEngine
     // Gets all the project's templates from the database
     $templates = DbFinder::from('W3sTemplate')->  
 		                       leftJoin('W3sProject')->
-		                       find();   // where('W3sProject.ProjectName', $this->projectName)->
+		                       find();   
     
     $result = ''; 
     foreach($templates as $template){
@@ -169,13 +189,14 @@ abstract class w3sTemplateEngine
    * @return string  The stylesheets name formatted as style1,[style2,style3,...]
    *
    */ 
-  public function retrieveTemplateStylesheets($contents = null)
+  public function retrieveTemplateStylesheets() // $contents = null
   {    
     $stylesheets = $this->getStylesheetsFromContents($this->pageContents);
     $this->pageContents = $this->removeStylesheetsFromTemplate($stylesheets, $this->pageContents);
     
     $stylesheetResults = '';
-	  foreach ($stylesheets[1] as $stylesheet){
+	  foreach ($stylesheets[1] as $stylesheet)
+    {
 	    $stylesheetResults .= str_replace('.css', '',basename($stylesheet)) . ',';
 	  }
     
@@ -202,7 +223,6 @@ abstract class w3sTemplateEngine
     // Renders the W3StudioCMS Copyright button. Please do not remove. See the function to 
     // learn the best way to implement it in your web site. Thank you
     $this->pageContents = $this->renderCopyright($this->pageContents);
-    //$listOptions = sprintf('dropOnEmpty:true,containment:[%s],constraint:false,', $slotNames);
     
     return $this->pageContents;
   }
@@ -225,14 +245,17 @@ abstract class w3sTemplateEngine
     
     return $contents;
   }
+  
   /**
    * Retrieves from the database the template associated to page requested
    * 
    * @return object  The retrieved page
    *
    */
-  protected function setCurrentTemplate($page){
-    if ($page != null){ 
+  protected function setCurrentTemplate($page)
+  {
+    if ($page != null)
+    {
 	    $templateInfo = w3sTemplateTools::retrieveTemplateAttributesFromPage($page);
 	    $this->idTemplate = $templateInfo["idTemplate"];
 	    $this->templateName = $templateInfo["templateName"];
@@ -250,7 +273,8 @@ abstract class w3sTemplateEngine
    * @return array 
    *
    */
-  protected function getSlotContents($idLanguage, $idPage){
+  protected function getSlotContents($idLanguage, $idPage)
+  {
     $slotName = '';
     $isRepeated = 0;
     $resultContents = array();
@@ -331,13 +355,17 @@ abstract class w3sTemplateEngine
  * 
  * Thank you!
  */
-  final protected function renderCopyright($pageContents){
-    $w3sCopyrightButton = sprintf('<a href="http://www.w3studiocms.com"><img src="%s/structural/w3scopyright.png" style="width:75px;height:30px;display:inline !important;visibility:visible !important;" /></a>', sfConfig::get('app_w3s_web_skin_images_dir'));   
+  final protected function renderCopyright($pageContents)
+  {
+    $buttonText = (is_file(sfConfig::get('app_w3s_web_skin_images_dir') . '/structural/w3scopyright.png')) ? sprintf('<img src="%s/structural/w3scopyright.png" style="width:75px;height:30px;display:inline !important;visibility:visible !important; border:0;" alt="Visit www.w3studiocms.com and download W3studioCMS for free to get your website" title="W3studioCMS a powerful ajax CMS" />', sfConfig::get('app_w3s_web_skin_images_dir')) : 'Powered by W3studioCMS';
+    $w3sCopyrightButton = sprintf('<a href="http://www.w3studiocms.com">%s</a>', $buttonText);
     preg_match("/\<\?php include_slot\('w3s_copyright'\)\?\>/", $pageContents, $checkCopyright);
-    if (count($checkCopyright) == 0){ 
-      $pageContents .= sprintf('<div id="w3s_copyright" style="width=100%%;margin:8px 0;text-align:center;">%s</div>', $w3sCopyrightButton);
+    if (count($checkCopyright) == 0)
+    {
+      $pageContents .= sprintf("\n" . '<div id="w3s_copyright" style="width=100%%;margin:8px 0;text-align:center;">%s</div>' . "\n", $w3sCopyrightButton);
     }
-    else{ 
+    else
+    {
       $pageContents = str_replace('<?php include_slot(\'w3s_copyright\')?>', $w3sCopyrightButton, $pageContents);  
     }
     

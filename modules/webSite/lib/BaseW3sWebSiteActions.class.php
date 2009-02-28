@@ -22,7 +22,9 @@ class BaseW3sWebSiteActions extends sfActions
   {
     $this->template = new w3sTemplateEngineFrontend($this->getRequestParameter('lang'), $this->getRequestParameter('page'));
     $styles = $this->template->retrieveTemplateStylesheets($this->template->getPageContents());
-		foreach($styles['stylesheets'] as $style){
+		
+    foreach($styles as $style)
+    {
 			$this->response->addStyleSheet($style["href"], 'last', array('media' => $style["media"]));
 		}
 	
@@ -39,7 +41,7 @@ class BaseW3sWebSiteActions extends sfActions
   		$message = null;
   	}  	
   	
-    $this->forward404If($this->template->getIdLanguage() == -1 || $this->template->getIdPage() == -1, $message);
+    //$this->forward404If($this->template->getIdLanguage() == -1 || $this->template->getIdPage() == -1, $message);
     
     $this->includeFiles($this->template->getJavascripts());
     $this->includeFiles($this->template->getStylesheets());		
