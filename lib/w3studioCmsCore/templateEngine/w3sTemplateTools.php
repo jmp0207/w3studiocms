@@ -29,6 +29,6 @@ class w3sTemplateTools
    */
   public static function getTemplateFile($projectName, $templateName)
   {
-  	return sprintf("%1\$s%2\$s%3\$s%2\$s%4\$s%2\$s%4\$s.php", sfConfig::get('app_w3s_web_templates_dir'), DIRECTORY_SEPARATOR, $projectName, $templateName);
+    return sprintf("%1\$s%2\$s%3\$s%2\$s%4\$s%2\$s%4\$s.php", sfConfig::get('app_w3s_web_templates_dir'), DIRECTORY_SEPARATOR, $projectName, $templateName);
   }
 }

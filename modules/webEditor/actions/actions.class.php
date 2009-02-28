@@ -18,9 +18,5 @@ class webEditorActions extends BaseW3sEditorActions
 {
 	public function executeTest()
 	{
-		$content = DbFinder::from('W3sContent')->findPK(1149);
-		echo htmlentities(w3sCommonFunctions::linkConverter($content, 'pub'));
-		
-		return sfView::NONE;
 	}
 }

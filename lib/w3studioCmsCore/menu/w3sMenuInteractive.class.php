@@ -30,7 +30,7 @@ class w3sMenuInteractive extends w3sMenu{
    *
    */ 
 	public function __construct($menuId, $user = null){ 
-		// Defines the skeleton  openEditor(\'%s\');return false;
+		// Defines the skeleton
 		$this->skeleton = 
 			'<a href="#" id="w3s_editor_opener" onclick="InteractiveMenu.openEditor();return false;"><div id="w3s_im_clone_element"></div></a>
 			 <div id="w3s_im_editor" style="display:none;"></div>';
@@ -45,6 +45,6 @@ class w3sMenuInteractive extends w3sMenu{
    *
    */   
 	public function drawMenu(){
-  	return $this->skeleton; //sprintf($this->skeleton, sfContext::getInstance()->getController()->genUrl('webEditor/openEditor'));
+  	return $this->skeleton; 
 	}
 }

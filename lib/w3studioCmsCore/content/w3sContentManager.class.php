@@ -181,7 +181,8 @@ abstract class w3sContentManager extends w3sTemplateEngineEditor
 			$values["ContentPosition"]++;
 			$values["Edited"] = 1;
 	  }		
-	  else{
+	  else
+    {
 	  	throw new RuntimeException(sprintf('%s requires an array with the following options: %s or an w3sContent object ', get_class($this), array_keys($this->defaultParams)));
 	  }
 	  
@@ -464,7 +465,7 @@ abstract class w3sContentManager extends w3sTemplateEngineEditor
     $this->idLanguage = $this->content->getLanguageId();
 	  $this->idPage = $this->content->getPageId();
 	  $this->idTemplate = $this->content->getW3sGroup()->getTemplateId();
-    $this->setSortables(null);
+    $this->setSortables();
 	  
 	  // Redraws the slot              							  
 		return $this->drawSlot(array('contents' => $currentSlotContents, 

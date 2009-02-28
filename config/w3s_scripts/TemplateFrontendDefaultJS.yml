@@ -1,0 +1,8 @@
+0: <?php echo sfConfig::get('sf_prototype_web_dir') ?>/js/prototype.js
+1: <?php echo sfConfig::get('app_w3s_web_js_dir')?>/scriptaculous/src/builder.js
+2: <?php echo sfConfig::get('app_w3s_web_js_dir')?>/scriptaculous/src/effects.js
+3: <?php echo sfConfig::get('app_w3s_web_js_dir')?>/scriptaculous/src/scriptaculous.js
+4: <?php echo sfConfig::get('app_w3s_web_js_dir')?>/w3s_init_frontend.js
+5: <?php echo sfConfig::get('app_w3s_web_js_dir')?>/w3s_window.js
+6: <?php echo sfConfig::get('app_w3s_web_js_dir')?>/window.js
+7: <?php echo sfConfig::get('app_w3s_web_js_dir')?>/window_effects.js

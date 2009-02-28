@@ -90,8 +90,10 @@ class w3sTemplateEnginePublisher extends w3sTemplateEngine
 	    		// Renders ther page
 	    		$slotContents = $this->getSlotContents($language->getId(), $page->getId()); 
 	    		foreach ($slotContents as $slot){ 
-			      $contents = $this->drawSlot($slot);		      
-			      $pageContents = str_replace('<?php include_slot(\'' . $slot['slotName'] . '\')?>', $contents, $pageContents);		         
+			      $contents = $this->drawSlot($slot);
+            $pageContents = preg_replace('/\<\?php.*?include_slot\(\'' . $slot['slotName'] . '\'\).*?\?\>/', $contents, $pageContents);
+            
+            /*$pageContents = str_replace('<?php include_slot(\'' . $slot['slotName'] . '\')?>', $contents, $pageContents);*/
 			    }
 			    
 			    // Renders the W3StudioCMS Copyright button. Please do not remove. See the function  
