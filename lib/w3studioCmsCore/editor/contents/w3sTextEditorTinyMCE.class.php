@@ -78,14 +78,13 @@ class w3sTextEditorTinyMCE extends w3sTextEditor
 	/**
    * Writes the Stylesheet for the tinyMCE editor
    */
-  public function writeStylesheet(){
-    $slot = $this->content->getW3sSlot();
-    $slotName = $slot->getSlotName();
+  public function writeStylesheet()
+  {
     $group = $this->content->getW3sGroup();
     $template = $group->getW3sTemplate();
     $templateName = strtolower($template->getTemplateName());
     $projectName = strtolower($template->getW3sProject()->getProjectName());
-    $classes = w3sCommonFunctions::getAvailableClasses($slotName, $projectName, $templateName, 1);
+    $classes = w3sTemplateEngine::findStylesheetClasses($this->content, 1);
     
     $css = $this->standardCss;
     foreach($classes as $class){

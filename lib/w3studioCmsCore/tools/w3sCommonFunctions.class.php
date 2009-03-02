@@ -92,7 +92,9 @@ class w3sCommonFunctions
   }
   
   /**
+   * MOVED TO w3sTemplateEngine
    * Returns the available classes for a given templates's DIV. Can retrieve only the class
+   *
    * name or the full CSS style. This is done with the last parameter 
    *
    * @param      str The div's id.
@@ -102,7 +104,7 @@ class w3sCommonFunctions
    *                           1 Retrieve the full css style
    * 
    * @return     array The founded classes 
-   */
+   *
   public static function getAvailableClasses($searchValue, $projectName, $templateName, $mode=0){
 
     // This is only a paliative solution. Hope someone can fix the parse class: I don't know Call-time pass-by-reference
@@ -186,7 +188,7 @@ class w3sCommonFunctions
     endforeach;
    	
     return $result;
-  }
+  }*/
 
   /**
    * Returns all files stored in a given directory.
@@ -443,14 +445,20 @@ class w3sCommonFunctions
       // Checks if the examined link is internal and in this case W3StudioCMS converts it 
       $oPage = W3sPagePeer::getFromPageName($currentPageName); 
       if ($oPage != null){
-        $classValue = (!empty($class)) ? ' class=' . $class : '';
+        $classValue = (!empty($class)) ? 'class=' . $class : '';
         $anchorPos = strpos($href, '#');
         $anchor = ($anchorPos !== false) ? substr($href, $anchorPos, strlen($href) - $anchorPos) : '';
+        /*
         $symfonyLink = ($mode == 'preview') ?
           link_to_function($result[2][$i], 'W3sTemplate.loadPreviewPage('. $content->getLanguageId() . ', ' . $oPage->getId() . ')', $classValue)
                                             :
           '<a href="/' . $oLanguage->getLanguage() . '/' . $currentPageName . '.html' . $anchor . '"' . $classValue . '>' . $result[2][$i] . '</a>';
-        
+        */
+        $symfonyLink = ($mode == 'preview') ?
+          sprintf('<a href="#" onclick="W3sTemplate.loadPreviewPage(%s, %s); return false;" %s>%s</a>', $content->getLanguageId(), $oPage->getId(), $classValue, $result[2][$i])
+                                            :
+          sprintf('<a href="/%s/%s.html%s" %s>%s</a>', $oLanguage->getLanguage(), $currentPageName, $anchor, $classValue, $result[2][$i]);
+
         $text = str_replace($result[0][$i], $symfonyLink, $text);
       }
       else{

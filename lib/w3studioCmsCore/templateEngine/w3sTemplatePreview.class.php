@@ -31,10 +31,14 @@ class w3sTemplateEnginePreview extends w3sTemplateEngine
    * 
    */
   public function drawSlot($slot){ 
-    $result = ''; 
-    foreach ($slot['contents'] as $content){    	
-      $curContent = w3sContentManagerFactory::create($content->getContentTypeId(), $content);
-      $result .= $curContent->getDisplayContentForPreviewMode();
+    $result = '';
+    foreach ($slot['contents'] as $content)
+    {
+      if ($content != null)
+      {
+        $curContent = w3sContentManagerFactory::create($content->getContentTypeId(), $content);
+        $result .= $curContent->getDisplayContentForPreviewMode();
+      }
     }  
     return $result;
   }
