@@ -141,9 +141,8 @@ class w3sMenuEditor extends w3sContentsEditor
   
   protected function drawOptions()
   {
-    $slot = new w3sSlotTemplateEditor($this->content->getLanguageId(), $this->content->getPageId());
     return sprintf($this->optionsSkeleton, __('Set as active class'),
-    																			 select_tag('w3s_assigned_class', options_for_select($slot->findStylesheetClasses($this->content->getW3sSlot()->getSlotName()), '')),
+    																			 select_tag('w3s_assigned_class', options_for_select(w3sTemplateEngine::findStylesheetClasses($this->content), '')),
     																			 __('Set the class on each page'),
     																			 checkbox_tag('w3s_class_page_assign', false),
     																			 __('Assign active class to'),

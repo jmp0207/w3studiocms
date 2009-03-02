@@ -21,16 +21,14 @@
  */
  
 class w3sTemplateEnginePublisher extends w3sTemplateEngine
-{ 
-  
-  /**
-   * Constructor.
-   *
-   */  
+{
+   /**
+   * Overrides the standard contructor because this object doesn't need any parameter    *
+   */
   public function __construct()
-  {    
+  {
   }
-  
+
   /** 
    * Draws the contents' slot when in publish contents 
    * 
@@ -58,7 +56,8 @@ class w3sTemplateEnginePublisher extends w3sTemplateEngine
    */
   public function publish()
   {
-    if ($this->updateDb()){
+    if ($this->updateDb())
+    {
 	    
 	    // Deletes the old directory with the previous published version
 	  	w3sCommonFunctions::deleteDirectoryRecursive(sfConfig::get('app_w3s_web_published_dir'), array('.svn'));
@@ -73,23 +72,26 @@ class w3sTemplateEnginePublisher extends w3sTemplateEngine
 	    									 find();
 	    
 	    // Cycles all the website's languages
-	    foreach($languages as $language){
+	    foreach($languages as $language)
+      {
 	    	
 	    	// Creates the directory for the lanugage if doesn't exists
 	    	if (!is_dir(sfConfig::get('app_w3s_web_published_dir') . '/' . $language->getLanguage())) mkdir(sfConfig::get('app_w3s_web_published_dir') . '/' . $language->getLanguage());
 	    	
 	    	// Cycles all the website's pages
-	    	foreach($pages as $page){  
+	    	foreach($pages as $page)
+        {
 	    		
 	    		// Retrieves the information needed to publish every single page
 	    		$pageContents = '';
-	    		$templateInfo = w3sTemplateTools::retrieveTemplateAttributesFromPage($page);
-	    		$pageContents = w3sCommonFunctions::readFileContents(w3sTemplateTools::getTemplateFile($templateInfo["projectName"], $templateInfo["templateName"]));
+	    		$templateInfo = self::retrieveTemplateAttributesFromPage($page);
+	    		$pageContents = w3sCommonFunctions::readFileContents(self::getTemplateFile($templateInfo["projectName"], $templateInfo["templateName"]));
 	    		$this->idTemplate = $templateInfo["idTemplate"];
 	    		
 	    		// Renders ther page
 	    		$slotContents = $this->getSlotContents($language->getId(), $page->getId()); 
-	    		foreach ($slotContents as $slot){ 
+	    		foreach ($slotContents as $slot)
+          {
 			      $contents = $this->drawSlot($slot);
             $pageContents = preg_replace('/\<\?php.*?include_slot\(\'' . $slot['slotName'] . '\'\).*?\?\>/', $contents, $pageContents);
             
