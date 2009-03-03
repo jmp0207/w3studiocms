@@ -120,7 +120,7 @@ class w3sContentManagerMenu extends w3sContentManager{
         if ($oPage != null){ 
           $pageName = $oPage->getPageName();
           $class = ($className != 'w3sNone' && $classForPage == $pageName) ? sprintf(' class="%s"', $className) : '';
-          $link = sprintf('/webSite/%s/%s.html', $language, $pageName);
+          $link = sprintf('/%s/%s.html', $language, $pageName);
           $onclickEvent = '';
         }
         else{

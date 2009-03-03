@@ -423,7 +423,8 @@ class w3sCommonFunctions
     closedir($handle);
   }
   
-  public static function linkConverter($content, $mode='editor'){
+  public static function linkConverter($content, $mode='editor')
+  {
   	$text = $content->getContent();  		
 		$oLanguage = $content->getW3sLanguage();
 		

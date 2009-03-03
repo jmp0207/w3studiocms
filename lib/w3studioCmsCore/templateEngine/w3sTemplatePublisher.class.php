@@ -47,7 +47,7 @@ class w3sTemplateEnginePublisher extends w3sTemplateEngine
 	      $curContent = w3sContentManagerFactory::create($content->getContentTypeId(), $content);
 	      $result .= $curContent->getDisplayContentForPublishMode($content);
     	}
-    }  
+    }   
     return $result;
   }
 
