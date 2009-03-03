@@ -24,26 +24,49 @@ class semaphore
    *                  1 - The page has been setted as active page
    *                  2 - The page is in use by another user
    */
-  public static function setRequestedOperation($idUser, $operation, $prevOperation='')
+  public static function setRequestedOperation($idUser, $operation, $prevOperation='', $maxInactiveTime = 300)
   {
 
-    // Checks the status of used pages
-    self::checkInactiveOperations();
-
-    // Verifies if the requested operation can be done
-    if (self::checkRequestedOperation($idUser, $operation) == 0)
+    if ($idUser == null)
     {
+      throw new InvalidArgumentException('idUser cannot be null');
+    }
+
+    // Checks the status of used pages
+    self::checkInactiveOperations($maxInactiveTime);
+
+    $con = Propel::getConnection();
+
+    $bCommit = true;
+    $con = w3sPropelWorkaround::beginTransaction($con);
+
+    // Verifies if the requested operation can be made
+    if (self::isRequestedFree($idUser, $operation))
+    {
+      
       // Removes the previous operation if exists
-      if ($prevOperation != '') self::deleteOperation($idUser, $prevOperation);
+      if ($prevOperation != '') $bCommit = (self::deleteOperation($idUser, $prevOperation) != 0) ? true : false;
 
       // Sets the requested page as active page and returns the operation result
-      $result = self::saveRequestedOperation($idUser, $operation);
-      
-      return $result;
+      if ($bCommit) $bCommit = self::saveRequestedOperation($idUser, $operation);
+
     }
     else{
-      return 0;
+      $bCommit = false;
     }
+
+    if ($bCommit)
+    {
+      $con->commit();
+      $result = true;
+    }
+    else
+    {
+      w3sPropelWorkaround::rollBack($con);
+      $result = false;
+    }
+
+    return $result;
   }
   
   /**
@@ -56,8 +79,18 @@ class semaphore
    */
   public static function deleteOperation($idUser, $operation)
   {
+    
     $semaphore = DbFinder::from('W3sSemaphore')->findPk($idUser, $operation);
-    $result = (isset($semaphore)) ? ($semaphore->delete() > 0) ? 1 : 0 : 1;
+
+    if (isset($semaphore))
+    {
+      $semaphore->delete();
+      $result = ($semaphore->isDeleted()) ? 1 : 0;
+    }
+    else
+    {
+      $result = 2;
+    }
 
     return $result;
   }
@@ -68,14 +101,11 @@ class semaphore
    * @param      int The max life a user can hold a page active without making any operation
    *                 in milliseconds
    */
-  private static function checkInactiveOperations($maxInactiveTime = 300)
+  public static function checkInactiveOperations($maxInactiveTime = 300)
   {
-    $selectedOperations = W3sSemaphorePeer::doSelect(new Criteria());
-    foreach($selectedOperations as $selectedOperation)
-    {
-      $diff =  time() - w3sCommonFunctions::dateToTime($selectedOperation->getCreatedAt());
-      if ($diff > $maxInactiveTime) $selectedOperation->delete();
-    }
+    $c = new Criteria();
+    $c->add(W3sSemaphorePeer::CREATED_AT, time() - $maxInactiveTime, CRITERIA::LESS_THAN);
+    return W3sSemaphorePeer::doDelete($c);
   }
   
   /**
@@ -86,13 +116,13 @@ class semaphore
    * @return     bool True  - The operation is currently in action
    *                  False - The operation can be performed
    */
-  private static function checkRequestedOperation($idUser, $operation)
+  protected static function isRequestedFree($idUser, $operation)
   {
     $result = (DbFinder::from('W3sSemaphore')->
                     where('SfGuardUserId', '!=', $idUser)->
                     where('Operation', $operation)->
-                    count() > 0) ? 1 : 0;
-                  
+                    count() > 0) ? false : true ;
+                  //echo DbFinder::from('W3sSemaphore')->getLatestQuery();
     return $result;
   }
   
@@ -104,7 +134,7 @@ class semaphore
    * @return     bool True  - The page has been saved succesfully
    *                  False - The page hasn't been saved
    */
-  private static function saveRequestedOperation($idUser, $operation)
+  protected static function saveRequestedOperation($idUser, $operation)
   {
     $semaphore = DbFinder::from('W3sSemaphore')->findPk($idUser, $operation);
     if($semaphore == null)
@@ -119,7 +149,7 @@ class semaphore
       $semaphore->setCreatedAt(date("Y-m-d H:i:s"));
       $res = $semaphore->save();
     }
-
-    return ($res > 0) ? 1 : 0;
+    
+    return ($res > 0) ? true : false;
   }
 }

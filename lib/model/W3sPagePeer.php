@@ -56,7 +56,7 @@ class W3sPagePeer extends BaseW3sPagePeer
 
     return self::doSelectOne($c);*/
     return DbFinder::from('W3sPage')->
-									   where('PageName', $pageName)->
+                     where('PageName', w3sCommonFunctions::slugify($pageName) )->
 									   where('ToDelete', '0')->
 									   findOne();
   }

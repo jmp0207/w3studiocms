@@ -94,14 +94,7 @@ abstract class w3sTemplateEngine
       $this->pageName = 'none';
     }
 
-    // Gets the template information
-    $page = DbFinder::from('W3sPage')->
-                      with('W3sTemplate', 'W3sProject')->  
-                      leftJoin('W3sGroup')->
-                      leftJoin('W3sTemplate')->
-                      leftJoin('W3sProject')->
-                      findPK($this->idPage);                        
-    $this->setCurrentTemplate($page);
+    if ($this->idPage != -1) $this->setTemplateInfo($this->idPage);
   }
   
   public function setIdPage($value){
@@ -370,6 +363,18 @@ abstract class w3sTemplateEngine
     
     return $this->pageContents;
   }
+
+  protected function setTemplateInfo($idPage)
+  {
+    // Gets the template information
+    $page = DbFinder::from('W3sPage')->
+                      with('W3sTemplate', 'W3sProject')->
+                      leftJoin('W3sGroup')->
+                      leftJoin('W3sTemplate')->
+                      leftJoin('W3sProject')->
+                      findPK($idPage);
+    $this->setCurrentTemplate($page);
+  }
     
   /**
    * Removes the stylesheets reference from the template
@@ -422,7 +427,9 @@ abstract class w3sTemplateEngine
     $slotName = '';
     $isRepeated = 0;
     $resultContents = array();
-    
+
+    if ($this->idTemplate == null) $this->setTemplateInfo($idPage);
+
     $slots = DbFinder::from('W3sSlot')->
 			                 where('TemplateId', $this->idTemplate)->
 			                 where('ToDelete', 0)->
