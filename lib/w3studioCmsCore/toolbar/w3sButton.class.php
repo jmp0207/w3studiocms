@@ -465,7 +465,7 @@
      * @return string
      *
      */
-    public function renderButton()
+    public function render()
     {
       // Disable the button if a reference to current user has been passed and
       // the user has not the required credentials to use that button

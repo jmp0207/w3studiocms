@@ -52,7 +52,7 @@ class w3sTemplateEngineEditor extends w3sTemplateEngine
       {
         $slotNames .= sprintf('"%s",', $slot['slotName']);
         $contents = $this->drawSlot($slot);
-        $this->pageContents = ereg_replace('\<\?php include_slot\(\'' . $slot['slotName'] . '\'\)\?\>', $contents, $this->pageContents);
+        $this->pageContents = preg_replace('/\<\?php.*?include_slot\(\'' . $slot['slotName'] . '\'\).*?\?\>/', $contents, $this->pageContents);
       }
 
       $this->setSortables($slotContents);

@@ -34,7 +34,7 @@ class w3sToolbarVertical extends w3sToolbar
     foreach ($this->toolbar as $button){ 
       $oButton = new w3sButton($this->currentUser);
       $oButton->fromArray($button);
-      $toolbar .= sprintf('<tr>%s</tr>', $oButton->renderButton());
+      $toolbar .= sprintf('<tr>%s</tr>', $oButton->render());
     }
    
     return $toolbar;

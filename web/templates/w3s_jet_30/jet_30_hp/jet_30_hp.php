@@ -75,10 +75,10 @@
 <!--bodyBottom end -->
 <!--footer start -->
 <div id="footer">
-  <div id="bottom-menu"><?php include_slot('bottom-menu') ?></div>
+  <div id="bottom-menu"><?php include_slot('bottom-menu')?></div>
   <div id="copyright"><?php include_slot('copyright') ?></div>
   <div id="xht"><?php include_slot('xht') ?></div>
   <div id="cs"><?php include_slot('cs') ?></div>
-  <div id="design">Design By : <a href="http://www.templateworld.com">Template World</a></p></div>
+  <div id="design">Design By : <a href="http://www.templateworld.com">Template World</a></div>
 </div>
 <!--footer end -->

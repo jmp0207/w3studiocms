@@ -85,7 +85,7 @@ class w3sCommonFunctions
 		{
 			$oButton = new w3sButton($currentUser);
 	    $oButton->fromArray($command);
-	    $renderedCommands[] = $oButton->renderButton();
+	    $renderedCommands[] = $oButton->render();
 		}
 		
 		return $renderedCommands;
@@ -430,7 +430,7 @@ class w3sCommonFunctions
 		
     // Retrieves all the links, the attributes and the link content
     preg_match_all('/\<a(.*?)\>(.*?)\<\/a\>?/', $text, $result);
-    $i=0;
+    $i = 0;
     foreach($result[1] as $linkAttributes){
       
       // Examines one attribute a time and retrieves href and class attributes if exists      
@@ -442,11 +442,12 @@ class w3sCommonFunctions
         if (strpos($attribute, 'class') !== false) $class = self::getTagAttribute($attribute, 'class');
       }
       $currentPageName = self::getPageNameFromLink($href);
+      $classValue = (!empty($class)) ? 'class=' . $class : '';
       
       // Checks if the examined link is internal and in this case W3StudioCMS converts it 
       $oPage = W3sPagePeer::getFromPageName($currentPageName); 
       if ($oPage != null){
-        $classValue = (!empty($class)) ? 'class=' . $class : '';
+        
         $anchorPos = strpos($href, '#');
         $anchor = ($anchorPos !== false) ? substr($href, $anchorPos, strlen($href) - $anchorPos) : '';
         /*
@@ -462,12 +463,22 @@ class w3sCommonFunctions
 
         $text = str_replace($result[0][$i], $symfonyLink, $text);
       }
-      else{
-        if (substr($href, 0, 1) != '/' && 
-            strpos($href, 'http://') === false && 
-            strpos($href, 'mailto:') === false &&
-            $href != '#'){
-          $text = str_replace($href, 'http://' . $href, $text);      
+      else
+      {
+        if ($mode == 'preview')
+        {
+          $symfonyLink = sprintf('<a href="#" onclick="alert(\'%s\'); return false;" %s>%s</a>', w3sCommonFunctions::toI18n('This page is not linked to an internal link. In preview only internal links can be tested') , $classValue, $result[2][$i]);
+          $text = str_replace($result[0][$i], $symfonyLink, $text);
+        }
+        else
+        {
+          if (substr($href, 0, 1) != '/' &&
+              strpos($href, 'http://') === false &&
+              strpos($href, 'mailto:') === false &&
+              $href != '#')
+              {
+                  $text = str_replace($href, 'http://' . $href, $text);
+              }
         }
       }  
       $i++;

@@ -24,7 +24,6 @@ class w3sMenuEditor extends w3sContentsEditor
 		        <div id="w3s_menu_options_header">%s</div>
 		        <div id="w3s_menu_options">%s</div>
 		        <div id="w3s_feedback">&nbsp;</div>
-            <div><textarea id="pipo"></textarea><a href="#" onclick="$(\'pipo\').value = objMenuBuilder.setLinks();">clic</a></div>
 		      </td>
 		    </tr>
 		    <tr>

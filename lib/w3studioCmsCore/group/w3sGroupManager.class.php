@@ -53,7 +53,7 @@ class w3sGroupManager
    */
   public function add($groupName, $idTemplate)
   {
-    $groupName = trim($groupName);
+    $groupName = w3sCommonFunctions::slugify($groupName);
     if ($groupName != '')
     {
 	    if ($idTemplate != null)
