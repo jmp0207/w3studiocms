@@ -34,7 +34,7 @@
       foreach ($this->toolbar as $button){ 
         $oButton = new w3sButton($this->currentUser);
         $oButton->fromArray($button);
-        $toolbar .= $oButton->renderButton();
+        $toolbar .= $oButton->render();
       }
       
       return sprintf('<tr>%s</tr>', $toolbar);

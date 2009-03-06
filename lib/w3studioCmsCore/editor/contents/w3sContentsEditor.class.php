@@ -91,7 +91,7 @@ abstract class w3sContentsEditor implements w3sEditor
   	$closeButton = new w3sButton();
   	$closeButton->fromYml('editorButtonClose.yml');  	
   	
-  	return sprintf('<div class="CloseCurrentEditor">%s</div>', $closeButton->renderButton());
+  	return sprintf('<div class="CloseCurrentEditor">%s</div>', $closeButton->render());
 	}
 	
 	/**
