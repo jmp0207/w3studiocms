@@ -71,7 +71,7 @@ class w3sControlPanel
 		    
 	protected function drawTitle()
 	{
-		return sprintf($this->titleSkeleton, __('Control panel'), link_to_function(image_tag(sfConfig::get('app_w3s_web_skin_images_dir') . '/structure/button.jpg'), 'W3sControlPanel.hide()', 'alt="" title="Close the Control Panel" width="16" height="12"'));
+		return sprintf($this->titleSkeleton, __('Control panel'), link_to_function(image_tag(sfConfig::get('app_w3s_web_skin_images_dir') . '/control_panel/button.jpg'), 'W3sControlPanel.hide()', 'alt="" title="Close the Control Panel" width="16" height="12"'));
 	} 
 	
 	protected function drawLanguagesPanel()

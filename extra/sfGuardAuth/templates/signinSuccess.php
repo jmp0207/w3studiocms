@@ -23,7 +23,7 @@
              * javascript function.
              */
             if (sfConfig::get('sf_environment') != 'test'){ 
-              echo link_to_function('Login', 'doLogin(\'' . url_for('@sf_guard_signin') . '\', \'' . url_for('/webEditor/index?lang=' . strtolower($languageName) . '&page=' . strtolower($pageName)) . '\')', 'class="link_button"');
+              echo link_to_function('Login', sprintf('doLogin(\'%s\', \'/W3studioCMS/%s/%s.html\')', url_for('@sf_guard_signin'), strtolower($languageName), strtolower($pageName)), 'class="link_button"');
             }
             else{
               echo submit_tag(__('signin'));

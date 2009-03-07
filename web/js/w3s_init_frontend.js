@@ -36,7 +36,8 @@ function showLoginForm(sActionPath, l, p)
 }
 
 // Validates the login data from the executeSignin action of sfGuard module.
-function doLogin(sActionPath, sPageUrl){ 
+function doLogin(sActionPath, sPageUrl)
+{  
   var bHasSigned = true;
   sAjaxOptions = {asynchronous:true,
                   evalScripts:false, 
@@ -49,7 +50,7 @@ function doLogin(sActionPath, sPageUrl){
                     { 
                       if (bHasSigned){ 
                         W3sWindow = new w3sWindow();
-                        W3sWindow.closeModal();
+                        W3sWindow.closeModal();  
                         location.href = sPageUrl;
                       }
                     }, 
