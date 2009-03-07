@@ -1,4 +1,4 @@
-# W3StudioCMS 0.8.0.1 Beta #
+# W3StudioCMS 0.9.0 #
 
 ## Overview ##
 
@@ -15,10 +15,10 @@ W3StudioCMS is a powerful, flexible and fully customizable Content Management Sy
 * Fully extendable
 * Fully Configurable
 
-I'm very proud to annunce the release of the first beta version of W3StudioCMS plugin.
-The W3sCore library is now ready with all the objects needed to manage the CMS and it's
-pretty stable but it needs a lot of test to became really stable. This is the next step.
-I will appreciate if someone will help me.
+I'm very proud to annunce the first release candidate stable version of W3StudioCMS plugin.
+The W3sCore library is now ready with all the objects needed to manage the CMS. A lot of
+bugs has been fixed during last month and a lot of tests has been written. W3studioCMS
+plugin is now availble for both symfony 1.1 and symfony 1.2.
 
 I have been working very hard since the release of W3StudioCMS 0.6.2 to refactor the 
 code and make it fully extensible and overridable to give every developer the ability 
@@ -28,6 +28,10 @@ objects under the w3sCore directory in the plugin's lib directory and the comman
 scripts replaced under the w3s_script directory in the plugin's config directory.
 
 ## What's new ##
+0.9.0
+1. W3studioCMS plugin is now ready for symfony 1.2.
+2. Bug fixing.
+
 0.8.2
 1. Fixed some bugs.
 
@@ -144,22 +148,6 @@ Change the *[your button]* parameter with the link to the image that represents 
 Clear the cache and reload your page. Clicking the content's add button you will have the new content available and the related editor to manage it. Is that easy, isn't it?
 
 That's all! Obviously you can extend and override every class of the w3sCore to fit your needs.
-
-## Notes ##
-
-This is the first beta version: you can carefully start to use it for your web sites. I hope that can be used in production as soon as possibile.
-
-## Todo ##
-
-Write the unit test to verify the CMS' core classes
-
-
-Last minute bug
-
-
-When you add a new project, the templates', you have to reload the page to make
-the new project ready to use, because the CSS are loaded when the page is fully loaded.
-
 
 ## Help ##
 

@@ -35,7 +35,7 @@ var w3sLanguage = Class.create({
 	                   onComplete:function(request, json)
 	                      {
 	                        curWindow.setHTMLContent($('w3s_error').innerHTML);
-													if (!hasFailed) W3sWindow.closeModal();
+													//if (!hasFailed) W3sWindow.closeModal();
 	                      },
 	                   parameters:'languageName=' + $('w3s_language_name').value +
 	                              '&isMain=' + isMain});
