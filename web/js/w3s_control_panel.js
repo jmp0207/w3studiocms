@@ -289,7 +289,7 @@ var w3sControlPanel = Class.create({
 	            InteractiveMenu.stop = false;
 	          },
 	        parameters:'newRepeatedValue=' + $('repeated_value').value +
-		                 '&language=' + w3studioCMS.language +
+		                 '&lang=' + w3studioCMS.language +
 	                   '&page=' + w3studioCMS.page + 
 		                 '&slotName=' + slotName});
 	  

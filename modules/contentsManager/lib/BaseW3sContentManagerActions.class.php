@@ -159,12 +159,12 @@ class BaseW3sContentsManagerActions extends sfActions
     $this->slot = W3sSlotPeer::retrieveByPk($this->getRequestParameter('idSlot'));
   }
   
-  public function executeChangeRepeatedContents()
+  public function executeChangeRepeatedContents($request)
   {
-    if ($this->getRequest()->hasParameter('page') &&
-        $this->getRequest()->hasParameter('language') &&
-        $this->getRequest()->hasParameter('slotName') &&
-        $this->getRequest()->hasParameter('newRepeatedValue'))
+    if ($request->hasParameter('page') &&
+        $request->hasParameter('lang') &&
+        $request->hasParameter('slotName') &&
+        $request->hasParameter('newRepeatedValue'))
       {
         $bRollBack = false;
         $con = Propel::getConnection();
@@ -182,12 +182,15 @@ class BaseW3sContentsManagerActions extends sfActions
 	        }
 	      }
         
-        if (!$bRollBack){   // Everything was fine so W3StudioCMS commits to database
+        if (!$bRollBack)
+        {   // Everything was fine so W3StudioCMS commits to database
           $con->commit();
-          $this->idLanguage = $this->getRequestParameter('language');          
-          $this->forward('sbStructure', 'loadSlots');
+          $this->idLanguage = $this->getRequestParameter('lang');
+          $this->idPage = $this->getRequestParameter('page');
+          $this->forward('controlPanel', 'drawSlots');
         }
-        else{               // Something was wrong so W3StudioCMS aborts the operation and restores to previous status
+        else
+        {               // Something was wrong so W3StudioCMS aborts the operation and restores to previous status
           w3sPropelWorkaround::rollBack($con);
           $this->result = 0;
           $this->getResponse()->setStatusCode(404);

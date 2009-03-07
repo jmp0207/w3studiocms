@@ -52,7 +52,7 @@ W3sContent:
     contentPosition: 1
     edited: 1
   edit-site:
-    contentTypeId: 2
+    contentTypeId: 4
     slotId: edit-site
     content: |
       <a href="#">Edit<br />Site</a>

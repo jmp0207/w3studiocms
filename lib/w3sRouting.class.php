@@ -24,9 +24,9 @@ class w3sRouting
     $r = $event->getSubject();
 
     // prepend our routes
-    //$r->prependRoute('sf_guard_signin', new sfRoute('/login', array('module' => 'sfGuardAuth', 'action' => 'signin')));
+    $r->prependRoute('sf_guard_signin', new sfRoute('/login', array('module' => 'sfGuardAuth', 'action' => 'signin')));
     $r->prependRoute('site', new sfRoute('/:lang/:page.html', array('module' => 'webSite', 'action' => 'index')));
-    $r->prependRoute('editor', new sfRoute('W3StudioCMS/:lang/:page.html', array('module' => 'webEditor', 'action' => 'index')));
+    $r->prependRoute('editor', new sfRoute('/:W3StudioCMS/:lang/:page.html', array('module' => 'webEditor', 'action' => 'index')));
     $r->prependRoute('homepage:', new sfRoute('/', array('module' => 'webSite', 'action' => 'index')));
   }
 }
