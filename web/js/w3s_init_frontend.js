@@ -20,8 +20,8 @@ function showLoginForm(sActionPath, l, p)
   language = (l != undefined) ? l : 0;
   sAjaxOptions = {asynchronous:true,
                   evalScripts:false, 
-                  method:'get',
-                  onComplete:function(request, json)
+                  method:'post',
+                  onComplete:function()
                     {
                       $('username').focus();
                     },
@@ -37,7 +37,8 @@ function showLoginForm(sActionPath, l, p)
 
 // Validates the login data from the executeSignin action of sfGuard module.
 function doLogin(sActionPath, sPageUrl)
-{  
+{
+ 
   var bHasSigned = true;
   sAjaxOptions = {asynchronous:true,
                   evalScripts:false, 
@@ -47,16 +48,20 @@ function doLogin(sActionPath, sPageUrl)
                       bHasSigned = false;
                     },
                   onComplete:function(request, json)
-                    { 
-                      if (bHasSigned){ 
+                    {
+                     
+                      if (bHasSigned){
                         W3sWindow = new w3sWindow();
-                        W3sWindow.closeModal();  
+                        W3sWindow.closeModal();
                         location.href = sPageUrl;
                       }
                     }, 
-                  parameters:'lang=' + language + 
+                  parameters:'lang=' + language +
                              '&page=' + page +
-                             '&' + 'signin[username]=' + $('signin_username').value + '&signin[password]=' + $('signin_password').value};
+                             '&signin[lang]=' + language +
+                             '&signin[page]=' + page +
+                             '&signin[username]=' + $('signin_username').value +
+                             '&signin[password]=' + $('signin_password').value};
   curWindow.setAjaxContent(sActionPath, sAjaxOptions);
   
   return false;

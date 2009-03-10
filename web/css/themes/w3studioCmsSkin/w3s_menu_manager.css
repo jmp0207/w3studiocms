@@ -13,14 +13,16 @@
     Page elements
  * ------------------------------------ */
 
-#w3s_menu_manager{
+#w3s_menu_manager
+{
   position:fixed;
-  width:610px;
+  width:auto;
   height:110px;
-  z-index:202;
+  z-index:202;  
 }
   
-#w3s_menu_manager_left{
+#w3s_menu_manager_left
+{
   width:60px;
   height:95px;
   float:left;
@@ -28,8 +30,9 @@
   background-repeat:no-repeat;
 }
 
-#w3s_menu_manager_center{
-  width:396px;
+#w3s_menu_manager_center
+{
+  width:auto;
   height:62px;
   float:left;
   padding:16px;
@@ -38,52 +41,55 @@
   text-align:center;
 }
 
-#w3s_menu_manager_center table td{
-  padding: 4px !important;
+#w3s_menu_manager_center table td
+{
+  /*padding: 4px !important;*/
 }
 
-#w3s_menu_manager_right{
+#w3s_menu_manager_right
+{
   width:60px;
   height:95px;
   float:left;
   background-image:url(images/w3s_menu_manager/right.png);
-  background-repeat:no-repeated;
+  background-repeat:no-repeat;
 }
 
-#w3s_menu_manager img{
+#w3s_menu_manager img
+{
   border:0px;
 }
 
-#w3s_menu_manager table td{
-  width:50px;
+#w3s_menu_manager table td
+{
   font: bold 9px Arial, Verdana;
-  color:#FFF;
-  padding:0px 4px;
-  text-align:center;
+  color: #FFF;
+  padding: 0px 4px;
+  text-align: center;
 }
 
-#w3s_menu_manager table td a{
+#w3s_menu_manager table td a
+{
   color:#FFF;
   text-decoration:none;
-  font: 11px Verdana, Arial, Helvetica, sans-serif;
+  font: 10px Arial, Verdana, Helvetica, sans-serif;
 }
 
-#w3s_menu_manager table td a:hover{
+#w3s_menu_manager table td a:hover
+{
   color:#C2FFFF;
   text-decoration:none;
-  font: bold 11px Verdana, Arial, Helvetica, sans-serif;
+  font: bold 10px Arial, Verdana, Helvetica, sans-serif;
 }
 
-#w3s_menu_manager_hidden{
+#w3s_menu_manager_hidden
+{
   position: fixed;
   width:500px;
   height:16px;
   background-image:url(images/w3s_menu_manager/manager_menu_hidden.png);
-  background-repeat:no-repeated;
+  background-repeat:no-repeat;
   text-align:center;
-  /*
-  opacity:0.3;
-  filter: alpha(opacity = 30);*/
   font: bold 10px Arial, Verdana;
   color:#FFF;
   display:block;

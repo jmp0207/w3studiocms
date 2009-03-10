@@ -13,12 +13,13 @@
     Page elements
  * ------------------------------------ */
  
-#w3s_scripts_manager{
-	width:600px;
-	font: 10px Verdana, Arial, Helvetica, sans-serif;
-	text-align:left;
-	padding:4px;
-	border-top:1px solid #bbb;
+#w3s_scripts_manager
+{
+  width:600px;
+  font: 10px Verdana, Arial, Helvetica, sans-serif;
+  text-align:left;
+  padding:4px;
+  border-top:1px solid #bbb;
   border-left:1px solid #bbb;
   border-bottom:1px solid #777;
   border-right:1px solid #777;
@@ -34,7 +35,9 @@
   text-align:center !important;
 }
 
-#w3s_scripts_manager textarea{
+#w3s_scripts_manager textarea
+{
+  width:550px;
   font: 11px Courier, Verdana, Arial, Helvetica, sans-serif !important;
   border:1px solid #aaa !important;
   background-color:#FFF !important;
