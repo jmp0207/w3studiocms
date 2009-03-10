@@ -12,12 +12,19 @@
 /* ------------------------------------ *
     Page elements
  * ------------------------------------ */
-#w3s_image_editor{
+#w3s_image_editor
+{
   background-color:#EEE;
   border-top:1px solid #CCC;
   border-left:1px solid #CCC;
   border-right:1px solid #999;
   border-bottom:1px solid #999;
+  font: 10px Arial, Verdana, Helvetica, sans-serif;
+}
+
+#w3s_image_editor a
+{
+  font: 10px Arial, Verdana, Helvetica, sans-serif;
 }
 
 #w3s_image_editor table{

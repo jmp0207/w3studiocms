@@ -1,4 +1,4 @@
-0: <?php echo sfConfig::get('app_w3s_web_skin_dir')?>/signin.css
+0: <?php echo sfConfig::get('app_w3s_web_skin_dir')?>/w3s_signin.css
 1: <?php echo sfConfig::get('app_w3s_web_skin_dir')?>/w3s_common_elements.css
 2: <?php echo sfConfig::get('app_w3s_web_window_skin_dir') ?>/default.css
 3: <?php echo sfConfig::get('app_w3s_web_window_skin_dir')?>/alphacube.css

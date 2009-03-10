@@ -7,25 +7,52 @@ class sfGuardAuthActions extends BasesfGuardAuthActions
    
   public function executeSignin($request)
   {
-  	$user = $this->getUser();
+    $user = $this->getUser();
     if ($user->isAuthenticated())
     {
       return $this->redirect('@homepage');
     }
 
-    $this->form = new sfGuardFormSignin();
-
     if ($request->isMethod('post'))
     {
+      $this->isAjax = ($request->getHttpHeader('X_REQUESTED_WITH') == 'XMLHttpRequest') ? true : false;
+
+      $defaults = array('lang' => $request->getParameter('lang'), 'page' => $request->getParameter('page'));
+      $this->form = new sfGuardFormW3studioCmsSignin($defaults);
+
       $this->form->bind($request->getParameter('signin'));
+      
       if ($this->form->isValid())
       {      	
         $values = $this->form->getValues();
+        
         $this->getUser()->signin($values['user']);
 
         $signinUrl = sfConfig::get('app_sf_guard_plugin_success_signin_url', $user->getReferer($request->getReferer()));
-				
-				return sfView::NONE;
+
+        if ($this->isAjax)
+        {
+          return sfView::NONE;
+        }
+        else
+        {
+          if ((int)$values['lang'] > 0 && (int)$values['page'] > 0)
+          {
+            $language = DbFinder::from('W3sLanguage')->findPK($values['lang']);
+            $page = DbFinder::from('W3sPage')->findPK($values['page']);
+            if ($language == null) $language = DbFinder::from('W3sLanguage')->where('mainLanguage', 1)->findOne();
+            if ($page == null) $page = DbFinder::from('W3sPage')->where('isHome', 1)->findOne();
+            $languageName = $language->getLanguage();
+            $pageName = $page->getPageName();
+          }
+          else
+          {
+            $languageName = $values['lang'];
+            $pageName = $values['page'];
+          }
+
+          return $this->redirect(sprintf('/W3studioCms/%s/%s.html', $languageName, $pageName));
+        }
       }
     }
   }  
@@ -35,11 +62,12 @@ class sfGuardAuthActions extends BasesfGuardAuthActions
     /* We need to be sure that user is authenticated because it can have more
      * sessions opened in several browsers ot browsers tabs
      */
-    if ($this->getUser()->isAuthenticated()){
+    if ($this->getUser()->isAuthenticated())
+    {
       $idUser = $this->getUser()->getGuardUser()->getId();
       $this->getUser()->signOut();
   
-      $operation = $this->getRequestParameter('lang') . $this->getRequestParameter('page');
+      $operation = $request->getParameter('lang') . $request->getParameter('page');
       semaphore::deleteOperation($idUser, $operation);
     }
 
