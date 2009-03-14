@@ -46,12 +46,11 @@ abstract class w3sTemplateEngine
    */   
   public function __construct($language, $page)
   {
-    
     // When language is null, main language is retrieved
     if ($language == null) $language = 'none';
 
     // When page is null, home page is retrieved
-    if ($page == null) $page = 'none';
+    if ($page == null) $page = 'none'; 
 
     // Checks that the two parameters are integers values    
     if ((int)($language) == 0)
@@ -76,7 +75,7 @@ abstract class w3sTemplateEngine
     
     if ((int)($page) == 0)
     {    	
-    	$oPage = ($page != 'none') ? W3sPagePeer::getFromPageName($page) : W3sPagePeer::getHomePage();
+    	$oPage = ($page != 'none') ? W3sPagePeer::getFromPageName($page) : W3sPagePeer::getHomePage();      
     }
     else
     {    	

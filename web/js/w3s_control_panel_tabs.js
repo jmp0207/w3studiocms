@@ -86,7 +86,7 @@ var w3sSlotManager = Class.create(w3sControlPanelTabs, {
 	                   parameters:'lang=' + w3studioCMS.language +
 	                              '&page=' + w3studioCMS.page}); 
 	  return false;
-	},
+	}
 });
 
 var w3sMetatags = Class.create(w3sControlPanelTabs, {
