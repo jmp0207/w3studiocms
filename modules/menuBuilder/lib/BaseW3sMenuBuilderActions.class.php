@@ -157,7 +157,7 @@ class BaseW3sMenuBuilderActions extends BaseW3sContentsManagerActions
                            where('contentId', $this->getRequestParameter('idContent'))->
                            where('Position', '>', $position)->
                            orderBy('Position', 'ASC')->
-                           find(); print_R($menuElements);
+                           find(); 
           foreach($menuElements as $menuElement)
           {
             $menuElement->setPosition($position);
