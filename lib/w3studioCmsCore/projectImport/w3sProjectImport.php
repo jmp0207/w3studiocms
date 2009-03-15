@@ -82,14 +82,17 @@ class w3sProjectImport implements w3sEditor
   {
     $rowSchema = '<span class="info_header">%s:</span> %s<br />';
     $defaultImage = sfConfig::get('app_w3s_web_images_dir') .  '/common/template_sample.png';
-    $infoDir = sprintf("%1\$s%2\$s%3\$s%2\$sinfo%2\$s", sfConfig::get('app_w3s_web_templates_dir'), DIRECTORY_SEPARATOR, $projectName);
+    $infoDir = sprintf("$s%1\$s%2\$s%3\$s%2\$sinfo%2\$s", sfConfig::get('app_w3s_web_templates_dir'), DIRECTORY_SEPARATOR, $projectName);
+    
     $fileInfo = $infoDir . 'info.yml';
    	$info = (is_file($fileInfo)) ? sfYaml::load($fileInfo) : null;
    	if ($info != null)
    	{
-   		$info = $info["Info"];
-   		$info['Image'] = $infoDir . $info['Image'];
-   		if (!is_file($info['Image'])) $info['Image'] = $defaultImage; 
+   		
+      // Image needs the absolute path
+      $infoDir = str_replace(sfConfig::get('sf_web_dir'), '', $infoDir);
+      $info = $info["Info"];
+   		$info['Image'] = $infoDir . $info['Image']; 
    	}
    	else
    	{
@@ -112,7 +115,7 @@ class w3sProjectImport implements w3sEditor
     {
     	$operation = link_to_function(__('Add'), 'W3sTemplateImport.add(\'' . $projectName . '\')', 'class="link_button"');
     }
-    
+
     return sprintf('<tr><td style="width:96px;">%s</td><td valign="bottom" style="width:250px;"><p>%s</p></td><td valign="bottom">%s</td></tr>', image_tag($info['Image'], "class=template_image"), $projectRows, $operation);
   }
   
