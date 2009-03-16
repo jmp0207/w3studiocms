@@ -82,7 +82,7 @@ class w3sProjectImport implements w3sEditor
   {
     $rowSchema = '<span class="info_header">%s:</span> %s<br />';
     $defaultImage = sfConfig::get('app_w3s_web_images_dir') .  '/common/template_sample.png';
-    $infoDir = sprintf("$s%1\$s%2\$s%3\$s%2\$sinfo%2\$s", sfConfig::get('app_w3s_web_templates_dir'), DIRECTORY_SEPARATOR, $projectName);
+    $infoDir = sprintf("%1\$s%2\$s%3\$s%2\$sinfo%2\$s", sfConfig::get('app_w3s_web_templates_dir'), DIRECTORY_SEPARATOR, $projectName);
     
     $fileInfo = $infoDir . 'info.yml';
    	$info = (is_file($fileInfo)) ? sfYaml::load($fileInfo) : null;

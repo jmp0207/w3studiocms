@@ -4,7 +4,7 @@ button1:
   imageDisabled: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/user_disabled.png
   caption: Users
   requiredCredentials: [admin]
-  action: W3sWindow.openStandard('<?php echo sfContext::getInstance()->getController()->genUrl('sfGuardUser/list') ?>', '', 750, 600, 'yes')
+  action: W3sWindow.openStandard('/sfGuardUser', '', 750, 600, 'yes')
   actionParams:
     title: Manage the users, groups and relative permissions
 button2:
