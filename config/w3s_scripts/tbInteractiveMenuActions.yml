@@ -36,7 +36,7 @@ button5:
 button6:
   image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_interactive_menu/file_add.png
   caption: 'Insert languages navigation made by images'
-  action: W3sContent.addContent(6)
+  action: alert('This content type must be reviewed')
   imageTextRelation: 0
   imageParams:
     size: 32x32 

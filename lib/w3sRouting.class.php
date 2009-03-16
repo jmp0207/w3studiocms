@@ -26,7 +26,6 @@ class w3sRouting
     // prepend our routes
     if (class_exists('sfRoute')) // Symfony 1.1 compatibility. Checks for sfRoute because it is not implemented in 1.1
     {
-      $r->prependRoute('sf_guard_signin', new sfRoute('/login', array('module' => 'sfGuardAuth', 'action' => 'signin')));
       $r->prependRoute('site', new sfRoute('/:lang/:page.html', array('module' => 'webSite', 'action' => 'index')));
       $r->prependRoute('editor', new sfRoute('/:W3StudioCMS/:lang/:page.html', array('module' => 'webEditor', 'action' => 'index')));
       $r->prependRoute('homepage:', new sfRoute('/', array('module' => 'webSite', 'action' => 'index')));
