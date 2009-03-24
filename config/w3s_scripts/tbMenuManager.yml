@@ -1,5 +1,4 @@
 button1:
-  id: aaa
   image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/user.png
   imageDisabled: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/user_disabled.png
   caption: Users
@@ -20,7 +19,7 @@ button8:
   imageDisabled: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/project_disabled.png
   caption: Associations
   requiredCredentials: [[admin, webdesigner]]
-  action: W3sTemplate.loadSlotAssociation(19, 18);
+  action: W3sSlotAssociation = new w3sSlotAssociation(); W3sSlotAssociation.loadSlotAssociation(18, 19);
   actionParams:
     title: Associate slots between templates
 button3:

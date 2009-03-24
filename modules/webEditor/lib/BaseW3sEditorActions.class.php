@@ -105,7 +105,7 @@ class BaseW3sEditorActions extends sfActions
       $this->status = 0;
       if ($this->getUser()->isAuthenticated())
       {
-        $this->template = new w3sTemplateEngineSlotAssociation($this->getRequestParameter('source'), $this->getRequestParameter('destionation'));
+        $this->template = new w3sTemplateEngineSlotAssociation($this->getRequestParameter('idTemplate'), $this->getRequestParameter('destionation'));
         /*
         if ($this->template->getIdLanguage() != -1 && $this->template->getIdPage() != -1)
         {

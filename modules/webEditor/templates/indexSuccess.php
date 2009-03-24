@@ -30,6 +30,7 @@ $frontController = (sfConfig::get('sf_environment') != 'prod') ? sprintf('/%s_%s
 echo $template->retrieveSiteStylesheets(); 
 ?>
 <div id="w3s_cms"></div>
+<div id="w3s_cms_temp"></div>
 <div id="w3s_menu_manager_hidden"></div>
 
 

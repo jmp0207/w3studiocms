@@ -13,7 +13,7 @@
  */
 
   use_helper('I18N', 'Javascript');
-  echo $template->retrieveSiteStylesheets(); //FAKE
+  //echo $template->retrieveSiteStylesheets(); //FAKE
   echo $template->renderPage();
   /*
   switch ($status)

@@ -100,37 +100,6 @@ var w3sTemplate = Class.create({
 	                   paramPrevPage});
 	  return false;
 	},
-
-  loadSlotAssociation: function(sorce, dest)
-  {
-	  var sActionPath = w3studioCMS.frontController + 'webEditor/slotAssociation';
-	  new Ajax.Updater({success:'w3s_cms', failure:'w3s_error'}, sActionPath,
-	      {asynchronous:true,
-	       evalScripts:true,
-	       onLoading:function()
-	          {
-	            InteractiveMenu.hide();
-	            var curWindow = W3sWindow.openModal(200, 100, false);
-	            curWindow.setHTMLContent('<br /><h1>LOADING PAGE<br />Please Wait</h1>');
-	            //curWindow.setSize(130,130).show(true).center({auto: true});
-	          },
-	       onComplete:function(request, json)
-	          {
-	            if (json[0][1] == 1)
-              {
-	              W3sTools.temaChange(json[1][1]);
-	              //W3sMenuManager.load('tbMenuManagerPreview');
-	              W3sWindow.closeModal();
-	            }
-	            else{
-	              curWindow.setSize(230, 120);
-	              curWindow.setHTMLContent($('w3s_error').innerHTML);
-	            }
-	          },
-	        parameters:'source=' + sorce +
-	                   '&lang=' + dest});
-	  return false;
-	},
 	
 	publish: function(sMessage)
   {

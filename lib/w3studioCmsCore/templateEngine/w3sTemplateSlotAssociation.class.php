@@ -27,8 +27,8 @@ class w3sTemplateEngineSlotAssociation extends w3sTemplateEngine
   {
     $this->idTemplate = $idTemplate;
     $template = DbFinder::from('W3sTemplate')->
-                      with('W3sProject')->
-                      findPK($idTemplate);
+                          with('W3sProject')->
+                          findPK($idTemplate);
 	  $this->templateName = $template->getTemplateName();
 	  $this->projectName = $template->getW3sProject()->getProjectName();
     $this->pageContents = w3sCommonFunctions::readFileContents(self::getTemplateFile($this->projectName, $this->templateName));
@@ -61,6 +61,6 @@ class w3sTemplateEngineSlotAssociation extends w3sTemplateEngine
    */
   public function drawSlot($slot)
   {
-    return sprintf('<div id="%s" style="min-height: 24px; color:#FFF; border:1px solid #FFFFFF; background:#C20000;">%s</div>', 'w3sSlotItem_' . $slot->getId(), $slot->getSlotName());
+    return sprintf('<a href="#" onclick="W3sSlotAssociation.currentSelected=%s;$(\'%s\').style.backgroundColor=\'#000066\';"><div id="%s" style="min-height:24px; color:#FFF; border:1px solid #FFFFFF; background:#C20000;">%s</div></a>', $slot->getId(), 'w3sSlotItem_' . $slot->getId(), 'w3sSlotItem_' . $slot->getId(), $slot->getSlotName());
   }
 }
