@@ -65,7 +65,7 @@ class w3sPageManager
 		    if ($oPage == null)
 		    {
 		      if ($idGroup != null)
-	    		{
+	    		{ 
 			      if (DbFinder::from('W3sGroup')->findPK($idGroup) != null)
 		    		{
 				      $con = Propel::getConnection();
@@ -108,9 +108,16 @@ class w3sPageManager
 					          $slots = W3sSlotPeer::getTemplateSlots($attributes["idTemplate"], $i);
 					          foreach ($slots as $slot)
 					        	{
-					        		
+					        		echo $slot->getRepeatedContents();
+
+                      // Retrieves a content that belongs to the current slot
+                      $baseContent = DbFinder::from('W3sContent')->
+                                               where('SlotId', $slot->getId())->
+                                               where('LanguageId', $idLanguage)->
+                                               findOne();
+                                                 
 					        		// When no repeated content, the content is simply copied
-					        		if ($slot->getRepeatedContents() == 0)
+					        		if (($slot->getRepeatedContents() == 0) || ($baseContent == null))
 					        		{
 					        			$slotName = $slot->getSlotName();
 					        			$content = w3sContentManagerFactory::create($defaultContents[$slotName]["contentTypeId"]);
@@ -127,12 +134,6 @@ class w3sPageManager
 					        		}
 					        		else
 					        		{
-					        			
-					        			// Retrieve a content that belongs to the current slot
-					        			$baseContent = DbFinder::from('W3sContent')->
-							        													 where('SlotId', $slot->getId())->
-							        													 where('LanguageId', $idLanguage)->
-							        													 findOne();
 					        			
 					        			// Creates a new content from the base content
 					        			$newContent = w3sContentManagerFactory::create($baseContent->getContentTypeId(), $baseContent);

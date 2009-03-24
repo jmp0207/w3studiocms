@@ -23,25 +23,6 @@ class BaseW3sEditorActions extends sfActions
   public function executeIndex()
   {    
     $this->template = new w3sTemplateEngineEditor($this->getRequestParameter('lang'), $this->getRequestParameter('page'));
-
-/*
-    if($this->template->getIdLanguage() == -1)
-    { 
-    	$message = sprintf($this->getContext()->getI18N()->__('The language %s does not exist'), $this->getRequestParameter('lang'));
-    }
-    else if($this->template->getIdPage() == -1)
-  	{ 
-  		$message = sprintf($this->getContext()->getI18N()->__('The page %s does not exist for the language %s'), $this->getRequestParameter('page'), $this->template->getLanguageName());
-  	}
-  	else
-  	{
-  		$message = null;
-  	}
-
-    echo $this->template->getIdLanguage() . ' - ' . $this->template->getIdPage();
-    */
-    //$this->forward404If($this->template->getIdLanguage() == -1 || $this->template->getIdPage() == -1, $message);
-    
     $this->managerMenu = new w3sMenuManager('w3s_menu_manager', 'tbMenuManager.yml', $this->getUser());
     $this->interactiveMenu = new w3sMenuInteractive('w3s_interactive_menu');
     $this->commands = new w3sMenuVertical('w3s_im_commands', 'tbInteractiveMenuCommands.yml');    
@@ -107,6 +88,35 @@ class BaseW3sEditorActions extends sfActions
         $this->status = 2;
       }
 
+      if($this->status != 1) $this->getResponse()->setStatusCode(404);
+      $this->getResponse()->setHttpHeader('X-JSON', sprintf('([["status", "%s"], ["stylesheet", "%s"]])', $this->status, $this->template->retrieveTemplateStylesheets()));
+    }
+    else
+    {
+      $this->status = 16;
+      $this->getResponse()->setStatusCode(404);
+      $this->getResponse()->setHttpHeader('X-JSON', sprintf('([["status", "%s"]])', $this->status));
+    }
+  }
+
+  public function executeSlotAssociation($request)
+  {
+
+      $this->status = 0;
+      if ($this->getUser()->isAuthenticated())
+      {
+        $this->template = new w3sTemplateEngineSlotAssociation($this->getRequestParameter('source'), $this->getRequestParameter('destionation'));
+        /*
+        if ($this->template->getIdLanguage() != -1 && $this->template->getIdPage() != -1)
+        {
+          $this->status = ($this->template->isPageFree($this->getRequestParameter('prevPage'))) ? 1 : 4;
+        }
+        else
+        {
+          $this->status = 8;
+        }*/
+
+      $this->status = 1; // FAKE
       if($this->status != 1) $this->getResponse()->setStatusCode(404);
       $this->getResponse()->setHttpHeader('X-JSON', sprintf('([["status", "%s"], ["stylesheet", "%s"]])', $this->status, $this->template->retrieveTemplateStylesheets()));
     }

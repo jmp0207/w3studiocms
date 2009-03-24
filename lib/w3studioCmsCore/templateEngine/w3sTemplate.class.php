@@ -348,6 +348,7 @@ abstract class w3sTemplateEngine
       foreach ($slotContents as $slot){
         $slotNames .= sprintf('"%s",', $slot['slotName']);
         $contents = $this->drawSlot($slot);
+        echo htmlentities($contents);
         $this->pageContents = preg_replace('/\<\?php.*?include_slot\(\'' . $slot['slotName'] . '\'\).*?\?\>/', $contents, $this->pageContents);
       }
     }
