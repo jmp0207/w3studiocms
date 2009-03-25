@@ -434,9 +434,9 @@ abstract class w3sTemplateEngine
 			                 where('TemplateId', $this->idTemplate)->
 			                 where('ToDelete', 0)->
 			                 orderBy('Id')->
-			                 find();  
+			                 find();
     foreach($slots as $slot)
-    {            
+    {
 	    $currentSlotContents = array();
 	    $currentSlot = $slot->getId();
 	    $slotName = $slot->getSlotName();
@@ -447,7 +447,7 @@ abstract class w3sTemplateEngine
 	                where('SlotId', $currentSlot)->
 	                where('ToDelete', 0)->
 	                orderBy('ContentPosition')->
-	                find();  
+	                find();
 	    if ($contents != null)
 	    {
 		    foreach($contents as $content)
@@ -457,13 +457,47 @@ abstract class w3sTemplateEngine
 	    }
 	    else
 	    {
-	    	$currentSlotContents[] = null; 
-	    }  
-	    
+        $associatedSlots = DbFinder::from('W3sSlotAssociation')->
+                            where('SlotIdSource', $currentSlot)->
+                            findOne();
+        if ($associatedSlots == null)
+        {
+          $associatedSlots = DbFinder::from('W3sSlotAssociation')->
+                            where('SlotIdDestination', $currentSlot)->
+                            findOne();
+          if ($associatedSlots != null)
+          { 
+            $currentSlot = $associatedSlots->getSlotIdSource();
+          }
+        }
+        else
+        {
+          $currentSlot = $associatedSlots->getSlotIdDestination();
+        }
+
+        if ($associatedSlots != null)
+        {
+          $contents = DbFinder::from('W3sContent')->
+                      where('LanguageId', $idLanguage)->
+                      where('PageId', $idPage)->
+                      where('SlotId', $currentSlot)->
+                      where('ToDelete', 0)->
+                      orderBy('ContentPosition')->
+                      find();
+          foreach($contents as $content)
+          {
+            $currentSlotContents[] =  $content;
+          }
+        }
+        else
+        {
+          $currentSlotContents[] = null;
+        }
+	    }
+
 	    // Saves the last slot's content
 	    $resultContents[] =  array('contents' => $currentSlotContents, 'idSlot' => $currentSlot, 'slotName' => $slotName, 'isRepeated' => $isRepeated);
     }
-    
 		return $resultContents;
   }
   
