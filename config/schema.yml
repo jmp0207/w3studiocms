@@ -324,14 +324,18 @@ propel:
       type: INTEGER
       required: true
       default: 0
-  w3s_slot_association:
+  w3s_slot_mapper:
     _attributes:
       idMethod: native
-    id:
+    id: 
       type: INTEGER
       required: true
       autoIncrement: true
       primaryKey: true
+    templates:
+      type: VARCHAR
+      size: 255
+      required: true
     slot_id_source:
       type: INTEGER
       required: true

@@ -99,13 +99,13 @@ class BaseW3sEditorActions extends sfActions
     }
   }
 
-  public function executeSlotAssociation($request)
+  public function executeSlotMapper($request)
   {
 
       $this->status = 0;
       if ($this->getUser()->isAuthenticated())
       {
-        $this->template = new w3sTemplateEngineSlotAssociation($this->getRequestParameter('idTemplate'), $this->getRequestParameter('destionation'));
+        $this->template = new w3sTemplateEngineSlotMapper($this->getRequestParameter('idTemplate'), $this->getRequestParameter('destination'));
         /*
         if ($this->template->getIdLanguage() != -1 && $this->template->getIdPage() != -1)
         {

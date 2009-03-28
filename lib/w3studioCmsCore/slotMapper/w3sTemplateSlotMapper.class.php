@@ -20,7 +20,7 @@
  * @author     Giansimon Diblas <giansimon.diblas@w3studiocms.com>
  */
  
-class w3sTemplateEngineSlotAssociation extends w3sTemplateEngine
+class w3sTemplateEngineSlotMapper extends w3sTemplateEngine
 {
 
   public function __construct($idTemplate)
@@ -61,6 +61,17 @@ class w3sTemplateEngineSlotAssociation extends w3sTemplateEngine
    */
   public function drawSlot($slot)
   {
-    return sprintf('<a href="#" onclick="W3sSlotAssociation.currentSelected=%s;$(\'%s\').style.backgroundColor=\'#000066\';"><div id="%s" style="min-height:24px; color:#FFF; border:1px solid #FFFFFF; background:#C20000;">%s</div></a>', $slot->getId(), 'w3sSlotItem_' . $slot->getId(), 'w3sSlotItem_' . $slot->getId(), $slot->getId() . $slot->getSlotName());
+    $slotMapper = DbFinder::from('W3sSlotMapper')->
+                      where('SlotIdSource', $slot->getId())->
+                      findOne();
+    if ($slotMapper == null)
+    {
+      $slotMapper = DbFinder::from('W3sSlotMapper')->
+                      where('SlotIdDestination', $slot->getId())->
+                      findOne();
+    }
+    $class = ($slotMapper == null) ? 'slotNotSelected' : 'slotSelected';
+    
+    return sprintf('<a href="#" onclick="W3sSlotMapper.selectSlot(%s, \'%s\')"><div id="%s" class="%s">%s</div></a>', $slot->getId(), $slot->getSlotName(), 'w3sSlotItem_' . $slot->getId(), $class, $slot->getId() . $slot->getSlotName());
   }
 }
