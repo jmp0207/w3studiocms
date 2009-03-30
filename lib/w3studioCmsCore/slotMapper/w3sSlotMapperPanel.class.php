@@ -52,9 +52,10 @@ class w3sSlotMapperPanel
         <li>%s</li>
         <li>%s</li>
         <li>%s</li>
+        <li>%s</li>
       </ul>';
 
-  /**/
+  
   public function __construct($sourceTemplate, $destTemplate)
   {
   	$this->sourceTemplate  = $sourceTemplate;
@@ -155,8 +156,9 @@ class w3sSlotMapperPanel
 	{
     return sprintf($this->commandsSkeleton, 
                     link_to_function(w3sCommonFunctions::toI18N('Switch template'), 'W3sSlotMapper.switchDiv()'),
-                    link_to_function(w3sCommonFunctions::toI18N('Map selected slots'), 'W3sSlotMapper.map()'),
-                    link_to_function(w3sCommonFunctions::toI18N('Save mapping'), 'W3sSlotMapper.save();'));
+                    link_to_function(w3sCommonFunctions::toI18N('Map slots'), 'W3sSlotMapper.map()'),
+                    link_to_function(w3sCommonFunctions::toI18N('Save map'), 'W3sSlotMapper.save();'),
+                    link_to_function(w3sCommonFunctions::toI18N('Return to editor'), 'W3sSlotMapper.close();'));
 	}
 
   protected function matchSlots()
@@ -180,5 +182,4 @@ class w3sSlotMapperPanel
       }
     }
   }
-	
 }

@@ -13,18 +13,29 @@
     Page elements
  * ------------------------------------ */
  
-#w3s_add_group_module{
+#w3s_add_group_module
+{
 	font: 10px Verdana, Arial, Helvetica, sans-serif;
 	text-align:left;
 	padding:4px;
 } 
  
-#w3s_add_group_module table td{
+#w3s_add_group_module table td
+{
   font: 10px Verdana, Arial, Helvetica, sans-serif !important;
 }
 
-#w3s_add_group_module table td input, #w3s_add_group_module table td select{
+#w3s_add_group_module table td input, #w3s_add_group_module table td select
+{
   font: 10px Verdana, Arial, Helvetica, sans-serif !important;
   border:1px solid #aaa !important;
+}
+
+#w3s_add_group_module .w3s_slot_link
+{
+	font: bold 10px Verdana, Arial, Helvetica, sans-serif;
+	text-align:left;
+  color: #C20000;
+  text-decoration:none;
 }
 

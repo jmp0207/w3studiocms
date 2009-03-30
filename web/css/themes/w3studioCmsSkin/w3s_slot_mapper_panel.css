@@ -12,7 +12,8 @@
 /* ------------------------------------ *
     Page elements
  * ------------------------------------ */
-#w3s_sm_panel{
+#w3s_sm_panel
+{
   width:300px;
   font: 10px Arial, Helvetica, sans-serif;
   position:fixed;
@@ -25,7 +26,8 @@
   z-index:200;
 }
 
-#w3s_sm_panel_title{
+#w3s_sm_panel_title
+{
   width:296px;
   height:12px;
   background-color:#CCC7BA;
@@ -86,7 +88,7 @@
   background-color: #E4E2D5;
 }
 
-#w3s_cms .slotNotSelected, #w3s_cms_temp .slotNotSelected
+#w3s_slot_mapper1 .slotNotSelected, #w3s_slot_mapper2 .slotNotSelected
 {
   min-height:24px;
   color:#FFF;
@@ -94,7 +96,7 @@
   background:#C20000;
 }
 
-#w3s_cms .slotSelected, #w3s_cms_temp .slotSelected
+#w3s_slot_mapper1 .slotSelected, #w3s_slot_mapper2 .slotSelected
 {
   min-height:24px;
   color:#FFF;
@@ -102,7 +104,7 @@
   background:#669900;
 }
 
-#w3s_cms .currentSelectedSlot, #w3s_cms_temp .currentSelectedSlot
+#w3s_slot_mapper1 .currentSelectedSlot, #w3s_slot_mapper2 .currentSelectedSlot
 {
   background-color: #000066;
 }

@@ -71,7 +71,7 @@ class w3sGroupEditorForEdit implements w3sEditor
     																			select_tag('w3s_templates_select', objects_for_select($options, 'getId', 'getTemplateName'), 'onchange=W3sControlPanel.checkMapping();'),
 																					link_to_function(w3sCommonFunctions::toI18n('Edit Group'), 'W3sGroup.add()', 'id="w3s_change_button" class="link_button"'),
                                           $this->idGroup,
-                                          w3sCommonFunctions::toI18n('Templates mapping'));
+                                          '');
   }
 
   public function checkMapping($destTemplate)
@@ -96,21 +96,23 @@ class w3sGroupEditorForEdit implements w3sEditor
 
         if ($sourceSlotsCount != $templateSlotsCount)
         {
-          $result = w3sCommonFunctions::toI18n('Warning: probably ');
+          $result = w3sCommonFunctions::toI18n('Warning: not all the source template\'s slots are not mapped on the destination template.');
+          $result .= sprintf('<a href="#" onclick="W3sControlPanel.doSlotMapping(%s, %s, \'%s\'); return false;" class="w3s_slot_link">%s</a>', $sourceTemplate, $destTemplate, sfConfig::get("app_w3s_web_skin_images_dir"), w3sCommonFunctions::toI18n('Map Slots'));
         }
         else
         {
-          $result = w3sCommonFunctions::toI18n('Slots matches ');
+          $result = w3sCommonFunctions::toI18n('All the slots of both templates has been matched.');
         }
       }
       else
       {
-        $result = w3sCommonFunctions::toI18n('No exists ');
+        $result = w3sCommonFunctions::toI18n('There\'s not exist any map between templates\'s slots.');
+        $result .= sprintf('<a href="#" onclick="W3sControlPanel.doSlotMapping(%s, %s, \'%s\'); return false;" class="w3s_slot_link">%s</a>', $sourceTemplate, $destTemplate, sfConfig::get("app_w3s_web_skin_images_dir"), w3sCommonFunctions::toI18n('Map Slots'));
       }
     }
     else
     {
-      $result = w3sCommonFunctions::toI18n('Same');
+      $result = w3sCommonFunctions::toI18n('The templates are the same. There is not needed any map.');
     }
 
     return $result;

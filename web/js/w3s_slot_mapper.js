@@ -24,17 +24,43 @@ var w3sSlotMapper = Class.create({
 
     var objBody = document.getElementsByTagName("body").item(0);
     var objTmpDiv = document.createElement("div");
-    objTmpDiv.setAttribute('id','w3s_cms_temp');
+    objTmpDiv.setAttribute('id','w3s_slot_mapper1');
+    objBody.appendChild(objTmpDiv);
+
+    objTmpDiv = document.createElement("div");
+    objTmpDiv.setAttribute('id','w3s_slot_mapper2');
     objBody.appendChild(objTmpDiv);
 
     var objSMPanel = document.createElement("div");
     objSMPanel.setAttribute('id','w3s_sm_panel');
+    objSMPanel.onmouseover = function()
+    {
+      W3sTools.opacize('w3s_sm_panel', '1')
+    }
+
+    objSMPanel.onmouseout = function()
+    {
+      W3sTools.opacize('w3s_sm_panel', '0.1')
+    }
     objBody.appendChild(objSMPanel);
     this.load();
-    
-    $('w3s_cms').show();
-    $('w3s_cms_temp').hide();
+
+    $('w3s_cms').hide();
+    $('w3s_slot_mapper1').show();
+    $('w3s_slot_mapper2').hide();
     InteractiveMenu.hide();
+    W3sControlPanel.hide();
+  },
+
+  close: function()
+  {
+    var objBody = document.getElementsByTagName("body").item(0);
+    objBody.removeChild($('w3s_slot_mapper1'));
+    objBody.removeChild($('w3s_slot_mapper2'));
+    objBody.removeChild($('w3s_sm_panel'));
+    W3sTools.temaChange(W3sTemplate.currentCss);
+    $('w3s_cms').show();
+    W3sControlPanel.show();
   },
 
   load: function()
@@ -138,7 +164,7 @@ var w3sSlotMapper = Class.create({
                      '&' + $('w3s_mapping').serialize()});
   },
 
-  delete: function(source, dest)
+  remove: function(source, dest)
   {
     var sourceSlotName = 'w3sSlotItem_' + source;
     var destSlotName = 'w3sSlotItem_' + dest;
@@ -154,7 +180,7 @@ var w3sSlotMapper = Class.create({
     slotName = 'w3sSlotItem_' + id;
     if (!$(slotName).hasClassName('slotSelected'))
     {      
-      if ($('w3s_cms').visible())
+      if ($('w3s_slot_mapper1').visible())
       {
         W3sSlotMapper.sourceSelected = id;
         $('w3s_sm_source').value = id;
@@ -193,7 +219,7 @@ var w3sSlotMapper = Class.create({
 
   switchDiv: function()
   {
-    if ($('w3s_cms').visible())
+    if ($('w3s_slot_mapper1').visible())
     {
       W3sTools.temaChange(W3sSlotMapper.destStyle);
     }
@@ -202,8 +228,8 @@ var w3sSlotMapper = Class.create({
       W3sTools.temaChange(W3sSlotMapper.sourceStyle);
     }
 
-    $('w3s_cms').toggle();
-    $('w3s_cms_temp').toggle();
+    $('w3s_slot_mapper1').toggle();
+    $('w3s_slot_mapper2').toggle();
 
     return false;
   },
@@ -211,21 +237,21 @@ var w3sSlotMapper = Class.create({
   loadSlotMapper: function(source, dest)
   {
     this.doLoadSlotMapper(this.sourceTemplateId);
-    this.doLoadSlotMapper(this.destTemplateId, 'w3s_cms_temp');
+    this.doLoadSlotMapper(this.destTemplateId, 'w3s_slot_mapper2');
 
 	  return false;
 	},
 
   doLoadSlotMapper: function(idTemplate, destDiv)
   {
-    if (destDiv == null) destDiv = 'w3s_cms';
+    if (destDiv == null) destDiv = 'w3s_slot_mapper1';
     var sActionPath = w3studioCMS.frontController + 'slotMapper/renderTemplate';
 	  new Ajax.Updater({success:destDiv, failure:'w3s_error'}, sActionPath,
 	      {asynchronous:true,
 	       evalScripts:true,
 	       onLoading:function()
 	          {
-	            if (destDiv == 'w3s_cms')
+	            if (destDiv == 'w3s_slot_mapper1')
               {
                 var curWindow = W3sWindow.openModal(200, 100, false);
                 curWindow.setHTMLContent('<br /><h1>LOADING MODULE<br />Please Wait</h1>');
@@ -235,7 +261,7 @@ var w3sSlotMapper = Class.create({
 	          {
 	            if (json[0][1] == 1) 
               {
-	              if (destDiv == 'w3s_cms')
+	              if (destDiv == 'w3s_slot_mapper1')
                 {  
                   W3sSlotMapper.sourceStyle = json[1][1];
                   W3sTools.temaChange(json[1][1]);

@@ -107,24 +107,16 @@ var w3sControlPanel = Class.create({
     if (op == undefined) op=1;
     var sGroupName = (op == 2) ? '&groupName=' + $("w3s_groups_select1").options[$("w3s_groups_select1").selectedIndex].text + '&idGroup=' + $("w3s_groups_select1").value : '';
     
-    // TEMPORARY
-    /*
-    if (op == 1){
-      }
-    else{
-
-    }*/
-      //curWindow.setContent('<p>&nbsp;</p>');
-      var sAjaxOptions = {asynchronous:true,
-                          evGroupalScripts:false,
-                          method:'get',
-                          onComplete:function(request, json)
-                            {
-                              $('w3s_group_name').focus();
-                            },
-                          parameters:'op=' + op + sGroupName};
-      curWindow = W3sWindow.openModal(350, 180);
-      curWindow.setAjaxContent(sActionPath, sAjaxOptions);
+    var sAjaxOptions = {asynchronous:true,
+                        evGroupalScripts:false,
+                        method:'get',
+                        onComplete:function(request, json)
+                          {
+                            $('w3s_group_name').focus();
+                          },
+                        parameters:'op=' + op + sGroupName};
+    curWindow = W3sWindow.openModal(350, 180);
+    curWindow.setAjaxContent(sActionPath, sAjaxOptions);
     
     return false;
   },
@@ -154,14 +146,17 @@ var w3sControlPanel = Class.create({
             {
               $('w3s_template_mapping').innerHTML('Checking mapping...');
             },
-          onComplete:function()
-            {
-              //W3sWindow.closeModal();
-            },
           parameters:'idGroup=' + $("w3s_id_group").value +
                      '&idDestTemplate=' + $("w3s_templates_select").value
 				});
     return false;
+  },
+
+  doSlotMapping :function(idTemplateSource, idTemplateDest, imagesPath)
+  {
+    W3sWindow.closeModal();
+    W3sSlotMapper = new w3sSlotMapper(idTemplateSource, idTemplateDest, imagesPath);
+    W3sSlotMapper.loadSlotMapper();
   },
 
 /*
