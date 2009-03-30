@@ -88,7 +88,7 @@ class w3sPageManager
 				        // Getting the page's id inserted yet
 				        $idPage = $this->page->getId();
 				      	$attributes = w3sTemplateEngine::retrieveTemplateAttributesFromPage($this->page);
-				      	$templateContents = w3sCommonFunctions::readFileContents(sprintf("%1\$s%2\$s%3\$s%2\$s%4\$s%2\$sdata.yml", sfConfig::get('app_w3s_web_templates_dir'), DIRECTORY_SEPARATOR, $attributes["projectName"], $attributes["templateName"]));
+				      	$templateContents = w3sCommonFunctions::readFileContents(sprintf("%1\$s%2\$s%3\$s%2\$sdata%2\$s%4\$s.yml", sfConfig::get('app_w3s_web_templates_dir'), DIRECTORY_SEPARATOR, $attributes["projectName"], $attributes["templateName"]));
 				      	
 				      	$defaultContents = sfYaml::load($templateContents);
 				      	$defaultContents = $defaultContents["W3sContent"];

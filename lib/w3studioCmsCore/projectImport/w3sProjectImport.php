@@ -82,7 +82,7 @@ class w3sProjectImport implements w3sEditor
   {
     $rowSchema = '<span class="info_header">%s:</span> %s<br />';
     $defaultImage = sfConfig::get('app_w3s_web_images_dir') .  '/common/template_sample.png';
-    $infoDir = sprintf("%1\$s%2\$s%3\$s%2\$sinfo%2\$s", sfConfig::get('app_w3s_web_templates_dir'), DIRECTORY_SEPARATOR, $projectName);
+    $infoDir = sprintf("%1\$s%2\$s%3\$s%2\$sdata%2\$s", sfConfig::get('app_w3s_web_templates_dir'), DIRECTORY_SEPARATOR, $projectName);
     
     $fileInfo = $infoDir . 'info.yml';
    	$info = (is_file($fileInfo)) ? sfYaml::load($fileInfo) : null;
@@ -90,9 +90,9 @@ class w3sProjectImport implements w3sEditor
    	{
    		
       // Image needs the absolute path
-      $infoDir = str_replace(sfConfig::get('sf_web_dir'), '', $infoDir);
+      //$infoDir = str_replace(sfConfig::get('sf_web_dir'), '', $infoDir);
       $info = $info["Info"];
-   		$info['Image'] = $infoDir . $info['Image']; 
+   		//$info['Image'] = $infoDir . $info['Image']; 
    	}
    	else
    	{
@@ -122,7 +122,7 @@ class w3sProjectImport implements w3sEditor
   protected function scanProject($projectName)
   {
     $result = array();
-    $projectDir = sfConfig::get('app_w3s_web_templates_dir')  . DIRECTORY_SEPARATOR . $projectName;
+    $projectDir = sfConfig::get('app_w3s_web_templates_dir')  . DIRECTORY_SEPARATOR . $projectName . DIRECTORY_SEPARATOR . 'templates';
     if ($handle = opendir($projectDir))
     {
       while (false !== ($file = readdir($handle)))
@@ -130,7 +130,7 @@ class w3sProjectImport implements w3sEditor
         if ($file != "." && $file != ".." && $file != ".svn")
         {
           $currentFile = $projectDir . DIRECTORY_SEPARATOR . $file;
-          if (is_dir($currentFile) && $file != 'info')
+          if (is_file($currentFile))
           {
             $project_dir = $currentFile;
 						$result[] = $file;
@@ -145,7 +145,7 @@ class w3sProjectImport implements w3sEditor
   
   protected function getSlotsFromTemplate($projectName, $templateName)
   {	
-  	$templateFile = sprintf("%1\$s%2\$s%3\$s%2\$s%4\$s%2\$s%4\$s.php", sfConfig::get('app_w3s_web_templates_dir'), DIRECTORY_SEPARATOR, $projectName, $templateName);
+  	$templateFile = sprintf("%1\$s%2\$s%3\$s%2\$stemplates%2\$s%4\$s.php", sfConfig::get('app_w3s_web_templates_dir'), DIRECTORY_SEPARATOR, $projectName, $templateName);
   	$contents = w3sCommonFunctions::readFileContents($templateFile);	  
 	  preg_match_all('/include_slot\s*\(\s*[\'|"](.*?)[\'|"]\s*\)/', $contents, $matchResults);
 	  
