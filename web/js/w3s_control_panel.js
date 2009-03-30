@@ -108,7 +108,12 @@ var w3sControlPanel = Class.create({
     var sGroupName = (op == 2) ? '&groupName=' + $("w3s_groups_select1").options[$("w3s_groups_select1").selectedIndex].text + '&idGroup=' + $("w3s_groups_select1").value : '';
     
     // TEMPORARY
+    /*
     if (op == 1){
+      }
+    else{
+
+    }*/
       //curWindow.setContent('<p>&nbsp;</p>');
       var sAjaxOptions = {asynchronous:true,
                           evGroupalScripts:false,
@@ -120,10 +125,7 @@ var w3sControlPanel = Class.create({
                           parameters:'op=' + op + sGroupName};
       curWindow = W3sWindow.openModal(350, 180);
       curWindow.setAjaxContent(sActionPath, sAjaxOptions);
-    }
-    else{
-      alert('This function is not implemented yet');
-    }
+    
     return false;
   },
 
@@ -142,6 +144,27 @@ var w3sControlPanel = Class.create({
     return false;
   },
 
+  checkMapping: function()
+  {
+    sActionPath = w3studioCMS.frontController + 'groupsManager/checkMapping';
+    new Ajax.Updater('w3s_template_mapping', sActionPath,
+        {asynchronous:true,
+         evalScripts:false,
+         onLoading:function()
+            {
+              $('w3s_template_mapping').innerHTML('Checking mapping...');
+            },
+          onComplete:function()
+            {
+              //W3sWindow.closeModal();
+            },
+          parameters:'idGroup=' + $("w3s_id_group").value +
+                     '&idDestTemplate=' + $("w3s_templates_select").value
+				});
+    return false;
+  },
+
+/*
   checkElementsForChange: function(sActionPath, idGroup, param){
     if(param.substr(1, 1) != '&') param = '&' + param;
     new Ajax.Updater('w3s_check_elements', sActionPath,
@@ -173,7 +196,7 @@ var w3sControlPanel = Class.create({
                                '&idPage=' + idPage}
     curWindow = W3sWindow.openModal(330, 160);
     curWindow.setAjaxContent(sActionPath, sAjaxOptions);
-    */
+    *
     return false;
   },
 
@@ -196,7 +219,7 @@ var w3sControlPanel = Class.create({
     }
 
     return false;
-  },
+  },*/
 
 	openLanguagesInterface: function(idLanguage){      
 	  if (curWindow != null) W3sWindow.closeModal();

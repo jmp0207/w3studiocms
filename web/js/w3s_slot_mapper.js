@@ -39,7 +39,7 @@ var w3sSlotMapper = Class.create({
 
   load: function()
   {
-    var sActionPath = w3studioCMS.frontController + 'slotMapper/render';
+    var sActionPath = w3studioCMS.frontController + 'slotMapper/renderPanel';
     new Ajax.Updater('w3s_sm_panel', sActionPath,
         {asynchronous:true,
           evalScripts:false,
@@ -49,24 +49,6 @@ var w3sSlotMapper = Class.create({
 	  return false;
   },
 
-  /*
-  setLinks: function(){ 
-  	var params='';
-    var divs = $('w3s_cms').getElementsByTagName('div'); 
-    divs = $A(divs); 
-    divs.each(function(div){ 
-      if (link.value != -1) {
-        a = div.value; 
-        properties = $('w3s_properties_form').getElements();
-        properties.each(function(property){ 
-          if (!Element.hasClassName(property, 'combined_button')) params += link.value + '[]=' + property.id + '=' + objMenuBuilder.objMenu[a][property.id] + "&";          
-        });
-      }
-    });
-
-    return params;
-  },*/
-
   map: function()
   {    
     if ($('w3s_sm_source').value != '' &&  $('w3s_sm_dest').value != '')
@@ -75,13 +57,17 @@ var w3sSlotMapper = Class.create({
       var rowClass = (divs.length % 2) ? "w3s_white_row" : "w3s_blue_row";
 
       var divName = $('w3s_sm_source').value + '-' + $('w3s_sm_dest').value;
-      var objMapDiv = $("w3s_sm_maps");
+      var objMapDiv = $("w3s_mapping");
 
       var objSourceInput = document.createElement("input");
+      objSourceInput.setAttribute('id', 'w3s_sm_source');
+      objSourceInput.setAttribute('name', 'w3s_sm_source[]');
       objSourceInput.setAttribute('type', 'hidden');
       objSourceInput.setAttribute('value',  $('w3s_sm_source').value);
 
       var objDestInput = document.createElement("input");
+      objDestInput.setAttribute('id', 'w3s_sm_dest');
+      objDestInput.setAttribute('name', 'w3s_sm_dest[]');
       objDestInput.setAttribute('type', 'hidden');
       objDestInput.setAttribute('value',  $('w3s_sm_dest').value);
 
@@ -101,7 +87,7 @@ var w3sSlotMapper = Class.create({
       objImg.setAttribute('style', 'border:0 width:14px height:14px');
       objImg.onclick = function()
                         {
-                          W3sSlotMapper.deleteMap(divName);
+                          W3sSlotMapper.remove($('w3s_sm_source').value, $('w3s_sm_dest').value);
                         }
       objRowDiv2.appendChild(objImg);
 
@@ -124,9 +110,43 @@ var w3sSlotMapper = Class.create({
     return false;
   },
 
-  deleteMap: function(sDivName)
+  save: function()
   {
-    $('w3s_sm_maps').removeChild($(sDivName));
+    var hasFailed = false;
+    $('w3s_mapping').enable();
+    var sActionPath = w3studioCMS.frontController + 'slotMapper/save';
+	  new Ajax.Updater('w3s_error', sActionPath,
+	      {asynchronous:true,
+	       evalScripts:false,
+	       onLoading:function()
+	          {
+	            var curWindow = W3sWindow.openModal(200, 100, false);
+              curWindow.setHTMLContent('<br /><h1>SAVING MAPS<br />Please Wait</h1>');
+	          },
+         onFailure:function()
+           {
+              hasFailed = true;
+           },
+	       onComplete:function(request, json)
+	          {
+	            curWindow.setSize(230, 120);
+	            curWindow.setHTMLContent($('w3s_error').innerHTML);
+              if (!hasFailed) W3sWindow.closeModal();
+	          },
+	        parameters:'sourceId=' + W3sSlotMapper.sourceTemplateId +
+                     '&destId=' + W3sSlotMapper.destTemplateId +
+                     '&' + $('w3s_mapping').serialize()});
+  },
+
+  delete: function(source, dest)
+  {
+    var sourceSlotName = 'w3sSlotItem_' + source;
+    var destSlotName = 'w3sSlotItem_' + dest;
+    Element.removeClassName(sourceSlotName, 'slotSelected');
+    Element.addClassName(sourceSlotName, 'slotNotSelected');
+    Element.removeClassName(destSlotName, 'slotSelected');
+    Element.addClassName(destSlotName , 'slotNotSelected');
+    $('w3s_mapping').removeChild($(source + '-' + dest));
   },
 
   selectSlot: function(id, name)
@@ -199,7 +219,7 @@ var w3sSlotMapper = Class.create({
   doLoadSlotMapper: function(idTemplate, destDiv)
   {
     if (destDiv == null) destDiv = 'w3s_cms';
-    var sActionPath = w3studioCMS.frontController + 'webEditor/slotMapper';
+    var sActionPath = w3studioCMS.frontController + 'slotMapper/renderTemplate';
 	  new Ajax.Updater({success:destDiv, failure:'w3s_error'}, sActionPath,
 	      {asynchronous:true,
 	       evalScripts:true,
@@ -208,7 +228,7 @@ var w3sSlotMapper = Class.create({
 	            if (destDiv == 'w3s_cms')
               {
                 var curWindow = W3sWindow.openModal(200, 100, false);
-                curWindow.setHTMLContent('<br /><h1>LOADING PAGE<br />Please Wait</h1>');
+                curWindow.setHTMLContent('<br /><h1>LOADING MODULE<br />Please Wait</h1>');
               }
 	          },
 	       onComplete:function(request, json)

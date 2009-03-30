@@ -42,13 +42,13 @@ class w3sSlotMapperPanel
      '<div id="%s" class="%s">
         <div style="float:left;">
         %s
-        <input id="w3s_sm_source" type="hidden" value="%s" />
-        <input id="w3s_sm_dest" type="hidden" value="%s" />
+        <input id="w3s_sm_source" name="w3s_sm_source[]" value="%s" type="hidden" />
+        <input id="w3s_sm_dest" name="w3s_sm_dest[]" value="%s" type="hidden" />
         </div>
         <div style="float:right;">%s</div>
       </div>',
     $commandsSkeleton =
-     '<ul>
+     '<ul id="w3s_slot_list">
         <li>%s</li>
         <li>%s</li>
         <li>%s</li>
@@ -71,7 +71,44 @@ class w3sSlotMapperPanel
                                          w3sCommonFunctions::toI18N('Dest slot'),
                                          w3sCommonFunctions::toI18N('None mapped'),
 																				 $this->drawMaps());
-	} 
+	}
+
+  public function save($sourceSlots, $destSlots)
+  {
+    $i = 0;
+    $con = Propel::getConnection();
+
+    $bRollBack = false;
+    $con = w3sPropelWorkaround::beginTransaction($con);
+    $slots = DbFinder::from('W3sSlotMapper')->
+                      where('Templates', $this->currentTemplate)->
+                      delete();
+    foreach($sourceSlots as $sourceSlot)
+    {
+      $slotMapper = new w3sSlotMapper();
+      $slotMapper->setTemplates($this->currentTemplate);
+      $slotMapper->setSlotIdSource($sourceSlot);
+      $slotMapper->setSlotIdDestination($destSlots[$i]);
+      $result = $slotMapper->save();
+      if ($slotMapper->isModified() && $result == 0)
+		  {
+        $bRollBack = true;
+        break;
+      }
+      $i++;
+    }
+    if (!$bRollBack)
+    {
+      $con->commit();
+      $result = true;
+    }
+    else{
+      w3sPropelWorkaround::rollBack($con);
+      $result = false;
+    }
+
+    return $result;
+  }
 	
 	protected function drawTitle()
 	{
@@ -107,8 +144,8 @@ class w3sSlotMapperPanel
                           $sourceSlot->getSlotName() . ' -> ' . $destSlot->getSlotName(),
                           $slot->getSlotIdSource(),
                           $slot->getSlotIdDestination(),
-                          link_to_function(image_tag(sfConfig::get('app_w3s_web_skin_images_dir') . '/control_panel/button_delete.gif', 'alt=' . w3sCommonFunctions::toI18N('Delete current page') . ' size=14x14 style="border=0'), 'W3sSlotMapper.deleteMap(\'' . $idName . '\')'));
-      $i++;
+                          link_to_function(image_tag(sfConfig::get('app_w3s_web_skin_images_dir') . '/control_panel/button_delete.gif', 'alt=' . w3sCommonFunctions::toI18N('Delete current page') . ' size=14x14 style="border=0'), 'W3sSlotMapper.remove(' . $slot->getSlotIdSource() . ',' . $slot->getSlotIdDestination() . ')'));
+      $i++; 
     }
 
     return $result;
@@ -119,7 +156,7 @@ class w3sSlotMapperPanel
     return sprintf($this->commandsSkeleton, 
                     link_to_function(w3sCommonFunctions::toI18N('Switch template'), 'W3sSlotMapper.switchDiv()'),
                     link_to_function(w3sCommonFunctions::toI18N('Map selected slots'), 'W3sSlotMapper.map()'),
-                    link_to_function(w3sCommonFunctions::toI18N('Save mapping'), 'alert($(\'w3s_mapping\').serialize())')); // non serializza perchè nascosti
+                    link_to_function(w3sCommonFunctions::toI18N('Save mapping'), 'W3sSlotMapper.save();'));
 	}
 
   protected function matchSlots()

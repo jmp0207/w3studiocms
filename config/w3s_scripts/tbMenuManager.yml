@@ -14,14 +14,14 @@ button2:
   action: W3sTemplateImport.show()
   actionParams:
     title: Import your own templates project or one downloaded from W3StudioCMS website
-button8:
-  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/project.png
-  imageDisabled: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/project_disabled.png
-  caption: Associations
-  requiredCredentials: [[admin, webdesigner]]
-  action: W3sSlotMapper = new w3sSlotMapper(1, 19, '<?php echo sfConfig::get("app_w3s_web_skin_images_dir")?>'); W3sSlotMapper.loadSlotMapper();
-  actionParams:
-    title: Associate slots between templates
+#button8:
+#  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/project.png
+#  imageDisabled: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/project_disabled.png
+#  caption: Associations
+#  requiredCredentials: [[admin, webdesigner]]
+#  action: W3sSlotMapper = new w3sSlotMapper(1, 19, '<?php echo sfConfig::get("app_w3s_web_skin_images_dir")?>'); W3sSlotMapper.loadSlotMapper();
+#  actionParams:
+#    title: Associate slots between templates
 button3:
   image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/structure.png
   imageDisabled: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/structure_disabled.png

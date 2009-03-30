@@ -17,21 +17,21 @@ class BaseW3sGroupsManagerActions extends sfActions
 	/**
    * Shows the module that allows the user to edit or add a group
    */
-  public function executeShow()
+  public function executeShow(sfWebRequest $request)
   {
-    $groupEditor = new w3sGroupEditor();
-    return $this->renderPartial('show', array('groupEditor' => $groupEditor));     
+    $groupEditor = ($request->getParameter('op') == 1) ? new w3sGroupEditorForAdd() : new w3sGroupEditorForEdit($request->getParameter('idGroup'), $request->getParameter('groupName'));
+    return $this->renderPartial('show', array('groupEditor' => $groupEditor));
   }
 
   /**
    * Saves the group
    */
-  public function executeAdd($request)
+  public function executeAdd(sfWebRequest $request)
   {
 	  if($request->hasParameter('groupName') && $request->hasParameter('idTemplate'))
     {
 		  $group = new w3sGroupManager();
-		  $result = $group->add($this->getRequestParameter('groupName'), $this->getRequestParameter('idTemplate'));
+		  $result = $group->add($request->getParameter('groupName'), $request->getParameter('idTemplate'));
 		  if($result != 1) $this->getResponse()->setStatusCode(404);
 		  return $this->renderPartial('add', array('result' => $result));
     }
@@ -72,6 +72,12 @@ class BaseW3sGroupsManagerActions extends sfActions
       $this->getResponse()->setStatusCode(404);
     }
     return $this->renderPartial('delete', array('result' => $result));
+  }
+
+  public function executeCheckMapping(sfWebRequest $request)
+  {
+    $groupEditor = new w3sGroupEditorForEdit($request->getParameter('idGroup'), '');
+    return $this->renderText($groupEditor->checkMapping($request->getParameter('idDestTemplate')));
   }
   
   // **********************************************

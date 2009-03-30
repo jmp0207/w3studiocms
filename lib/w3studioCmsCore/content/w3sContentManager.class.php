@@ -156,7 +156,6 @@ abstract class w3sContentManager extends w3sTemplateEngineEditor
    */ 
   public function add($param)
   { 
-	  $con = null;
 	  if (is_array($param))
 	  {
 	  	if ($diff = array_diff(array_keys($param), array_keys($this->defaultParams)))

@@ -41,7 +41,8 @@ var w3sGroup = Class.create({
     return false;    
   },
 
-  edit: function(sActionPath){    
+  edit: function()
+  {
     var resultString = checkGroupElements();
 		if (resultString != 'Request aborted'){
 			var hasFailded = false;

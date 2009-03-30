@@ -99,35 +99,6 @@ class BaseW3sEditorActions extends sfActions
     }
   }
 
-  public function executeSlotMapper($request)
-  {
-
-      $this->status = 0;
-      if ($this->getUser()->isAuthenticated())
-      {
-        $this->template = new w3sTemplateEngineSlotMapper($this->getRequestParameter('idTemplate'), $this->getRequestParameter('destination'));
-        /*
-        if ($this->template->getIdLanguage() != -1 && $this->template->getIdPage() != -1)
-        {
-          $this->status = ($this->template->isPageFree($this->getRequestParameter('prevPage'))) ? 1 : 4;
-        }
-        else
-        {
-          $this->status = 8;
-        }*/
-
-      $this->status = 1; // FAKE
-      if($this->status != 1) $this->getResponse()->setStatusCode(404);
-      $this->getResponse()->setHttpHeader('X-JSON', sprintf('([["status", "%s"], ["stylesheet", "%s"]])', $this->status, $this->template->retrieveTemplateStylesheets()));
-    }
-    else
-    {
-      $this->status = 16;
-      $this->getResponse()->setStatusCode(404);
-      $this->getResponse()->setHttpHeader('X-JSON', sprintf('([["status", "%s"]])', $this->status));
-    }
-  }
-  
   /**
    * Shows the W3StudioCMS' loader
    *
