@@ -13,7 +13,7 @@
  */
  
 /**
- * w3sPageEditor builds the editor to manage the site's pages
+ * w3sSlotMapperPanel builds the editor to manage the site's pages
  *
  * @package    sfW3studioCMSPlugin
  * @subpackage w3sPageEditor

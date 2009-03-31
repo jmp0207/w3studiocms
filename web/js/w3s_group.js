@@ -11,7 +11,7 @@
 
 var w3sGroup = Class.create({
 	add: function(){
-    var hasFailded = false;
+    var hasFailed = false;
 		var sActionPath = w3studioCMS.frontController + 'groupsManager/add';
     new Ajax.Updater('w3s_error', sActionPath,
         {asynchronous:true,
@@ -28,12 +28,12 @@ var w3sGroup = Class.create({
 		        { 
 		          W3sWindow.closeModal();          
 		          curWindow = W3sWindow.openModal(370, 210);
-		          hasFailded = true;         
+		          hasFailed = true;
 		        },
           onComplete:function()
             {
               curWindow.setHTMLContent($('w3s_error').innerHTML); 
-							if (!hasFailded) W3sWindow.closeModal();	            
+							if (!hasFailed) W3sWindow.closeModal();
             },
           parameters:'groupName=' + $('w3s_group_name').value +
                      '&idTemplate=' + $("w3s_templates_select").value
@@ -41,41 +41,41 @@ var w3sGroup = Class.create({
     return false;    
   },
 
-  edit: function()
+  edit: function(idGroup, idCurrentTemplate)
   {
-    var resultString = checkGroupElements();
-		if (resultString != 'Request aborted'){
-			var hasFailded = false;
-      var idTemplate = $("w3s_templates_select").value;
-      new Ajax.Updater('w3s_error', sActionPath,
-          {asynchronous:true,
-            evalScripts:false,
-            onLoading:function()
+    var hasFailed = false;
+    var sActionPath = w3studioCMS.frontController + 'groupsManager/edit';
+    var idTemplate = $("w3s_templates_select").value;
+    new Ajax.Updater('w3s_error', sActionPath,
+        {asynchronous:true,
+          evalScripts:false,
+          onLoading:function()
+            {
+              curWindow.setHTMLContent('<br /><h1>EDITING SELECTED GROUP<br />Please Wait</h1>');
+            },
+          onSuccess:function()
+            {
+              if (idTemplate != idCurrentTemplate )
               {
-                curWindow.setHTMLContent('<br /><h1>EDITING SELECTED GROUP<br />Please Wait</h1>');
-                //curWindow.setSize(130,130).show(true).center({auto: true});
-              },
-	          onSuccess:function()
-	            {
-	              W3sControlPanel.refreshGroupsSelect();
-	            },
-		     		onFailure:function()
-			        { 
-			          W3sWindow.closeModal();          
-			          curWindow = W3sWindow.openModal(370, 210);
-			          hasFailded = true;         
-			        },
-	          onComplete:function()
-	            {
-	              curWindow.setHTMLContent($('w3s_error').innerHTML); 
-								if (!hasFailded) W3sWindow.closeModal();	            
-	            },
-            parameters:'idGroup=' + $('w3s_group_id').value +
-                       '&groupName=' + $('w3s_group_name').value +
-                       '&idTemplate=' + idTemplate +
-                       '&elements=' + resultString +
-                       '&op=2'});
-    }
+                W3sTemplate.loadEditorPage();
+              }
+              W3sControlPanel.refreshGroupsSelect();
+            },
+          onFailure:function()
+            {
+              W3sWindow.closeModal();
+              curWindow = curWindow.openModal(370, 210);
+              hasFailed = true;
+            },
+          onComplete:function()
+            {
+              curWindow.setHTMLContent($('w3s_error').innerHTML);
+              if (!hasFailed) W3sWindow.closeModal();
+            },
+          parameters:'idGroup=' + idGroup +
+                     '&groupName=' + $('w3s_group_name').value +
+                     '&idTemplate=' + idTemplate});
+    //}
     return false;
   },
 

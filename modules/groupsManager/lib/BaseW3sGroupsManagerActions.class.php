@@ -42,6 +42,37 @@ class BaseW3sGroupsManagerActions extends sfActions
 	  }
   }
 
+  public function executeEdit(sfWebRequest $request)
+  {
+	  if($request->hasParameter('idGroup') && $request->hasParameter('groupName') && $request->hasParameter('idTemplate'))
+    {
+		  $group = DbFinder::from('W3sGroup')->findPK($this->getRequestParameter('idGroup'));
+      if ($group != null)
+      {
+        $groupManager = new w3sGroupManager($group);
+        $result = $groupManager->edit($request->getParameter('groupName'), $request->getParameter('idTemplate'));
+      }
+      else
+      {
+        $result = 2;
+      }
+      
+      $groupEditor = null;
+      if($result != 1)
+      {
+        $this->getResponse()->setStatusCode(404);
+        $groupEditor = new w3sGroupEditorForEdit($request->getParameter('idGroup'), $request->getParameter('groupName'));
+      }
+
+      return $this->renderPartial('edit', array('result' => $result, "groupEditor" => $groupEditor));
+    }
+	  else
+	  {
+	  	$this->getResponse()->setStatusCode(404);
+    	return $this->renderText(w3sCommonFunctions::toI18n('A required parameter misses.'));
+	  }
+  }
+
   /**
    * Reloads the combobox with groups
    */
