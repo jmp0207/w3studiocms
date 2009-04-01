@@ -16,8 +16,8 @@ all:
   # Some useful paths to sfW3studioCmsPlugin web directory
   w3s_web_images_dir: /sfW3studioCmsPlugin/images
   w3s_web_js_dir: /sfW3studioCmsPlugin/js
-  w3s_web_templates_dir: %SF_WEB_DIR%/sfW3studioCmsPlugin/templates
-  w3s_web_published_dir: %SF_WEB_DIR%/sfW3studioCmsPlugin/published
+  w3s_web_templates_dir: %SF_ROOT_DIR%/themes
+  w3s_web_published_dir: %SF_DATA_DIR%/published
   
   # The w3studioCms skin 
   w3s_web_window_skin_dir: %SF_W3S_WEB_CSS_DIR%/themes/window
