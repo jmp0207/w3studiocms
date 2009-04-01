@@ -23,3 +23,8 @@ all:
   w3s_web_window_skin_dir: %SF_W3S_WEB_CSS_DIR%/themes/window
   w3s_web_skin_dir: %SF_W3S_WEB_CSS_DIR%/themes/%SF_W3S_SKIN%
   w3s_web_skin_images_dir: %SF_W3S_WEB_CSS_DIR%/themes/%SF_W3S_SKIN%/images
+  
+  # Default META
+  w3s_meta_title: 'A website powered by W3StudioCMS'
+  w3s_meta_keywords: ''
+  w3s_meta_description: ''
