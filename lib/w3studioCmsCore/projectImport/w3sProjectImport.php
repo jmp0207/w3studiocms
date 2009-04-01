@@ -63,7 +63,7 @@ class w3sProjectImport implements w3sEditor
     if ($handle = opendir(sfConfig::get('app_w3s_web_templates_dir'))){
 	    while (false !== ($file = readdir($handle)))
 	    {
-	    	if ($file != "." && $file != ".." && $file != ".svn")
+	    	if ($file != "." && $file != ".." && $file != ".svn" && $file != ".gitignore")
 	    	{
 	        $project = DbFinder::from('W3sProject')->
 	        										 where('ProjectName', $file)->
