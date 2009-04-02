@@ -133,7 +133,8 @@ class w3sProjectImport implements w3sEditor
           if (is_file($currentFile))
           {
             $project_dir = $currentFile;
-						$result[] = $file;
+            // cut off file extension
+            $result[] = substr($file, 0, -4);
           }
         }
       }
