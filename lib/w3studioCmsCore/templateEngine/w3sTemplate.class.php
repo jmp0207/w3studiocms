@@ -507,20 +507,6 @@ abstract class w3sTemplateEngine
  */
   final protected function renderCopyright($pageContents)
   {
-    $buttonText = (is_file(sfConfig::get('sf_web_dir') . sfConfig::get('app_w3s_web_skin_images_dir') . '/structural/w3scopyright.png')) ? sprintf('<img src="%s/structural/w3scopyright.png" style="width:75px;height:30px;display:inline !important;visibility:visible !important; border:0;" alt="Visit www.w3studiocms.com and download W3studioCMS for free to get your website" title="W3studioCMS a powerful ajax CMS" />', sfConfig::get('app_w3s_web_skin_images_dir')) : 'Powered by W3studioCMS';
-    $w3sCopyrightButton = sprintf('<a href="http://www.w3studiocms.com">%s</a>', $buttonText);
-    preg_match("/\<\.*?php include_slot\('w3s_copyright'\)\.*?\>/", $pageContents, $checkCopyright);
-    if (count($checkCopyright) == 0)
-    {
-      $pageContents .= sprintf("\n" . '<div id="w3s_copyright" style="width=100%%;margin:8px 0;text-align:center;">%s</div>' . "\n", $w3sCopyrightButton);
-    }
-    else
-    {
-      $pageContents = preg_replace('/\<\?php.*?include_slot\(\'w3s_copyright\'\).*?\?\>/', $w3sCopyrightButton, $pageContents);
-
-      /*$pageContents = str_replace('<?php include_slot(\'w3s_copyright\')?>', $w3sCopyrightButton, $pageContents);*/
-    }
-    
-    return $pageContents;
+    return w3sCopyright::renderCopyright($pageContents);
   }
 }
