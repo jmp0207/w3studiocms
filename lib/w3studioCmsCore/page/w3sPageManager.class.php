@@ -108,25 +108,32 @@ class w3sPageManager
 					          $slots = W3sSlotPeer::getTemplateSlots($attributes["idTemplate"], $i);
 					          foreach ($slots as $slot)
 					        	{
-					        		
-					        		// When no repeated content, the content is simply copied
-					        		if ($slot->getRepeatedContents() == 0)
-					        		{
-					        			$slotName = $slot->getSlotName();
-					        			$content = w3sContentManagerFactory::create($defaultContents[$slotName]["contentTypeId"]);
-					        			$contentValue = array("PageId"          => $idPage,
-																              "SlotId"          => $slot->getId(),
-																              "LanguageId"      => $idLanguage,
-																              "GroupId"         => $idGroup,
-																              "Content"         => $defaultContents[$slotName]["content"],
-																              "ContentTypeId"   => $defaultContents[$slotName]["contentTypeId"],
-																              "ContentPosition" => $defaultContents[$slotName]["contentPosition"],
-																              "Edited"          => 1);
-					        			$content->setUpdateForeigns(false);
-					        			$content->add($contentValue);
-					        		}
-					        		else
-					        		{
+                      // When no repeated content, the content is simply copied
+                      if ($slot->getRepeatedContents() == 0)
+                      {
+                        $slotName = $slot->getSlotName();
+                        foreach ($defaultContents as $defaultContent)
+                        {
+                          if ($defaultContent['slotId'] == $slotName)
+                          {
+                            $content = w3sContentManagerFactory::create($defaultContent["contentTypeId"]);
+                            $contentValue = array(
+                              "PageId"          => $idPage,
+                              "SlotId"          => $slot->getId(),
+                              "LanguageId"      => $idLanguage,
+                              "GroupId"         => $idGroup,
+                              "Content"         => $defaultContent["content"],
+                              "ContentTypeId"   => $defaultContent["contentTypeId"],
+                              "ContentPosition" => $defaultContent["contentPosition"],
+                              "Edited"          => 1
+                            );
+                            $content->setUpdateForeigns(false);
+                            $content->add($contentValue);
+                          }
+                        }
+                      }
+                      else
+                      {
                         // Retrive base page, if any, but NOT current one
                         $pageFinder = DbFinder::from('W3sPage')->whereToDelete(0)->whereIdNot($idPage);
                         if ($basePage = $pageFinder->findOne())
