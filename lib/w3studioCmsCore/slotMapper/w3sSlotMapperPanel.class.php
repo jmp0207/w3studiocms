@@ -26,6 +26,7 @@ class w3sSlotMapperPanel
   	$currentTemplate,
     $sourceTemplate,
     $destTemplate,
+    $invertedMapExists,
   	$panelSkeleton = 						
      '<div>
 			  <div id="w3s_sm_panel_title">%s</div>
@@ -60,7 +61,27 @@ class w3sSlotMapperPanel
   {
   	$this->sourceTemplate  = $sourceTemplate;
     $this->destTemplate = $destTemplate;
+    $this->invertedMapExists = false;
+
+
     $this->currentTemplate = sprintf('[%s][%s]', $sourceTemplate, $destTemplate);
+    $slots = DbFinder::from('W3sSlotMapper')->
+                      where('Templates', $this->currentTemplate)->
+                      count();
+    if ($slots == 0)
+    {
+      $currentTemplate1 = sprintf('[%s][%s]', $destTemplate, $sourceTemplate);
+      $slots = DbFinder::from('W3sSlotMapper')->
+                        where('Templates', $currentTemplate1)->
+                        count();
+      if ($slots > 0)
+      {
+        $this->sourceTemplate  = $destTemplate;
+        $this->destTemplate = $sourceTemplate;
+        $this->currentTemplate = $currentTemplate1;
+        $this->invertedMapExists = true;
+      }
+    }
   }
 	
 	public function render()
@@ -76,20 +97,23 @@ class w3sSlotMapperPanel
 
   public function save($sourceSlots, $destSlots)
   {
+    
+    $maps = (!$this->invertedMapExists) ? array_combine($sourceSlots, $destSlots) : array_combine($destSlots, $sourceSlots);
+
     $i = 0;
     $con = Propel::getConnection();
 
     $bRollBack = false;
     $con = w3sPropelWorkaround::beginTransaction($con);
-    $slots = DbFinder::from('W3sSlotMapper')->
-                      where('Templates', $this->currentTemplate)->
-                      delete();
-    foreach($sourceSlots as $sourceSlot)
+    DbFinder::from('W3sSlotMapper')->
+              where('Templates', $this->currentTemplate)->
+              delete();
+    foreach($maps as $sourceSlot => $destSlots)
     {
       $slotMapper = new w3sSlotMapper();
       $slotMapper->setTemplates($this->currentTemplate);
       $slotMapper->setSlotIdSource($sourceSlot);
-      $slotMapper->setSlotIdDestination($destSlots[$i]);
+      $slotMapper->setSlotIdDestination($destSlots);
       $result = $slotMapper->save();
       if ($slotMapper->isModified() && $result == 0)
 		  {
