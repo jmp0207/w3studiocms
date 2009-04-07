@@ -1,0 +1,25 @@
+button1:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/user.png
+  imageDisabled: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/user_disabled.png
+  caption: Switch to source
+  requiredCredentials: [[admin, webdesigner]]
+  action: W3sSlotMapper.switchDiv();
+  #$('w3s_cms').show();$('w3s_cms_temp').hide();
+  actionParams:
+    title: Manage the users, groups and relative permissions
+button2:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/project.png
+  imageDisabled: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/project_disabled.png
+  caption: Projects  
+  requiredCredentials: [[admin, webdesigner]]
+  #action: if($('w3s_cms_temp').innerHTML == ''){W3sTemplate.loadSlotMapper(19, 'w3s_cms_temp');} W3sSlotMapper.switchDiv(); //$('w3s_cms_temp').show();$('w3s_cms').hide();
+  actionParams:
+    title: Import your own templates project or one downloaded from W3StudioCMS website
+button3:
+  image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/project.png
+  imageDisabled: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/project_disabled.png
+  caption: Mappers
+  requiredCredentials: [[admin, webdesigner]]
+  action: W3sTemplate.loadSlotMapper(19);
+  actionParams:
+    title: Associate slots between templates

@@ -107,23 +107,17 @@ var w3sControlPanel = Class.create({
     if (op == undefined) op=1;
     var sGroupName = (op == 2) ? '&groupName=' + $("w3s_groups_select1").options[$("w3s_groups_select1").selectedIndex].text + '&idGroup=' + $("w3s_groups_select1").value : '';
     
-    // TEMPORARY
-    if (op == 1){
-      //curWindow.setContent('<p>&nbsp;</p>');
-      var sAjaxOptions = {asynchronous:true,
-                          evGroupalScripts:false,
-                          method:'get',
-                          onComplete:function(request, json)
-                            {
-                              $('w3s_group_name').focus();
-                            },
-                          parameters:'op=' + op + sGroupName};
-      curWindow = W3sWindow.openModal(350, 180);
-      curWindow.setAjaxContent(sActionPath, sAjaxOptions);
-    }
-    else{
-      alert('This function is not implemented yet');
-    }
+    var sAjaxOptions = {asynchronous:true,
+                        evGroupalScripts:false,
+                        method:'get',
+                        onComplete:function(request, json)
+                          {
+                            $('w3s_group_name').focus();
+                          },
+                        parameters:'op=' + op + sGroupName};
+    curWindow = W3sWindow.openModal(350, 180);
+    curWindow.setAjaxContent(sActionPath, sAjaxOptions);
+    
     return false;
   },
 
@@ -142,6 +136,30 @@ var w3sControlPanel = Class.create({
     return false;
   },
 
+  checkMapping: function()
+  {
+    sActionPath = w3studioCMS.frontController + 'groupsManager/checkMapping';
+    new Ajax.Updater('w3s_template_mapping', sActionPath,
+        {asynchronous:true,
+         evalScripts:false,
+         onLoading:function()
+            {
+              $('w3s_template_mapping').innerHTML('Checking mapping...');
+            },
+          parameters:'idGroup=' + $("w3s_id_group").value +
+                     '&idDestTemplate=' + $("w3s_templates_select").value
+				});
+    return false;
+  },
+
+  doSlotMapping :function(idTemplateSource, idTemplateDest, imagesPath)
+  {
+    W3sWindow.closeModal();
+    W3sSlotMapper = new w3sSlotMapper(idTemplateSource, idTemplateDest, imagesPath);
+    W3sSlotMapper.loadSlotMapper();
+  },
+
+/*
   checkElementsForChange: function(sActionPath, idGroup, param){
     if(param.substr(1, 1) != '&') param = '&' + param;
     new Ajax.Updater('w3s_check_elements', sActionPath,
@@ -173,7 +191,7 @@ var w3sControlPanel = Class.create({
                                '&idPage=' + idPage}
     curWindow = W3sWindow.openModal(330, 160);
     curWindow.setAjaxContent(sActionPath, sAjaxOptions);
-    */
+    *
     return false;
   },
 
@@ -196,7 +214,7 @@ var w3sControlPanel = Class.create({
     }
 
     return false;
-  },
+  },*/
 
 	openLanguagesInterface: function(idLanguage){      
 	  if (curWindow != null) W3sWindow.closeModal();
@@ -296,73 +314,3 @@ var w3sControlPanel = Class.create({
 	  return false;
 	}
 });
-
-
-
-/* Checks that user has not assigned a number of elements greater than the
- * number of elements contained in the availble element's SELECT. If everything
- * is fine, returns the string which contains the elements associations between
- * the old and the new template.
- */
-function checkGroupElements(){
-  var tString;
-  var bResult = true;
-  var resultString = '';
-
-  /* Retrieves all the elements that are not present in the new template. These elements are
-   * identified by a SELECT.
-   */
-  if ($('w3s_elements_list') != null){
-  var selects = $('w3s_elements_list').getElementsByTagName('SELECT');
-  if (selects.length>0){
-    selects = $A(selects);
-    var options = selects[0].getElementsByTagName('OPTION');
-
-    // Don't consider the Delete element
-    var optionsElements = options.length-1;
-
-    // Cycles all the SELECTS
-    var countNotToDelete=0;
-    selects.each(function(select){
-
-      // Creates the string with the template's elements association
-      tString = select.id;
-      resultString += tString.substr(7, tString.length) + ',';
-      resultString += select.options[select.selectedIndex].value + '|';
-
-      // Checks if user set associations between elements of the old and the new template
-      if (optionsElements > 0){
-
-        /* Checks the value of the current SELECT: Zero indicates that the element must be
-         * deleted, so if the value is not zero user made an association
-         */
-        if(select.options[select.selectedIndex].value != 0) countNotToDelete++;
-      }
-    });
-
-    /* If user made associations and the count of associated elements is greater than the available elements
-     * it's probal that user made duplicated associations.
-     */
-    if(countNotToDelete > optionsElements) bResult = (confirm('WARNING: You have choosed to transfer the contents of ' + countNotToDelete + ' elements, but there are only ' + optionsElements + ' availables: do you want to continue anymore?'));
-    if (!bResult) resultString = 'Request aborted';
-  }
-
-  if (bResult){
-
-    /* Retrieves all the elements that are present in both template. These elements are
-     * identified by an INPUT.
-     */
-    var inputs = $('w3s_elements_list').getElementsByTagName('INPUT');
-    inputs = $A(inputs);
-    inputs.each(function(input){
-
-      // Creates the string with the template's elements association
-      tString = input.id;
-      resultString += tString.substr(7, tString.length) + ',';
-      resultString += input.value + '|';
-    });
-  }
-  }
-
-  return resultString;
-}

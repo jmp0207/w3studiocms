@@ -10,7 +10,12 @@
  */
 
 var w3sTemplate = Class.create({
-	
+
+  initialize: function()
+  {
+    this.currentCss = '';
+  },
+
 	// Loads the editor page from webEditor/loadPage
 	loadEditorPage: function(newlanguage, newPage)
   {
@@ -45,7 +50,8 @@ var w3sTemplate = Class.create({
 	        onComplete:function(request, json)
 	          { 
 	            if (json[0][1] == 1){   
-	              W3sTools.temaChange(json[1][1]);
+	              W3sTemplate.currentCss = json[1][1];
+                W3sTools.temaChange(json[1][1]);
 	              W3sMenuManager.load('tbMenuManager');
 	              W3sWindow.closeModal(); 
 	              W3sControlPanel.listPages();
@@ -62,7 +68,8 @@ var w3sTemplate = Class.create({
 	},
 	
 	// Loads the preview page from webPreview/index
-	loadPreviewPage: function(newlanguage, newPage){
+	loadPreviewPage: function(newlanguage, newPage)
+  {
 	  if (newlanguage == undefined) newlanguage = w3studioCMS.language;
 	  if (newPage == undefined) newPage = w3studioCMS.page;
 	  var paramPrevPage = (w3studioCMS.page != undefined) ? '&prevPage=' + w3studioCMS.page : '';
@@ -80,7 +87,8 @@ var w3sTemplate = Class.create({
 	       onComplete:function(request, json)
 	          {
 	            if (json[0][1] == 1){ 
-	              W3sTools.temaChange(json[1][1]);
+	              W3sTemplate.currentCss = json[1][1];
+                W3sTools.temaChange(json[1][1]);
 	              W3sMenuManager.load('tbMenuManagerPreview');
 	              W3sWindow.closeModal();
 	            }
@@ -100,7 +108,8 @@ var w3sTemplate = Class.create({
 	  return false;
 	},
 	
-	publish: function(sMessage){
+	publish: function(sMessage)
+  {
 	  if(confirm(sMessage)){ 
 	    var sActionPath = w3studioCMS.frontController + 'webEditor/publish';
 	    new Ajax.Updater('w3s_error', sActionPath,
@@ -121,7 +130,8 @@ var w3sTemplate = Class.create({
 	  return false;
 	},
 	
-	moveContents: function(move){
+	moveContents: function(move)
+  {
 		if (move){
 	    W3sContent = new w3sContent();
 			InteractiveMenu.stop = true;

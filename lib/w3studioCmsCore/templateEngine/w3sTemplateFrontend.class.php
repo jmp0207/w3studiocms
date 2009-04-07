@@ -112,7 +112,6 @@ class w3sTemplateEngineFrontend extends w3sTemplateEngine
   {    
     $result = array();
     $stylesheets = $this->getStylesheetsFromContents($contents);
-    //$result['contents'] = $this->removeStylesheetsFromTemplate($stylesheets, $contents);
     
     // Returns the stylesheets
     $stylesheetResults = array();
@@ -121,7 +120,6 @@ class w3sTemplateEngineFrontend extends w3sTemplateEngine
 			$stylesheetsAttributes = w3sCommonFunctions::getHtmlAttributes($stylesheet, 'link');
       $stylesheetResults[] = array('href' => $stylesheetsAttributes['href'], 'media' => $stylesheetsAttributes['media']);
     }
-    //$result['stylesheets'] = $stylesheetResults;
     $result = $stylesheetResults;
     
     return $result; 

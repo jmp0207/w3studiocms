@@ -348,6 +348,7 @@ abstract class w3sTemplateEngine
       foreach ($slotContents as $slot){
         $slotNames .= sprintf('"%s",', $slot['slotName']);
         $contents = $this->drawSlot($slot);
+        echo htmlentities($contents);
         $this->pageContents = preg_replace('/\<\?php.*?include_slot\(\'' . $slot['slotName'] . '\'\).*?\?\>/', $contents, $this->pageContents);
       }
     }
@@ -433,20 +434,71 @@ abstract class w3sTemplateEngine
 			                 where('TemplateId', $this->idTemplate)->
 			                 where('ToDelete', 0)->
 			                 orderBy('Id')->
-			                 find();  
+			                 find();
     foreach($slots as $slot)
-    {            
+    {
 	    $currentSlotContents = array();
 	    $currentSlot = $slot->getId();
 	    $slotName = $slot->getSlotName();
 		  $isRepeated = $slot->getRepeatedContents();
-	    $contents = DbFinder::from('W3sContent')->
-	                where('LanguageId', $idLanguage)->
-	                where('PageId', $idPage)->
-	                where('SlotId', $currentSlot)->
-	                where('ToDelete', 0)->
-	                orderBy('ContentPosition')->
-	                find();  
+      $i = 0;
+
+      // Checks for contents on previous themplates
+      while(1)
+      {
+
+        // Retrieves contents
+        $contents = DbFinder::from('W3sContent')->
+                      where('LanguageId', $idLanguage)->
+                      where('PageId', $idPage)->
+                      where('SlotId', $currentSlot)->
+                      where('ToDelete', 0)->
+                      orderBy('ContentPosition')->
+                      find();
+        if ($contents == null)
+        {
+
+          // Checks for mapped slots when $contents are null
+          // Functional schema:
+          //
+          //   Source - Destination
+          //      1          2       Template 1
+          //      2          3       Template 2
+          //      3          4       Template 3
+          //
+          // There are three templates on this website. The one in use is the
+          // third and the slot which contains the content is the number 4.
+          // There are no contents stored for that slot, so the source slot,
+          // the number 3, can have them. In this case it haven't, so the source
+          // slot for the number 3 is searched. The number 2 is found, but it had no
+          // contents, so it searchs for its source, the number 1, and there
+          // the contents exists.
+
+          $mappedSlots = DbFinder::from('W3sSlotMapper')->
+                           where('SlotIdDestination', $currentSlot)->
+                           findOne();
+          if ($mappedSlots != null)
+          { 
+            $currentSlot = $mappedSlots->getSlotIdSource();
+          }
+          else
+          {
+            // All the mapped slots has been searched. Nothing else to look for.
+            break;
+          }
+        }
+        else
+        {
+
+          // A content has been found, exists the loop
+          break;
+        }
+
+        // Prevents accidentally dead loops
+        $i++;
+        if ($i == 500) break;
+      }
+
 	    if ($contents != null)
 	    {
 		    foreach($contents as $content)
@@ -456,13 +508,12 @@ abstract class w3sTemplateEngine
 	    }
 	    else
 	    {
-	    	$currentSlotContents[] = null; 
-	    }  
-	    
+        $currentSlotContents[] = null;
+	    }
+
 	    // Saves the last slot's content
 	    $resultContents[] =  array('contents' => $currentSlotContents, 'idSlot' => $currentSlot, 'slotName' => $slotName, 'isRepeated' => $isRepeated);
     }
-    
 		return $resultContents;
   }
   

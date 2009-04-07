@@ -28,7 +28,8 @@ var MenuBuilder = Class.create(
     Element.addClassName($(this.currentSelectedLink), 'currentSelectedLink');
 
     properties = $('w3s_properties_form').getElements();
-    properties.each(function(property){
+    properties.each(function(property)
+    {
       if (!property.hasClassName('combined_button')) property.value = objMenuBuilder.objMenu[idMenu][property.id];
     });
   },

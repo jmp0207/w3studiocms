@@ -71,13 +71,13 @@ class w3sControlPanel
 		    
 	protected function drawTitle()
 	{
-		return sprintf($this->titleSkeleton, __('Control panel'), link_to_function(image_tag(sfConfig::get('app_w3s_web_skin_images_dir') . '/control_panel/button.jpg'), 'W3sControlPanel.hide()', 'alt="" title="Close the Control Panel" width="16" height="12"'));
+		return sprintf($this->titleSkeleton, w3sCommonFunctions::toI18N('Control panel'), link_to_function(image_tag(sfConfig::get('app_w3s_web_skin_images_dir') . '/control_panel/button.jpg'), 'W3sControlPanel.hide()', 'alt="" title="Close the Control Panel" width="16" height="12"'));
 	} 
 	
 	protected function drawLanguagesPanel()
 	{			     
 		$commands = w3sCommonFunctions::renderCommandsFromYml('cpLanguagesManager.yml', $this->currentUser);
-		return sprintf($this->languagesPanelSkeleton, __('Language'), 
+		return sprintf($this->languagesPanelSkeleton, w3sCommonFunctions::toI18N('Language'),
 																									$this->drawLanguagesSelect(),
 																									$commands[0],
 																									$commands[1],
@@ -91,7 +91,7 @@ class w3sControlPanel
 		$result = '';
 		foreach ($tabs as $key => $tab)
 		{
-			$result .= sprintf('<li>%s</li>', link_to_function(__($tab["text"]), 'W3sControlPanelTabs.createTab(' . $key . ', this.id)', 'id=' . $tab["id"]));
+			$result .= sprintf('<li>%s</li>', link_to_function(w3sCommonFunctions::toI18N($tab["text"]), 'W3sControlPanelTabs.createTab(' . $key . ', this.id)', 'id=' . $tab["id"]));
 		}
 		return sprintf('<ul>%s</ul>', $result);
 	} 

@@ -29,22 +29,54 @@ class w3sMenuInteractive extends w3sMenu{
    * @param object  A reference to current user
    *
    */ 
-	public function __construct($menuId, $user = null){ 
+	public function __construct($menuId, $user = null)
+  {
 		// Defines the skeleton
+    /*
 		$this->skeleton = 
 			'<a href="#" id="w3s_editor_opener" onclick="InteractiveMenu.openEditor();return false;"><div id="w3s_im_clone_element"></div></a>
+			 <div id="w3s_im_editor" style="display:none;"></div>
+<div id="w3s_im_slots" style="float:right;background-color: #FFF;color:#000;"><table>%s</table></div>';
+		*/
+    $this->skeleton =
+			'<a href="#" id="w3s_editor_opener" onclick="InteractiveMenu.openEditor();return false;"><div id="w3s_im_clone_element"></div></a>
 			 <div id="w3s_im_editor" style="display:none;"></div>';
-			 
+
 		parent::__construct($menuId, $user);
 	}
 	
-	/**
+  /**
    * Draws the menu.
    *   
    * @return string - The rendered menu
    *
    */   
-	public function drawMenu(){
-  	return $this->skeleton; 
-	}
+  public function drawMenu()
+  {
+    /*
+    $ss = '';
+    $slots = DbFinder::from('W3sSlot')->
+              join('W3sContent')->
+              where('TemplateId', 18)->
+              where('W3sContent.PageId', 27)->
+              find();
+    if ($slots == null)
+    {
+      $ss = "No contents<br>";
+      $slots = DbFinder::from('W3sSlot')->
+                where('TemplateId', 18)->
+                find();
+    }
+	  foreach($slots as $slot)
+    {
+      $w3sContent = $slot->getW3sContents();
+      //print_r($w3sContent);
+      $content = (is_object($w3sContent)) ? $w3sContent->getContent() : 'Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test ';
+
+      $ss .= sprintf('<tr><td><a href="#" onmouseover="$(\'w3s_im_clone_element\').innerHTML=\'%s\'">%s</a></td></tr>', $content, $slot->getSlotName());
+    }
+  	return sprintf($this->skeleton, $ss);
+*/
+    return $this->skeleton;
+  }
 }

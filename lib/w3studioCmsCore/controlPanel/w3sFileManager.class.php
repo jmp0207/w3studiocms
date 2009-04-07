@@ -83,7 +83,7 @@ class w3sFileManager
 	  foreach($pagesList as $page)
 	  {
 	  	$idPage = $page->getId();
-	    $class = (($i/2)==intval($i/2)) ? "w3s_white_row" : "w3s_yellow_row";
+	    $class = ($i % 2) ? "w3s_white_row" : "w3s_yellow_row";
 	    if($this->idLanguage.$idPage == $this->currentPage) $class .= '_active';
 	    
 	    $c = new Criteria;

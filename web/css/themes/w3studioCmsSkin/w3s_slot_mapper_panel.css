@@ -1,0 +1,112 @@
+/*
+ * This file is part of the w3studioCMS package library and it is distributed 
+ * under the LGPL LICENSE Version 2.1. To use this library you must leave 
+ * intact this copyright notice.
+ *  
+ * (c) 2007-2008 Giansimon Diblas <giansimon.diblas@w3studiocms.com>
+ *  
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/* ------------------------------------ *
+    Page elements
+ * ------------------------------------ */
+#w3s_sm_panel
+{
+  width:300px;
+  font: 10px Arial, Helvetica, sans-serif;
+  position:fixed;
+  top:0px;
+  right:1px;
+  background-color: #E4E2D5;
+  text-align:left;
+  border: 1px solid #000;
+  color: #000;
+  z-index:200;
+}
+
+#w3s_sm_panel_title
+{
+  width:296px;
+  height:12px;
+  background-color:#CCC7BA;
+  background:url(images/control_panel/title.jpg) repeat-x;
+  font:11px Arial, Helvetica, sans-serif;
+  padding:2px;
+  border-bottom: 1px solid #000;
+}
+
+#w3s_sm_commands
+{
+  width:292px;
+  height:12px;
+  padding:4px;
+  padding-bottom:8px;
+  font:11px Arial, Helvetica, sans-serif;
+  border-bottom: 1px solid #999;
+  background-color:#E4E2D5;
+}
+
+#w3s_sm_commands ul
+{
+  margin:0;
+  padding:0;
+}
+
+#w3s_sm_commands ul li
+{
+  float:left;
+  margin-left:3px;
+  margin-right:3px;
+  list-style-type:none;
+}
+
+#w3s_sm_commands ul li a
+{
+  border:1px solid #AAA;
+  padding:1px;
+  background-color:#EEE;
+  color:#666;
+  text-decoration:none;
+  display:block;
+  font:10px Arial, Helvetica, sans-serif;
+}
+
+#w3s_sm_maps
+{
+  background-color:#FFFFFF;
+  border-top:1px solid #CCC;
+  border-bottom:1px solid #999;
+  border-left:1px solid #CCC;
+  border-right:1px solid #999;
+}
+
+#w3s_sm_current_mapping table td input
+{
+  border: 0;
+  background-color: #E4E2D5;
+}
+
+#w3s_slot_mapper1 .slotNotSelected, #w3s_slot_mapper2 .slotNotSelected
+{
+  min-height:24px;
+  color:#FFF;
+  border:1px solid #FFFFFF;
+  background:#C20000;
+}
+
+#w3s_slot_mapper1 .slotSelected, #w3s_slot_mapper2 .slotSelected
+{
+  min-height:24px;
+  color:#FFF;
+  border:1px solid #FFFFFF;
+  background:#669900;
+}
+
+#w3s_slot_mapper1 .currentSelectedSlot, #w3s_slot_mapper2 .currentSelectedSlot
+{
+  background-color: #000066;
+}
+
+

@@ -33,8 +33,8 @@ class w3sGroupManager
    *
    */                         
   public function __construct($group = null)
-  {
-  	$this->group = ($group == null) ? new W3sGroup() : $group;
+  {    
+    $this->group = ($group == null) ? new W3sGroup() : $group;
   }
   
   public function getGroup()
@@ -53,7 +53,7 @@ class w3sGroupManager
    */
   public function add($groupName, $idTemplate)
   {
-    $groupName = w3sCommonFunctions::slugify($groupName);
+    $groupName = w3sCommonFunctions::slugify($groupName); 
     if ($groupName != '')
     {
 	    if ($idTemplate != null)
@@ -91,6 +91,58 @@ class w3sGroupManager
 	    $result = 4;
 	  }
 	  
+	  return $result;
+  }
+
+  /**
+   * Adds a new group
+   *
+   * @param  string The new group's name
+   * @param  string The template's id which must be assigned the new group
+   *
+   * @return     int 0 - The save operation failed
+   *                 1 - Success
+   */
+  public function edit($groupName, $idTemplate)
+  {
+    $groupName = w3sCommonFunctions::slugify($groupName);
+    if ($groupName != '')
+    {
+	    if ($idTemplate != null)
+	    {
+        if ($groupName != $this->group->getGroupName() || $this->group->getTemplateId() != $idTemplate )
+		    {
+			    if (DbFinder::from('W3sTemplate')->findPK($idTemplate) != null)
+		    	{
+				    $this->group->setTemplateId($idTemplate);
+						$this->group->setGroupName($groupName);
+						$this->group->setEdited(1);
+						$result = ($this->group->isModified() && $this->group->save() > 0) ? 1 : 0;
+		    	}
+		    	else
+			    {
+				    // The template doesn't exist
+				    $result = 16;
+			    }
+		    }
+		    else
+		    {
+			    // Group name exists
+			    $result = 2;
+		    }
+	    }
+	    else
+	    {
+		    // The template id is null
+		    $result = 8;
+	    }
+	  }
+	  else{
+
+	    // Group name is empty
+	    $result = 4;
+	  }
+
 	  return $result;
   }
   

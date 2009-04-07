@@ -27,7 +27,7 @@ switch (sfConfig::get('app_webeditor')){
 // Set the javascripts variables needed for managing languages and pages.
 $frontController = (sfConfig::get('sf_environment') != 'prod') ? sprintf('/%s_%s.php/', sfConfig::get('sf_app'),  sfConfig::get('sf_environment')) : '/';
 
-echo $template->retrieveSiteStylesheets(); 
+echo $template->retrieveSiteStylesheets();
 ?>
 <div id="w3s_cms"></div>
 <div id="w3s_menu_manager_hidden"></div>

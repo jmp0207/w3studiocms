@@ -66,6 +66,7 @@ var W3studioCMS = Class.create({
 	          onComplete:function(request, json)
 	            {	            
 	              if (json[0][1] == 1){ 
+                  W3sTemplate.currentCss = json[1][1];
 	                W3sTools.temaChange(json[1][1]);
 	                Element.removeClassName($('w3s_img_editor'), 'img_waiting');
 	                Element.addClassName($('w3s_img_editor'), 'img_done');
