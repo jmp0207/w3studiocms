@@ -75,27 +75,31 @@ var w3sSlotMapper = Class.create({
 	  return false;
   },
 
-  map: function()
+  map: function(inverted)
   {    
+    if (inverted == null) inverted = false;
     if ($('w3s_sm_source').value != '' &&  $('w3s_sm_dest').value != '')
     {
+      var source = (!inverted) ? $('w3s_sm_source').value : $('w3s_sm_dest').value;
+      var dest = (!inverted) ? $('w3s_sm_dest').value : $('w3s_sm_source').value;
+
       var divs = $('w3s_sm_maps').getElementsByTagName('div');
       var rowClass = (divs.length % 2) ? "w3s_white_row" : "w3s_blue_row";
 
-      var divName = $('w3s_sm_source').value + '-' + $('w3s_sm_dest').value;
+      var divName = source + '-' + dest;
       var objMapDiv = $("w3s_mapping");
 
       var objSourceInput = document.createElement("input");
       objSourceInput.setAttribute('id', 'w3s_sm_source');
       objSourceInput.setAttribute('name', 'w3s_sm_source[]');
       objSourceInput.setAttribute('type', 'hidden');
-      objSourceInput.setAttribute('value',  $('w3s_sm_source').value);
+      objSourceInput.setAttribute('value',  source);
 
       var objDestInput = document.createElement("input");
       objDestInput.setAttribute('id', 'w3s_sm_dest');
       objDestInput.setAttribute('name', 'w3s_sm_dest[]');
       objDestInput.setAttribute('type', 'hidden');
-      objDestInput.setAttribute('value',  $('w3s_sm_dest').value);
+      objDestInput.setAttribute('value',  dest);
 
       var objRowDiv = document.createElement("div");
       objRowDiv.setAttribute('id', divName);
@@ -113,7 +117,7 @@ var w3sSlotMapper = Class.create({
       objImg.setAttribute('style', 'border:0 width:14px height:14px');
       objImg.onclick = function()
                         {
-                          W3sSlotMapper.remove($('w3s_sm_source').value, $('w3s_sm_dest').value);
+                          W3sSlotMapper.remove(source, dest);
                         }
       objRowDiv2.appendChild(objImg);
 

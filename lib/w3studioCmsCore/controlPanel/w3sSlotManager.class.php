@@ -20,7 +20,7 @@
  * @author     Giansimon Diblas <giansimon.diblas@w3studiocms.com>
  */
  
-class w3sSlotManager
+class w3sSlotManager implements w3sEditor
 {
   protected
   	$idPage,

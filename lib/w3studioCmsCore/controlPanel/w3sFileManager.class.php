@@ -20,7 +20,7 @@
  * @author     Giansimon Diblas <giansimon.diblas@w3studiocms.com>
  */
  
-class w3sFileManager
+class w3sFileManager implements w3sEditor
 {
   protected
   	$idLanguage,

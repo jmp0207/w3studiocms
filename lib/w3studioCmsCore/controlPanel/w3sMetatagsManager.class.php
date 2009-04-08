@@ -20,7 +20,7 @@
  * @author     Giansimon Diblas <giansimon.diblas@w3studiocms.com>
  */
  
-class w3sMetatagsManager
+class w3sMetatagsManager implements w3sEditor
 {
   protected
   	$metatag,

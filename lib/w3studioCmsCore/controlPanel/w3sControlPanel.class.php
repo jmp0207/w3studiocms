@@ -20,7 +20,7 @@
  * @author     Giansimon Diblas <giansimon.diblas@w3studiocms.com>
  */
  
-class w3sControlPanel
+class w3sControlPanel implements w3sEditor
 {
   protected 
   	$currentUser,

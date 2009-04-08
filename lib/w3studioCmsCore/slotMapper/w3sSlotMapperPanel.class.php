@@ -13,17 +13,17 @@
  */
  
 /**
- * w3sSlotMapperPanel builds the editor to manage the site's pages
+ * w3sSlotMapperPanel builds the editor to manage slot mapper
  *
  * @package    sfW3studioCMSPlugin
- * @subpackage w3sPageEditor
+ * @subpackage w3sSlotMapperPanel
  * @author     Giansimon Diblas <giansimon.diblas@w3studiocms.com>
  */
  
-class w3sSlotMapperPanel
+class w3sSlotMapperPanel implements w3sEditor
 {
   protected 
-  	$currentTemplate,
+  	$currentTemplate, // The unique id that identifies the slot mapper for two templates, formatted as: [idSource][idDestination]
     $sourceTemplate,
     $destTemplate,
     $invertedMapExists,
@@ -56,26 +56,38 @@ class w3sSlotMapperPanel
         <li>%s</li>
       </ul>';
 
-  
+  /**
+   * Constructor.
+   *
+   * @param int  The id of the source template
+   * @param int  The id of the destionation template
+   *
+   */
   public function __construct($sourceTemplate, $destTemplate)
   {
   	$this->sourceTemplate  = $sourceTemplate;
     $this->destTemplate = $destTemplate;
     $this->invertedMapExists = false;
 
-
+    // Checks if the currentTemplate exists.
     $this->currentTemplate = sprintf('[%s][%s]', $sourceTemplate, $destTemplate);
     $slots = DbFinder::from('W3sSlotMapper')->
                       where('Templates', $this->currentTemplate)->
                       count();
+
+    // Current template doesn't exist
     if ($slots == 0)
     {
+
+      // Checks for corrispondence, tring to invert destination with source
       $currentTemplate1 = sprintf('[%s][%s]', $destTemplate, $sourceTemplate);
       $slots = DbFinder::from('W3sSlotMapper')->
                         where('Templates', $currentTemplate1)->
                         count();
       if ($slots > 0)
       {
+
+        // The templates are inverted, so everything have to be inverted
         $this->sourceTemplate  = $destTemplate;
         $this->destTemplate = $sourceTemplate;
         $this->currentTemplate = $currentTemplate1;
@@ -83,7 +95,13 @@ class w3sSlotMapperPanel
       }
     }
   }
-	
+
+  /**
+   * Implements the interface w3sEditor.
+   *
+   * @return string The rendered panel
+   *
+   */
 	public function render()
 	{
 		return sprintf($this->panelSkeleton, $this->drawTitle(),
@@ -95,61 +113,36 @@ class w3sSlotMapperPanel
 																				 $this->drawMaps());
 	}
 
-  public function save($sourceSlots, $destSlots)
-  {
-    
-    $maps = (!$this->invertedMapExists) ? array_combine($sourceSlots, $destSlots) : array_combine($destSlots, $sourceSlots);
-
-    $i = 0;
-    $con = Propel::getConnection();
-
-    $bRollBack = false;
-    $con = w3sPropelWorkaround::beginTransaction($con);
-    DbFinder::from('W3sSlotMapper')->
-              where('Templates', $this->currentTemplate)->
-              delete();
-    foreach($maps as $sourceSlot => $destSlots)
-    {
-      $slotMapper = new w3sSlotMapper();
-      $slotMapper->setTemplates($this->currentTemplate);
-      $slotMapper->setSlotIdSource($sourceSlot);
-      $slotMapper->setSlotIdDestination($destSlots);
-      $result = $slotMapper->save();
-      if ($slotMapper->isModified() && $result == 0)
-		  {
-        $bRollBack = true;
-        break;
-      }
-      $i++;
-    }
-    if (!$bRollBack)
-    {
-      $con->commit();
-      $result = true;
-    }
-    else{
-      w3sPropelWorkaround::rollBack($con);
-      $result = false;
-    }
-
-    return $result;
-  }
-	
+	/**
+   * Draws the panel title.
+   *
+   * @return string The drawed title
+   *
+   */
 	protected function drawTitle()
 	{
     return sprintf(w3sCommonFunctions::toI18N('Slot Mapper'));
 	}
 
+  /**
+   * Draws all the mapped slots.
+   *
+   * @return string The drawed slots
+   *
+   */
   protected function drawMaps()
 	{
     
     $result = '';
 
+    // Checks is a mapping exists
     $slots = DbFinder::from('W3sSlotMapper')->
                           where('Templates', $this->currentTemplate)->
                           find();
     if ($slots == null)
     { 
+
+      // Tries to match the slots when any mapping exists
       $this->matchSlots();
       $slots = DbFinder::from('W3sSlotMapper')->
                           where('Templates', $this->currentTemplate)->
@@ -176,34 +169,152 @@ class w3sSlotMapperPanel
     return $result;
 	}
 
+  /**
+   * Draws the panel commands.
+   *
+   * @return string The drawed commands
+   *
+   */
   protected function drawCommands()
 	{
     return sprintf($this->commandsSkeleton, 
                     link_to_function(w3sCommonFunctions::toI18N('Switch template'), 'W3sSlotMapper.switchDiv()'),
-                    link_to_function(w3sCommonFunctions::toI18N('Map slots'), 'W3sSlotMapper.map()'),
+                    link_to_function(w3sCommonFunctions::toI18N('Map slots'), 'W3sSlotMapper.map(' . $this->invertedMapExists . ')'),
                     link_to_function(w3sCommonFunctions::toI18N('Save map'), 'W3sSlotMapper.save();'),
                     link_to_function(w3sCommonFunctions::toI18N('Return to editor'), 'W3sSlotMapper.close();'));
 	}
 
+  /**
+   * Saves the current mapping
+   *
+   * @param array  An array that contains the slots id for source template
+   * @param array  An array that contains the slots id for destionation template
+   *
+   * @return int 0 - An error occoured
+   *             1 - Savving success
+   *             2 - Source and destination malformed and cannot be combined.
+   *
+   */
+  public function save($sourceSlots, $destSlots)
+  {
+    try
+    {
+      $maps = array_combine($sourceSlots, $destSlots);
+    }
+    catch(Exception $e)
+    {
+      return 2;
+    }
+
+    try
+    {
+      $con = Propel::getConnection();
+
+      $bRollBack = false;
+      $con = w3sPropelWorkaround::beginTransaction($con);
+
+      // Previous mapping will be deleted
+      DbFinder::from('W3sSlotMapper')->
+                where('Templates', $this->currentTemplate)->
+                delete();
+      foreach($maps as $sourceSlot => $destSlots)
+      {
+        if (!$this->saveMap($sourceSlot, $destSlots))
+        {
+          $bRollBack = true;
+          break;
+        }
+      }
+
+      if (!$bRollBack)
+      {
+        $con->commit();
+        $result = 1;
+      }
+      else
+      {
+        w3sPropelWorkaround::rollBack($con);
+        $result = 0;
+      }
+    }
+    catch(Exception $e)
+    {
+      return 0;
+    }
+
+    return $result;
+  }
+
+  /**
+   * Tries to make an automation match of the templates slots using their names
+   *
+   * @return bool false - An error occoured
+   *              true  - Savving success
+   *
+   */
   protected function matchSlots()
   {
+    $con = Propel::getConnection();
+    $bRollBack = false;
+    $con = w3sPropelWorkaround::beginTransaction($con);
+
+    // Search the slots of source template
     $slots = DbFinder::from('W3sSlot')->
                           where('TemplateId', $this->sourceTemplate)->
                           find();
     foreach($slots as $slot)
     {
+
+      // Search the same slots on destination template by name
       $destSlot = DbFinder::from('W3sSlot')->
                           where('TemplateId', $this->destTemplate)->
                           where('SlotName', $slot->getSlotName())->
                           findOne();
       if ($destSlot != null)
       {
-        $slotMapper = new w3sSlotMapper();
-        $slotMapper->setTemplates($this->currentTemplate);
-        $slotMapper->setSlotIdSource($slot->getId());
-        $slotMapper->setSlotIdDestination($destSlot->getId());
-        $slotMapper->save();
+
+        // Saves the mapping when a match has been found
+        if (!$this->saveMap($slot->getId(), $destSlot->getId()))
+        {
+          $bRollBack = true;
+          break;
+        }
       }
     }
+
+    if (!$bRollBack)
+    {
+      $con->commit();
+      $result = true;
+    }
+    else
+    {
+      w3sPropelWorkaround::rollBack($con);
+      $result = false;
+    }
+    
+    return $result;
+  }
+
+  /**
+   * @param int  The id of the source slot
+   * @param int  The id of the destionation slot
+   *
+   * @return bool false - An error occoured
+   *              true  - Savving success
+   *
+   */
+  protected function saveMap($sourceSlot, $destSlots)
+  {
+    $result = true;
+
+    $slotMapper = new w3sSlotMapper();
+    $slotMapper->setTemplates($this->currentTemplate);
+    $slotMapper->setSlotIdSource($sourceSlot);
+    $slotMapper->setSlotIdDestination($destSlots);
+    $result = $slotMapper->save();
+    if ($slotMapper->isModified() && $result == 0) $result = false;
+
+    return $result;
   }
 }

@@ -24,7 +24,7 @@
 class w3sTemplateEngineSlotMapper extends w3sTemplateEngine
 {
 
-  /*
+  /**
    * Overrides the standard w3sTemplateEngine constructor to render only the
    * a template without contents.
    * 
@@ -66,7 +66,7 @@ class w3sTemplateEngineSlotMapper extends w3sTemplateEngine
   }
 
   /** 
-   * Draws the contents' slot when in preview contents. 
+   * Draws the slot.
    * 
    * @param object   A slot object
    * 
@@ -75,6 +75,8 @@ class w3sTemplateEngineSlotMapper extends w3sTemplateEngine
    */
   public function drawSlot($slot)
   {
+    
+    // Checks if a map exists for the current slot
     $slotMapper = DbFinder::from('W3sSlotMapper')->
                       where('SlotIdSource', $slot->getId())->
                       findOne();

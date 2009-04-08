@@ -23,7 +23,7 @@
 class w3sTemplateEnginePreview extends w3sTemplateEngine
 {  
   /** 
-   * Draws the contents' slot when in preview contents. 
+   * Draws the contents' slot when in preview mode.
    * 
    * @param object   A slot object
    * 
