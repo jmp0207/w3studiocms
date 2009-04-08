@@ -13,10 +13,10 @@
  */
  
 /**
- * w3sPageEditor builds the editor to manage the site's pages
+ * w3sControlPanel builds the editor to manage pages,groups, languages, slots and metatags
  *
  * @package    sfW3studioCMSPlugin
- * @subpackage w3sPageEditor
+ * @subpackage w3sControlPanel
  * @author     Giansimon Diblas <giansimon.diblas@w3studiocms.com>
  */
  
@@ -46,13 +46,27 @@ class w3sControlPanel implements w3sEditor
 				<li>%s</li>
 			</ul>';
 
+  /**
+   * Constructor.
+   *
+   * @param object  An object that represents the current user
+   * @param int     The id of the current language
+   * @param int     The id of the current page
+   *
+   */
   public function __construct($currentUser = null, $idLanguage = 0, $currentPage = 0)
   {
   	$this->idLanguage = $idLanguage;
   	$this->currentPage = $currentPage;
   	$this->currentUser = $currentUser;
   }
-	
+
+  /**
+   * Implements the interface w3sEditor.
+   *
+   * @return string The rendered panel
+   *
+   */
 	public function render()
 	{
 		return sprintf($this->panelSkeleton, $this->drawTitle(),
@@ -60,7 +74,13 @@ class w3sControlPanel implements w3sEditor
 																				 $this->drawTabsPanel(),
 																				 $this->drawContentsTabs());
 	} 
-	
+
+  /**
+   * Draws a select which contains all the site's languages
+   *
+   * @return string The drawed select
+   *
+   */
 	public function drawLanguagesSelect()
 	{
 		$languageOptions = DbFinder::from('W3sLanguage')->
@@ -68,12 +88,24 @@ class w3sControlPanel implements w3sEditor
 									     find();									      
 		return select_tag('w3s_languages_select', objects_for_select($languageOptions, 'getId', 'getLanguage'));
 	}
-		    
+
+  /**
+   * Draws the panel title.
+   *
+   * @return string The drawed title
+   *
+   */
 	protected function drawTitle()
 	{
 		return sprintf($this->titleSkeleton, w3sCommonFunctions::toI18N('Control panel'), link_to_function(image_tag(sfConfig::get('app_w3s_web_skin_images_dir') . '/control_panel/button.jpg'), 'W3sControlPanel.hide()', 'alt="" title="Close the Control Panel" width="16" height="12"'));
 	} 
-	
+
+  /**
+   * Draws the control panel to manage languages
+   *
+   * @return string The drawed panel
+   *
+   */
 	protected function drawLanguagesPanel()
 	{			     
 		$commands = w3sCommonFunctions::renderCommandsFromYml('cpLanguagesManager.yml', $this->currentUser);
@@ -84,7 +116,13 @@ class w3sControlPanel implements w3sEditor
 																									$commands[2],
 																									$commands[3]);		
 	} 
-	
+
+  /**
+   * Draws the tabbed panel to change panel
+   *
+   * @return string The drawed panel
+   *
+   */
 	protected function drawTabsPanel()
 	{
 		$tabs = w3sCommonFunctions::loadScript('cpTabs.yml');
@@ -95,7 +133,14 @@ class w3sControlPanel implements w3sEditor
 		}
 		return sprintf('<ul>%s</ul>', $result);
 	} 
-	
+
+  /**
+   * Draws the panel that contains the current section used. Renders the deafult
+   * section, that is the fileManager
+   *
+   * @return string The drawed panel
+   *
+   */
 	protected function drawContentsTabs()
 	{
 		$tabs = w3sCommonFunctions::loadScript('cpTabs.yml');

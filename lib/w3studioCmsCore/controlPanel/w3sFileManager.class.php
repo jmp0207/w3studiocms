@@ -13,10 +13,10 @@
  */
  
 /**
- * w3sPageEditor builds the editor to manage the site's pages
+ * w3sFileManager builds the editor to change, add, edit or delete the site's pages
  *
  * @package    sfW3studioCMSPlugin
- * @subpackage w3sPageEditor
+ * @subpackage w3sFileManager
  * @author     Giansimon Diblas <giansimon.diblas@w3studiocms.com>
  */
  
