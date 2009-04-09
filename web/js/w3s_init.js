@@ -22,7 +22,7 @@ var W3studioCMS = Class.create({
 	    W3sMenuManager = new w3sMenuManager();
 	    W3sControlPanel = new w3sControlPanel(); 
 	    W3sWindow = new w3sWindow();
-			W3sTemplateImport = new w3sTemplateImport();
+			W3sThemeImport = new w3sThemeImport();
 	    $('w3s_menu_manager_hidden').observe('mouseover', W3sMenuManager.show, false);
 	    this.initW3Studio();
 	},

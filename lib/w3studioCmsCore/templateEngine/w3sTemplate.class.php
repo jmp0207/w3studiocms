@@ -374,6 +374,7 @@ abstract class w3sTemplateEngine
                       leftJoin('W3sProject')->
                       findPK($idPage);
     $this->setCurrentTemplate($page);
+
   }
     
   /**
