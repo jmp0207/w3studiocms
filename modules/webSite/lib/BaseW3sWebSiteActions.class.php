@@ -48,11 +48,20 @@ class BaseW3sWebSiteActions extends sfActions
 
     // Retrieves the page's metatags
     $oMetatag = W3sSearchEnginePeer::getFromPageAndLanguage($this->template->getIdLanguage(), $this->template->getIdPage());
-    
+
     // Sets metatags
-    $this->getResponse()->addMeta('title', ($oMetatag != null) ? $oMetatag->getMetaTitle() : 'A website powered by W3StudioCMS');
-    $this->getResponse()->addMeta('keywords', ($oMetatag != null) ? $oMetatag->getMetaKeywords() : '');
-    $this->getResponse()->addMeta('description', ($oMetatag != null) ? $oMetatag->getMetaDescription() : '');
+    $this->getResponse()->addMeta(
+      'title',
+      ($oMetatag != null) ? $oMetatag->getMetaTitle() : sfConfig::get('app_w3s_meta_title', 'A website powered by W3StudioCMS')
+    );
+    $this->getResponse()->addMeta(
+      'keywords',
+      ($oMetatag != null) ? $oMetatag->getMetaKeywords() : sfConfig::get('app_w3s_meta_keywords', '')
+    );
+    $this->getResponse()->addMeta(
+      'description',
+      ($oMetatag != null) ? $oMetatag->getMetaDescription() : sfConfig::get('app_w3s_meta_description', '')
+    );
   }
   
   /**

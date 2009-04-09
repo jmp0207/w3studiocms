@@ -139,7 +139,7 @@ class w3sImage{
     
     // Retrieves all attributes from the image  
     $this->attributes = w3sCommonFunctions::stringToArray($this->image);
-    $this->attributes["fullImagePath"] = (basename($this->attributes["src"]) != 'sample_image.png') ? str_replace(sfConfig::get('app_absolute_images_path'), w3sCommonFunctions::checkLastDirSeparator(sfConfig::get('app_images_path')), $this->attributes['src']) : sfConfig::get('sf_web_dir') . $this->attributes['src'];
+    $this->attributes["fullImagePath"] = sfConfig::get('sf_web_dir') . $this->attributes['src'];
     $this->attributes["linkedTo"] = w3sCommonFunctions::getTagAttribute(trim(strip_tags($value, '<a>')), 'href');
     $this->setImageAttributes();
   }

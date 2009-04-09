@@ -88,7 +88,7 @@ class w3sPageManager
 				        // Getting the page's id inserted yet
 				        $idPage = $this->page->getId();
 				      	$attributes = w3sTemplateEngine::retrieveTemplateAttributesFromPage($this->page);
-				      	$templateContents = w3sCommonFunctions::readFileContents(sprintf("%1\$s%2\$s%3\$s%2\$s%4\$s%2\$sdata.yml", sfConfig::get('app_w3s_web_templates_dir'), DIRECTORY_SEPARATOR, $attributes["projectName"], $attributes["templateName"]));
+				      	$templateContents = w3sCommonFunctions::readFileContents(sprintf("%1\$s%2\$s%3\$s%2\$sdata%2\$s%4\$s.yml", sfConfig::get('app_w3s_web_templates_dir'), DIRECTORY_SEPARATOR, $attributes["projectName"], $attributes["templateName"]));
 				      	
 				      	$defaultContents = sfYaml::load($templateContents);
 				      	$defaultContents = $defaultContents["W3sContent"];
@@ -115,38 +115,57 @@ class w3sPageManager
                                                where('SlotId', $slot->getId())->
                                                where('LanguageId', $idLanguage)->
                                                findOne();
-                                                 
-					        		// When no repeated content, the content is simply copied
-					        		if (($slot->getRepeatedContents() == 0) || ($baseContent == null))
-					        		{
-					        			$slotName = $slot->getSlotName();
-					        			$content = w3sContentManagerFactory::create($defaultContents[$slotName]["contentTypeId"]);
-					        			$contentValue = array("PageId"          => $idPage,
-																              "SlotId"          => $slot->getId(),
-																              "LanguageId"      => $idLanguage,
-																              "GroupId"         => $idGroup,
-																              "Content"         => $defaultContents[$slotName]["content"],
-																              "ContentTypeId"   => $defaultContents[$slotName]["contentTypeId"],
-																              "ContentPosition" => $defaultContents[$slotName]["contentPosition"],
-																              "Edited"          => 1);
-					        			$content->setUpdateForeigns(false);
-					        			$content->add($contentValue);
-					        		}
-					        		else
-					        		{
-					        			
-					        			// Creates a new content from the base content
-					        			$newContent = w3sContentManagerFactory::create($baseContent->getContentTypeId(), $baseContent);
-					        			
-					        			// Converts the content in array and changes the page's id and the group's id
-					        			$contentValue = W3sContentPeer::contentToArray($newContent->getContent());
-					        			$contentValue["PageId"] = $idPage;
-					        			$contentValue["GroupId"] = $idGroup;
-					        			
-					        			// Updates the content and copies the related elements
-												$newContent->setUpdateForeigns(false);
-						        		$newContent->add($contentValue);
-						        		w3sContentManagerMenuPeer::copyRelatedElements($baseContent->getId(), $newContent->getContent()->getId());
+                      // When no repeated content, the content is simply copied
+                      if (($slot->getRepeatedContents() == 0) || ($baseContent == null))
+                      {
+                        $slotName = $slot->getSlotName();
+                        foreach ($defaultContents as $defaultContent)
+                        {
+                          if ($defaultContent['slotId'] == $slotName)
+                          {
+                            $content = w3sContentManagerFactory::create($defaultContent["contentTypeId"]);
+                            $contentValue = array(
+                              "PageId"          => $idPage,
+                              "SlotId"          => $slot->getId(),
+                              "LanguageId"      => $idLanguage,
+                              "GroupId"         => $idGroup,
+                              "Content"         => $defaultContent["content"],
+                              "ContentTypeId"   => $defaultContent["contentTypeId"],
+                              "ContentPosition" => $defaultContent["contentPosition"],
+                              "Edited"          => 1
+                            );
+                            $content->setUpdateForeigns(false);
+                            $content->add($contentValue);
+                          }
+                        }
+                      }
+                      else
+                      {
+                        // Retrive base page, if any, but NOT current one
+                        $pageFinder = DbFinder::from('W3sPage')->whereToDelete(0)->whereIdNot($idPage);
+                        if ($basePage = $pageFinder->findOne())
+                        {
+                          // Retrieve a content that belongs to the current slot
+                          $baseContents = DbFinder::from('W3sContent')->whereToDelete(0)->
+                            relatedTo($basePage)->relatedTo($slot)->
+                            whereLanguageId($idLanguage)->find();
+
+                          foreach ($baseContents as $baseContent)
+                          {
+                            // Creates a new content from the base content
+                            $newContent = w3sContentManagerFactory::create($baseContent->getContentTypeId(), $baseContent);
+
+                            // Converts the content in array and changes the page's id and the group's id
+                            $contentValue = W3sContentPeer::contentToArray($newContent->getContent());
+                            $contentValue["PageId"] = $idPage;
+                            $contentValue["GroupId"] = $idGroup;
+
+                            // Updates the content and copies the related elements
+                            $newContent->setUpdateForeigns(false);
+                            $newContent->add($contentValue);
+                            w3sContentManagerMenuPeer::copyRelatedElements($baseContent->getId(), $newContent->getContent()->getId());
+                          }
+                        }
 					        		}
 					        	}
 				          }
