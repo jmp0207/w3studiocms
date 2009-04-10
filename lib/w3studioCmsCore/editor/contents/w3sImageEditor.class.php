@@ -166,7 +166,7 @@ class w3sImageEditor extends w3sContentsEditor
     }
   	$params = 
       array(
-        array('name' => 'w3s_ppt_image', 'label' => 'Image', 'type' => 'input', 'options' => array('value' => basename($this->attributes["fullImagePath"]), 'disabled'=> true, 'class' => 'disabled')),
+        array('name' => 'w3s_ppt_image', 'label' => 'Image', 'type' => 'input', 'options' => array('value' => w3sCommonFunctions::getStdBasename($this->attributes["fullImagePath"]), 'disabled'=> true, 'class' => 'disabled')),
         array('name' => 'w3s_ppt_width', 'label' => 'Width', 'type' => 'input', 'options' => array('value' => $this->attributes["width"], 'disabled'=> true, 'class' => 'disabled')),
         array('name' => 'w3s_ppt_height', 'label' => 'Height', 'type' => 'input', 'options' => array('value' => $this->attributes["height"], 'disabled'=> true, 'class' => 'disabled')),
         array('name' => 'w3s_ppt_size', 'label' => 'Size', 'type' => 'input', 'options' => array('value' => $this->attributes["size"], 'disabled'=> true, 'class' => 'disabled')),

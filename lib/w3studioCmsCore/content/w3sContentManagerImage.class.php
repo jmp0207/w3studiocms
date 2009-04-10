@@ -71,10 +71,18 @@ class w3sContentManagerImage extends w3sContentManager{
   		$propertyValues = explode('=', $property);
   		$formattedProperties[$propertyValues[0]] = $propertyValues[1];
   	}
-  	
+
+    // build src attribute
+    $src = $formattedProperties['w3s_ppt_image'];
+    $image_name = basename($formattedProperties['w3s_ppt_image']);
+    if ($image_name == $formattedProperties['w3s_ppt_image'])
+    {
+      $src = sfConfig::get('app_absolute_images_path') . $src;
+    }
+
   	// Creates the image
   	$image = sprintf('<img src="%s" alt="%s" title="%s" width="%s" height="%s" />', 
-  										sfConfig::get('app_absolute_images_path') . $formattedProperties['w3s_ppt_image'], 
+  										$src, 
 											$formattedProperties['w3s_ppt_alt_text'],
 											$formattedProperties['w3s_ppt_title_text'],
 											$formattedProperties['w3s_ppt_width'],
