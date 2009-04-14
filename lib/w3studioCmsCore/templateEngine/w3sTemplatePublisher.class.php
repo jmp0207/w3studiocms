@@ -60,7 +60,7 @@ class w3sTemplateEnginePublisher extends w3sTemplateEngine
     {
 	    
 	    // Deletes the old directory with the previous published version
-	  	w3sCommonFunctions::deleteDirectoryRecursive(sfConfig::get('app_w3s_web_published_dir'), array('.svn'));
+	  	w3sCommonFunctions::clearDirectory(sfConfig::get('app_w3s_web_published_dir'), array('.svn'));
 	  
 	  	// Retrieves all the website's languages and pages from the database
 	    $languages = DbFinder::from('W3sLanguage')->find(); 

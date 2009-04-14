@@ -17,7 +17,7 @@ var w3sThemeImport = Class.create({
 		sAjaxOptions = {asynchronous:true,
 	                  evalScripts:false,
 	                  method:'get'};
-		var curWindow = W3sWindow.openModal(450, 320, true);
+		var curWindow = W3sWindow.openModal(470, 320, true);
 		
 	  curWindow.setAjaxContent(sActionPath, sAjaxOptions);
 	  return false;
@@ -32,7 +32,8 @@ var w3sThemeImport = Class.create({
        });    
   },
 	
-	add: function(projectName){ 
+	add: function(themeName)
+  {
 	  var hasFailded = false;
 	  var sActionPath = w3studioCMS.frontController + 'themeImport/add';
 	  var curWindow = W3sWindow.openModal(320, 200, false);
@@ -41,7 +42,7 @@ var w3sThemeImport = Class.create({
 	     evalScripts:false,
 	     onLoading:function()
 	        {
-	          curWindow.setHTMLContent('<br /><br /><br /><h1>ADDING THE PROJECT<br />Please Wait</h1>');	          
+	          curWindow.setHTMLContent('<br /><br /><br /><h1>ADDING THEME<br />Please Wait</h1>');
 	        },
 	     onFailure:function()
 	        { 
@@ -56,6 +57,34 @@ var w3sThemeImport = Class.create({
 							W3sWindow.closeModal();         
 	          }				
 	        },        
-	     parameters:'projectName=' + projectName}); 
+	     parameters:'themeName=' + themeName});
+	},
+
+	remove: function(themeName)
+  {
+	  var hasFailded = false;
+	  var sActionPath = w3studioCMS.frontController + 'themeImport/remove';
+	  var curWindow = W3sWindow.openModal(320, 200, false);
+	  new Ajax.Updater({success:'w3s_template_import_contents', failure:'w3s_error'}, sActionPath,
+	    {asynchronous:true,
+	     evalScripts:false,
+	     onLoading:function()
+	        {
+	          curWindow.setHTMLContent('<br /><br /><br /><h1>REMOVING THEME<br />Please Wait</h1>');
+	        },
+	     onFailure:function()
+	        {
+	          hasFailded = true;
+	        },
+	     onComplete:function()
+	        {
+
+						if (!hasFailded)
+						{
+	          	curWindow.setHTMLContent($('w3s_error').innerHTML);
+							W3sWindow.closeModal();
+	          }
+	        },
+	     parameters:'themeName=' + themeName});
 	}
 });

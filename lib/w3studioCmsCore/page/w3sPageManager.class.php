@@ -88,8 +88,7 @@ class w3sPageManager
 				        // Getting the page's id inserted yet
 				        $idPage = $this->page->getId();
 				      	$attributes = w3sTemplateEngine::retrieveTemplateAttributesFromPage($this->page);
-				      	$templateContents = w3sCommonFunctions::readFileContents(sprintf("%1\$s%2\$s%3\$s%2\$sdata%2\$s%4\$s.yml", sfConfig::get('app_w3s_web_templates_dir'), DIRECTORY_SEPARATOR, $attributes["projectName"], $attributes["templateName"]));
-				      	
+                $templateContents = w3sCommonFunctions::readFileContents(sprintf("%1\$s%2\$s%3\$s%2\$sdata%2\$s%4\$s.yml", sfConfig::get('app_w3s_web_themes_dir'), DIRECTORY_SEPARATOR, $attributes["projectName"], $attributes["templateName"]));
 				      	$defaultContents = sfYaml::load($templateContents);
 				      	$defaultContents = $defaultContents["W3sContent"];
 				      	
@@ -99,7 +98,7 @@ class w3sPageManager
 				        												 find(); 
 				        foreach ($oLanguages as $language)
 				        {
-				          $idLanguage = $language->getId();
+				          $idLanguage = $language->getId(); 
 				          
 				          // Cycles the slot's three repeated contents status 
 				          for ($i=0; $i<=2; $i++)
@@ -108,17 +107,15 @@ class w3sPageManager
 					          $slots = W3sSlotPeer::getTemplateSlots($attributes["idTemplate"], $i);
 					          foreach ($slots as $slot)
 					        	{
-					        		echo $slot->getRepeatedContents();
-
                       // Retrieves a content that belongs to the current slot
                       $baseContent = DbFinder::from('W3sContent')->
                                                where('SlotId', $slot->getId())->
                                                where('LanguageId', $idLanguage)->
-                                               findOne();
+                                               findOne(); 
                       // When no repeated content, the content is simply copied
                       if (($slot->getRepeatedContents() == 0) || ($baseContent == null))
                       {
-                        $slotName = $slot->getSlotName();
+                        $slotName = $slot->getSlotName(); 
                         foreach ($defaultContents as $defaultContent)
                         {
                           if ($defaultContent['slotId'] == $slotName)
@@ -133,14 +130,14 @@ class w3sPageManager
                               "ContentTypeId"   => $defaultContent["contentTypeId"],
                               "ContentPosition" => $defaultContent["contentPosition"],
                               "Edited"          => 1
-                            );
-                            $content->setUpdateForeigns(false);
-                            $content->add($contentValue);
+                            ); 
+                            $content->setUpdateForeigns(false); 
+                            $content->add($contentValue); 
                           }
                         }
                       }
                       else
-                      {
+                      { 
                         // Retrive base page, if any, but NOT current one
                         $pageFinder = DbFinder::from('W3sPage')->whereToDelete(0)->whereIdNot($idPage);
                         if ($basePage = $pageFinder->findOne())

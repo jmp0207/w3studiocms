@@ -9,7 +9,7 @@ button1:
 button2:
   image: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/project.png
   imageDisabled: <?php echo sfConfig::get('app_w3s_web_skin_images_dir')?>/w3s_menu_manager/project_disabled.png
-  caption: Projects  
+  caption: Themes
   requiredCredentials: [[admin, webdesigner]]
   action: W3sThemeImport.show()
   actionParams:

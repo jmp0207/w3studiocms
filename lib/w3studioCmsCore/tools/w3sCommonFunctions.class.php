@@ -32,7 +32,7 @@ class w3sCommonFunctions
   public static function getPageElementsId($projectName, $templateName)
   {
     ob_start();
-    include(sfConfig::get('app_w3s_web_templates_dir') . '/' . $projectName . '/' . $templateName . '/' . $templateName . '.php');
+    include(sfConfig::get('app_w3s_web_themes_dir') . '/' . $projectName . '/' . $templateName . '/' . $templateName . '.php');
     $template = ob_get_clean();
     preg_match_all('/id\s*=\s*["|\'](.*?)["|\']/', $template, $result);
     
@@ -114,7 +114,7 @@ class w3sCommonFunctions
     require_once('parser/common.inc');
 
     // Opens the template and parses its structure
-    $templateFile = sfConfig::get('app_w3s_web_templates_dir') . '/' . $projectName . '/' . $templateName . '/' . $templateName . '.php';
+    $templateFile = sfConfig::get('app_w3s_web_themes_dir') . '/' . $projectName . '/' . $templateName . '/' . $templateName . '.php';
     $p=new HtmlParser($templateFile, unserialize(Read_File("parser/htmlgrammar.cmp")), $templateFile, 1);
     $p->Parse();
     $src="";
@@ -234,7 +234,8 @@ class w3sCommonFunctions
     return array("values" => $files, "selected" => $selected);
   }
 
-	public static function stringToArray($string){
+	public static function stringToArray($string)
+  {
 		preg_match_all('/
 	      \s*(\w+)              # key                               \\1
 	      \s*=\s*               # =
@@ -259,7 +260,8 @@ class w3sCommonFunctions
    * 
    * @return     str The attribute value. Returns a blank string if the attribute wasn't found
    */
-  public static function getTagAttribute($source, $attribute){
+  public static function getTagAttribute($source, $attribute)
+  {
     $result = '';
     
     if ($source != '' && $attribute != ''){
@@ -280,7 +282,8 @@ class w3sCommonFunctions
    * 
    * @return     str The attribute value. Returns a blank string if the attribute wasn't found
    */
-  public static function getHtmlAttributes($source, $tag){
+  public static function getHtmlAttributes($source, $tag)
+  {
     $result = '';
     
     if ($source != ''){
@@ -299,7 +302,8 @@ class w3sCommonFunctions
    * @param      str The string to verify
    * @return     str The string modified as needed
    */
-  public static function checkLastDirSeparator($string, $char=DIRECTORY_SEPARATOR){ 
+  public static function checkLastDirSeparator($string, $char=DIRECTORY_SEPARATOR)
+  {
     $string = trim($string);
     return (substr($string, strlen($string) - 1, 1) != $char) ? $string . $char : $string;
   }
@@ -312,7 +316,8 @@ class w3sCommonFunctions
    * @param      int The length desidered
    * @return     str The string modified as needed
    */
-  public static function setStringMaxWidth($string, $length=20){
+  public static function setStringMaxWidth($string, $length=20)
+  {
     return (strlen($string) > $length) ? substr($string, 0, $length - 4) . '...' : $string;
   }
 
@@ -323,7 +328,8 @@ class w3sCommonFunctions
    * 
    * @return     time 
    */
-  public static function dateToTime($date){
+  public static function dateToTime($date)
+  {
     preg_match_all('([^-:][0-9]*)',  $date, $r);
     return mktime ($r[0][3], $r[0][4], $r[0][5], $r[0][1], $r[0][2], $r[0][0]);
   }
@@ -336,7 +342,8 @@ class w3sCommonFunctions
    * 
    * @return     int 0 fails, 1 success
    */ 
-  public static function extractZipFile($zipFile, $destinationPath){
+  public static function extractZipFile($zipFile, $destinationPath)
+  {
     $zip = new ZipArchive;
     if ($zip->open($zipFile) === TRUE) {
       $result = $zip->extractTo($destinationPath); 
@@ -357,7 +364,8 @@ class w3sCommonFunctions
    * @return string  The template's contents
    *
    */
-  public static function readFileContents($filename){
+  public static function readFileContents($filename)
+  {
     $result = '';
     $handle = @fopen($filename, "r");
     if ($handle)
@@ -378,7 +386,8 @@ class w3sCommonFunctions
    * @return string  The template's contents
    *
    */
-  public static function writeFileContents($filename, $contents){
+  public static function writeFileContents($filename, $contents)
+  {
     $fp = fopen ($filename, "w");
 	  fwrite($fp, $contents);
 	  fclose($fp);
@@ -390,8 +399,9 @@ class w3sCommonFunctions
    *
    * @param      str Path of the directory to delete.
    */
-  public static function deleteDirectoryRecursiveFull($sourceDir){
-    self::deleteDirectoryRecursive($sourceDir);
+  public static function removeDirectory($sourceDir)
+  {
+    self::clearDirectory($sourceDir);
     @rmdir($sourceDir);
   }
 
@@ -401,22 +411,26 @@ class w3sCommonFunctions
    *
    * @param      str Path of the directory to delete.
    */
-  public static function deleteDirectoryRecursive($sourceDir, $ignore=array()){
-    if ($handle = opendir($sourceDir)){
-      while (false !== ($file = readdir($handle))){
-        if ($file != '.' && $file != '..'){
-          if (is_dir($sourceDir . '/' . $file)){
+  public static function clearDirectory($sourceDir, $ignore=array())
+  {
+    if ($handle = opendir($sourceDir))
+    {
+      while (false !== ($file = readdir($handle)))
+      {
+        if ($file != '.' && $file != '..')
+        {
+          if (is_dir($sourceDir . '/' . $file))
+          {
             if (!in_array($file, $ignore))
             {
-              self::deleteDirectoryRecursive($sourceDir . '/' . $file, $ignore);
+              self::clearDirectory($sourceDir . '/' . $file, $ignore);
               rmdir($sourceDir . '/' . $file);
             }
           }
-          else{
-            chmod ($sourceDir . '/' . $file, 0777);
+          else
+          {
             unlink ($sourceDir . '/' . $file);
           }
-          flush();
         }
       }
     }

@@ -80,7 +80,7 @@ class BaseW3sContentsManagerActions extends sfActions
   {     
     if($request->hasParameter('idContent') && $request->hasParameter('content'))
     {
-	    $currentContent = W3sContentPeer::retrieveByPk($this->getRequestParameter('idContent'));
+	    $currentContent = DbFinder::from('W3sContent')->findPK($request->getParameter('idContent'));
 	    $content = w3sContentManagerFactory::create($currentContent->getContentTypeId(), $currentContent);
 	    $result = $content->edit(array('Content' => $this->getRequestParameter('content')));
 	    
@@ -105,7 +105,7 @@ class BaseW3sContentsManagerActions extends sfActions
   {
     if($request->hasParameter('idContent'))
     {
-	    $currentContent = W3sContentPeer::retrieveByPk($this->getRequestParameter('idContent'));
+	    $currentContent = DbFinder::from('W3sContent')->findPK($request->getParameter('idContent'));
       $this->content = w3sContentManagerFactory::create($currentContent->getContentTypeId(), $currentContent);
 	    $result = $this->content->delete();
 	    if ($result != 1){     	
@@ -126,24 +126,11 @@ class BaseW3sContentsManagerActions extends sfActions
    */
   public function executeMove($request)
   {
-    //print_r($request->getParameterHolder()->getAll());
     $slotManager = new w3sContentsMove($this->getRequestParameter('language'), 
     																	 $this->getRequestParameter('page'), 
     																	 $this->getRequestParameter('slotId'));
     $slotContents = ($request->hasParameter($this->getRequestParameter('slotName'))) ? $this->getRequestParameter($this->getRequestParameter('slotName')) : array();    
-    //echo $slotContents; // is_array($slotContents) ? "OK" : "no";
-    /*
-    echo $request->getRequestParameter($this->getRequestParameter('slotName'));
-    if($request->hasParameter($this->getRequestParameter('slotName')))
-    { 
-    	echo "Q";
-    	$slotContents = $this->getRequestParameter($this->getRequestParameter('slotName'));
-    }
-    else
-    {
-    	echo "A";
-    	$slotContents = array();
-    }*/
+    
     $result = $slotManager->moveContents($slotContents); //  print_r($slotContents);  echo $this->getRequestParameter('slotName');
     
     if ($result != 1) $this->getResponse()->setStatusCode(404);

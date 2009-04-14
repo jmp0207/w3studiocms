@@ -30,7 +30,7 @@ include $install_path . "tfu_helper.php";
     CONFIGURATION
 */
 $login = "true"; // The login flag - has to set by yourself below "true" is logged in, "auth" shows the login form, "reauth" should be set if the authentification has failed. "false" if the flash should be disabled.
-$folder = "../../../../web/templates"; // this is the root upload folder. 
+$folder = "../../../themes"; // this is the root upload folder.
 
 $maxfilesize = getMaximumUploadSize(); // The max files size limit of the server in KB. You can specify your own limit here e.g. 512. This setting is restricted by your server settings! Please read FAQ 4 of the TFU FAQ how to set upload_max_filesize and post_max_size.
 

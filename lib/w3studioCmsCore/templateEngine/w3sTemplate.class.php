@@ -153,7 +153,7 @@ abstract class w3sTemplateEngine
    */
   public static function getTemplateFile($projectName, $templateName)
   {
-    return sprintf("%1\$s%2\$s%3\$s%2\$stemplates%2\$s%4\$s.php", sfConfig::get('app_w3s_web_templates_dir'), DIRECTORY_SEPARATOR, $projectName, $templateName);
+    return sprintf("%1\$s%2\$s%3\$s%2\$stemplates%2\$s%4\$s.php", sfConfig::get('app_w3s_web_themes_dir'), DIRECTORY_SEPARATOR, $projectName, $templateName);
   }
 
   /**
@@ -348,7 +348,6 @@ abstract class w3sTemplateEngine
       foreach ($slotContents as $slot){
         $slotNames .= sprintf('"%s",', $slot['slotName']);
         $contents = $this->drawSlot($slot);
-        echo htmlentities($contents);
         $this->pageContents = preg_replace('/\<\?php.*?include_slot\(\'' . $slot['slotName'] . '\'\).*?\?\>/', $contents, $this->pageContents);
       }
     }

@@ -14,7 +14,6 @@
  
 /**
  * w3sThemeImport class represents the interface to manage the templates.
- * This class must be deeply tested.
  *  
  * @package    sfW3studioCMSPlugin
  * @subpackage w3sThemeImport
@@ -35,64 +34,240 @@ class w3sThemeImport implements w3sEditor
 		$toolbarFile = 'tbTemplateImport.yml',
 		$themes = array(),
 		$defaultInfo = array("Author" => '', "License" => '');
-		
+
+  /**
+   * Renders the editor
+   *
+   * @return string
+   *
+   */
 	public function render()
 	{
 		return sprintf($this->interfaceSkeleton, 'w3s_import_templates', 
-																						 $this->renderToolbar(), 
-																						 $this->renderThemes(DbFinder::from('W3sProject')->find()));
+																						 $this->drawToolbar(),
+																						 $this->drawThemes(DbFinder::from('W3sProject')->find()));
 	}
-	
-	public function setDefaultInfo($array = null)
+
+  /**
+   * Sets the related theme info.
+   *
+   * @param string
+   *
+   */
+	public function setDefaultInfo($param = null)
 	{
-		$this->defaultInfo = $array;
-	} 
-	
-	protected function renderToolbar()
-	{
-		$toolbar = new w3sToolbarHorizontal(); 
-    $toolbar->fromYml($this->toolbarFile);
-    
-    return $toolbar->renderToolbar();
+		if ($diff = array_diff(array_keys($param), array_keys($this->defaultInfo)))
+    {
+      throw new InvalidArgumentException(sprintf('%s does not support the following options: \'%s\'.', get_class($this), implode('\', \'', $diff)));
+    }
+    if ($diff = array_diff(array_keys($this->defaultInfo), array_keys($param)))
+    {
+      throw new InvalidArgumentException(sprintf('%s requires the following options: \'%s\'.', get_class($this), implode('\', \'', $diff)));
+    }
+    $this->defaultInfo = $param;
 	}
-	
-	public function renderThemes()
+
+ /**
+  * Publishes Web Assets for third party themes. Originally written to be used
+  * in tasks only, readapted to be used in whole application
+  *
+  * @author     Yevgeniy Viktorov <wik@osmonitoring.com>
+  *             Giansimon Diblas  <giansimon.diblas@w3studiocms.com>
+  *
+  * @param Array
+  * @param Array
+  *
+  * @return Array - Contain the description of the generated assets publishing events
+  *
+  */
+  public function publishAssets($arguments = array(), $options = array())
+  {
+    $events = array();
+    $themesDir = $options['themes_dir'];
+    $exclude = array('.registry','.svn', '.gitignore','.channels');
+    if (is_dir($themesDir))
+    {
+      foreach (new DirectoryIterator($themesDir) as $file)
+      {
+        if (true === $file->isDir() && !$file->isDot())
+        {
+          if (!in_array($file->getFileName(), $exclude))
+          {
+            $theme = $file->getFileName();
+            $webDir = $themesDir.DIRECTORY_SEPARATOR.$theme.DIRECTORY_SEPARATOR.'web';
+            if (is_dir($webDir))
+            {
+              $filesystem = new sfFilesystem();
+              $unpublishResult = $this->unpublishAsset($theme, $filesystem);
+              if ($unpublishResult != '') $events[] = $unpublishResult;
+              $events[] = 'Published assets for ' . $theme;
+              $filesystem->symlink($webDir, $options['web_dir'].DIRECTORY_SEPARATOR.$theme, true);
+            }
+          }
+        }
+      }
+    }
+
+    return $events;
+  }
+
+  /**
+  * Publishes Web Assets for third party themes. Originally written to be used
+  * in tasks only, readapted to be used in whole application
+  *
+  * @author     Yevgeniy Viktorov <wik@osmonitoring.com>
+  *             Giansimon Diblas  <giansimon.diblas@w3studiocms.com>
+  *
+  * @param Array
+  * @param Array
+  *
+  * @return Array - Contain the description of the generated assets publishing events
+  *
+  */
+  public function unpublishAsset($param, $filesystem = null)
+  {
+    $result = '';
+
+    $theme = sfConfig::get('sf_web_dir') . DIRECTORY_SEPARATOR . $param;
+    if (is_dir($theme))
+    {
+      if ($filesystem == null) $filesystem = new sfFilesystem();
+      $filesystem->remove($theme);
+      $result = 'Unpublished assets for ' . $param;
+    }
+
+    return $result;
+  }
+
+ /**
+  * Draws all the loaded themes readed from the themes folder
+  *
+  * @author     Giansimon Diblas  <giansimon.diblas@w3studiocms.com>
+  *
+  * @return String - The html table with drawed themes
+  *
+  */
+	public function drawThemes()
   {
     $themeRows = '';
     
-    if ($handle = opendir(sfConfig::get('app_w3s_web_templates_dir'))){
+    if ($handle = opendir(sfConfig::get('app_w3s_web_themes_dir'))){
 	    while (false !== ($file = readdir($handle)))
 	    {
 	    	if ($file != "." && $file != ".." && $file != ".svn" && $file != ".gitignore")
 	    	{
-	        $theme = DbFinder::from('W3sProject')->
+	        $exists = DbFinder::from('W3sProject')->
 	        										 where('ProjectName', $file)->
-	        										 findOne();
-	        $exists = count($theme);
-		    	
-		    	$themeRows .= sprintf('<tr><td style="text-align:left;">%s</td></tr>', $this->renderThemeRow($file, $exists));
+	        										 count();
+		    	$themeRows .= sprintf('<tr><td style="text-align:left;">%s</td></tr>', $this->drawThemeRow($file, $exists));
 	    	}
 	    }
     }
     
     return sprintf('<table id="w3s_table_import">%s</table>', $themeRows);;
   }
-  
-  protected function renderThemeRow($themeName, $exists)
+
+ /**
+  * Adds the theme to database after it has been loaded to make it available to be used
+  *
+  * @author     Giansimon Diblas  <giansimon.diblas@w3studiocms.com>
+  *
+  * @return Bool - True: success - False: failure
+  *
+  */
+  public function add($themeName)
+  {
+    $bRollBack = false;
+    $con = Propel::getConnection();
+    $con = w3sPropelWorkaround::beginTransaction($con);
+
+    $theme = new W3sProject();
+    $theme->setProjectName($themeName);
+    $result = $theme->save();
+    if ($theme->isModified() && $result == 0) $bRollBack = true;
+
+    if (!$bRollBack)
+    {
+	    $idTheme = $theme->getId();
+	    $templates = $this->scanTheme($themeName);
+	   	foreach ($templates as $templateName)
+	   	{
+	    	$template = new W3sTemplate;
+	      $template->setProjectId($idTheme);
+	      $template->setTemplateName($templateName);
+	      $result = $template->save();
+	      if ($template->isModified() && $result == 0)
+	      {
+	        $bRollBack = true;
+	        break;
+	      }
+
+	      if (!$bRollBack)
+    		{
+		      $idTemplate = $template->getId();
+		      $slots = $this->getSlotsFromTemplate($themeName, $templateName);
+		      foreach($slots as $slotName)
+		      {
+		      	$slot = new W3sSlot;
+			      $slot->setTemplateId($idTemplate);
+			      $slot->setSlotName($slotName);
+			      $result = $slot->save();
+			      if ($slot->isModified() && $result == 0)
+			      {
+			        $bRollBack = true;
+			        break;
+			      }
+		      }
+    		}
+	   	}
+    }
+
+    if (!$bRollBack)
+    { // Everything was fine so W3StudioCMS commits to database
+      $con->commit();
+      $result = true;
+    }
+    else
+    { // Something was wrong so W3StudioCMS aborts the operation and restores to previous status
+      w3sPropelWorkaround::rollBack($con);
+      $result = false;
+    }
+
+    return $result;
+  }
+
+  public function remove($themeName)
+  {
+    $theme = DbFinder::from('W3sProject')->
+                       where('ProjectName', $themeName)->
+                       findOne();
+    if ($theme != null)
+    {
+      $theme->delete();
+      w3sCommonFunctions::removeDirectory(sfConfig::get('app_w3s_web_themes_dir') . DIRECTORY_SEPARATOR . $themeName);
+      $this->unpublishAsset($themeName);
+    }
+  }
+
+  protected function drawToolbar()
+	{
+		$toolbar = new w3sToolbarHorizontal();
+    $toolbar->fromYml($this->toolbarFile);
+
+    return $toolbar->renderToolbar();
+	}
+
+  protected function drawThemeRow($themeName, $exists)
   {
     $rowSchema = '<span class="info_header">%s:</span> %s<br />';
     $defaultImage = sfConfig::get('app_w3s_web_images_dir') .  '/common/template_sample.png';
-    $infoDir = sprintf("%1\$s%2\$s%3\$s%2\$sdata%2\$s", sfConfig::get('app_w3s_web_templates_dir'), DIRECTORY_SEPARATOR, $themeName);
+    $infoDir = sprintf("%1\$s%2\$s%3\$s%2\$sdata%2\$s", sfConfig::get('app_w3s_web_themes_dir'), DIRECTORY_SEPARATOR, $themeName);
     
     $fileInfo = $infoDir . 'info.yml';
    	$info = (is_file($fileInfo)) ? sfYaml::load($fileInfo) : null;
    	if ($info != null)
    	{
-   		
-      // Image needs the absolute path
-      //$infoDir = str_replace(sfConfig::get('sf_web_dir'), '', $infoDir);
-      $info = $info["Info"];
-   		//$info['Image'] = $infoDir . $info['Image']; 
+   		$info = $info["Info"];
    	}
    	else
    	{
@@ -113,7 +288,11 @@ class w3sThemeImport implements w3sEditor
     $operation = '';
     if ($exists == 0)
     {
-    	$operation = link_to_function(__('Add'), 'W3sTemplateImport.add(\'' . $themeName . '\')', 'class="link_button"');
+    	$operation = link_to_function(__('Add'), 'W3sThemeImport.add(\'' . $themeName . '\')', 'class="link_button"');
+    }
+    else
+    {
+      $operation = link_to_function(__('Remove'), 'W3sThemeImport.remove(\'' . $themeName . '\')', 'class="link_button"');
     }
 
     return sprintf('<tr><td style="width:96px;">%s</td><td valign="bottom" style="width:250px;"><p>%s</p></td><td valign="bottom">%s</td></tr>', image_tag($info['Image'], "class=template_image"), $themeRows, $operation);
@@ -122,7 +301,7 @@ class w3sThemeImport implements w3sEditor
   protected function scanTheme($themeName)
   {
     $result = array();
-    $themeDir = sfConfig::get('app_w3s_web_templates_dir')  . DIRECTORY_SEPARATOR . $themeName . DIRECTORY_SEPARATOR . 'templates';
+    $themeDir = sfConfig::get('app_w3s_web_themes_dir')  . DIRECTORY_SEPARATOR . $themeName . DIRECTORY_SEPARATOR . 'templates';
     if ($handle = opendir($themeDir))
     {
       while (false !== ($file = readdir($handle)))
@@ -146,106 +325,10 @@ class w3sThemeImport implements w3sEditor
   
   protected function getSlotsFromTemplate($themeName, $templateName)
   {	
-  	$templateFile = sprintf("%1\$s%2\$s%3\$s%2\$stemplates%2\$s%4\$s.php", sfConfig::get('app_w3s_web_templates_dir'), DIRECTORY_SEPARATOR, $themeName, $templateName);
+  	$templateFile = sprintf("%1\$s%2\$s%3\$s%2\$stemplates%2\$s%4\$s.php", sfConfig::get('app_w3s_web_themes_dir'), DIRECTORY_SEPARATOR, $themeName, $templateName);
   	$contents = w3sCommonFunctions::readFileContents($templateFile);	  
 	  preg_match_all('/include_slot\s*\(\s*[\'|"](.*?)[\'|"]\s*\)/', $contents, $matchResults);
 	  
 		return $matchResults[1];
   }
-  
-  public function add($themeName)
-  {
-    $bRollBack = false;
-    $con = Propel::getConnection();
-    $con = w3sPropelWorkaround::beginTransaction($con); 
-    
-    $theme = new W3sTheme();
-    $theme->setThemeName($themeName);
-    $result = $theme->save();
-    if ($theme->isModified() && $result == 0) $bRollBack = true;
-     
-    if (!$bRollBack)
-    {
-	    $idTheme = $theme->getId();
-	    $templates = $this->scanTheme($themeName);
-	   	foreach ($templates as $templateName)
-	   	{ 
-	    	$template = new W3sTemplate;
-	      $template->setThemeId($idTheme);
-	      $template->setTemplateName($templateName);
-	      $result = $template->save();
-	      if ($template->isModified() && $result == 0)
-	      {
-	        $bRollBack = true;
-	        break;
-	      }
-	      
-	      if (!$bRollBack)
-    		{
-		      $idTemplate = $template->getId();
-		      $slots = $this->getSlotsFromTemplate($themeName, $templateName);
-		      foreach($slots as $slotName)
-		      {
-		      	$slot = new W3sSlot;
-			      $slot->setTemplateId($idTemplate);
-			      $slot->setSlotName($slotName);
-			      $result = $slot->save();
-			      if ($slot->isModified() && $result == 0)
-			      {
-			        $bRollBack = true;
-			        break;
-			      }
-		      }
-    		}
-	   	}
-    }
-    
-    if (!$bRollBack)
-    { // Everything was fine so W3StudioCMS commits to database
-      $con->commit();
-      $result = 1;
-    }
-    else
-    { // Something was wrong so W3StudioCMS aborts the operation and restores to previous status
-      w3sPropelWorkaround::rollBack($con);
-      $result = 0;
-    }
-    
-    return $result;
-  }
-  
-  /*
-  protected function renderAvailableThemes()
-  {
-    $result = array();
-    $themeRows = '';
-    $loadedThemes = $this->scanThemes();
-    $availableThemes = array_diff($loadedThemes, $this->themes);
-    foreach ($availableThemes as $availableTheme)
-    {
-    	$themeRows .= sprintf('<tr><td style="text-align:left;">%s</td></tr>', $availableTheme);
-    }
-    
-    return sprintf('<table>%s</table>', $themeRows);;
-  }
-  
-  protected function renderTemplates()
-  {
-    $templates = DbFinder::from('W3sTemplate')->  
-		                      leftJoin('W3sTheme')->
-		                      where('W3sTheme.InUse', '1')->
-		                      find();   
-    $templateRows = '';
-    foreach ($templates as $template)
-    {
-    	$templateRows .= sprintf('<tr><td style="text-align:left;">%s</td></tr>', $template->getTemplateName());	
-    }
-    
-    return sprintf('<table>%s</table>', $templateRows);;
-  }*/
-	
-	
-  
-	
-	 
 }

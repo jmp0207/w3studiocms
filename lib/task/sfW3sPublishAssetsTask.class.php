@@ -6,6 +6,7 @@
  * @package    sfW3studioCMSPlugin
  * @subpackage task
  * @author     Yevgeniy Viktorov <wik@osmonitoring.com>
+ * @
  */
 class sfW3sPublishAssetsTask extends sfBaseTask
 {
@@ -37,34 +38,12 @@ EOF;
    */
   protected function execute($arguments = array(), $options = array())
   {
-    $themesDir = $options['themes_dir'];
-    $exclude = array('.registry','.svn', '.gitignore','.channels');
-    if (is_dir($themesDir))
-    {
-      foreach (new DirectoryIterator($themesDir) as $file)
-      {
-        if (true === $file->isDir() && !$file->isDot())
-        {
-          if (!in_array($file->getFileName(), $exclude))
-          {
-            $theme = $file->getFileName();
-            $webDir = $themesDir.DIRECTORY_SEPARATOR.$theme.DIRECTORY_SEPARATOR.'web';
-            if (is_dir($webDir))
-            {
-              $filesystem = new sfFilesystem();
-              // remove first
-              if (is_dir($options['web_dir'].DIRECTORY_SEPARATOR.$theme))
-              {
-                $this->dispatcher->notify(new sfEvent($this, 'application.log', array('Unpublishing assets for '.$theme)));
-                $filesystem->remove($options['web_dir'].DIRECTORY_SEPARATOR.$theme);
-              }
+    $themeImport = new w3sThemeImport();
+    $events = $themeImport->publishAssets($arguments, $options);
 
-              $this->dispatcher->notify(new sfEvent($this, 'application.log', array('Publishing assets for '.$theme)));
-              $filesystem->symlink($webDir, $options['web_dir'].DIRECTORY_SEPARATOR.$theme, true);
-            }
-          }
-        }
-      }
+    foreach($events as $event)
+    {
+      $this->dispatcher->notify(new sfEvent($this, 'application.log', array($event)));
     }
   }
 }

@@ -12,28 +12,26 @@ class BaseSlotMapperActions extends sfActions
 {
   public function executeRenderTemplate(sfWebRequest $request)
   {
-
-      $this->status = 0;
+    $this->status = 0;
+    if ($request->hasParameter('idTemplate') && $request->hasParameter('otherTemplate'))
+    {
       if ($this->getUser()->isAuthenticated())
       {
-        $this->template = new w3sTemplateEngineSlotMapper($request->getParameter('idTemplate'), $request->getParameter('destination'));
-        /*
-        if ($this->template->getIdLanguage() != -1 && $this->template->getIdPage() != -1)
-        {
-          $this->status = ($this->template->isPageFree($this->getRequestParameter('prevPage'))) ? 1 : 4;
-        }
-        else
-        {
-          $this->status = 8;
-        }*/
+        $this->status = 1;
+        $this->template = new w3sTemplateEngineSlotMapper($request->getParameter('idTemplate'), $request->getParameter('otherTemplate'));
 
-      $this->status = 1; // FAKE
-      if($this->status != 1) $this->getResponse()->setStatusCode(404);
-      $this->getResponse()->setHttpHeader('X-JSON', sprintf('([["status", "%s"], ["stylesheet", "%s"]])', $this->status, $this->template->retrieveTemplateStylesheets()));
+        $this->getResponse()->setHttpHeader('X-JSON', sprintf('([["status", "%s"], ["stylesheet", "%s"]])', $this->status, $this->template->retrieveTemplateStylesheets()));
+      }
+      else
+      {
+        $this->status = 4;
+        $this->getResponse()->setStatusCode(404);
+        $this->getResponse()->setHttpHeader('X-JSON', sprintf('([["status", "%s"]])', $this->status));
+      }
     }
     else
     {
-      $this->status = 16;
+      $this->status = 2;
       $this->getResponse()->setStatusCode(404);
       $this->getResponse()->setHttpHeader('X-JSON', sprintf('([["status", "%s"]])', $this->status));
     }
@@ -51,9 +49,10 @@ class BaseSlotMapperActions extends sfActions
 
   public function executeSave(sfWebRequest $request)
   {
-    $slotMapperPanel = new w3sSlotMapperPanel($request->getParameter('sourceId'), $request->getParameter('destId'));
-    $this->result = $slotMapperPanel->save($request->getParameter('w3s_sm_source'), $request->getParameter('w3s_sm_dest'));
-
-    if($this->status != 1) $this->getResponse()->setStatusCode(404);
+    if ($request->hasParameter('w3s_sm_source') && $request->hasParameter('w3s_sm_dest'))
+    {
+      $slotMapperPanel = new w3sSlotMapperPanel($request->getParameter('sourceId'), $request->getParameter('destId'));
+      $this->result = $slotMapperPanel->save($request->getParameter('w3s_sm_source'), $request->getParameter('w3s_sm_dest'));
+    }
   }
 }

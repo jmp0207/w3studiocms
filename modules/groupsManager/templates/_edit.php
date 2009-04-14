@@ -21,17 +21,17 @@
   $type = 'error';
   switch($result){
     case 0:
-      $message = __('An error occoured during the save operation. Group not added.');
+      $message = __('An error occoured during the save operation. Group not edited.');
       break;
     case 1:
       $type = 'success_14';
       $message = __('Group edited succesfully!');
       break;
     case 2:
-      $message = __('This Group already exists in the web site: use another name.');
+      $message = __('You have passed the same parameters already memorized in the database. Nothing to edit.');
       break;
     case 4:
-      $message = __('You must provide a name for the new group.');
+      $message = __('You must provide at least a name for the group or a new template.');
       break;
     case 8:
       $message = __('The template you want to associate to the new group doesn\'t exist anymore');

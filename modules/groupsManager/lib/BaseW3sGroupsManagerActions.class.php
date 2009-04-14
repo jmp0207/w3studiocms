@@ -19,7 +19,7 @@ class BaseW3sGroupsManagerActions extends sfActions
    */
   public function executeShow(sfWebRequest $request)
   {
-    $groupEditor = ($request->getParameter('op') == 1) ? new w3sGroupEditorForAdd() : new w3sGroupEditorForEdit($request->getParameter('idGroup'), $request->getParameter('groupName'));
+    $groupEditor = (!$request->hasParameter('op') || $request->getParameter('op') == 1) ? new w3sGroupEditorForAdd() : new w3sGroupEditorForEdit($request->getParameter('idGroup'), $request->getParameter('groupName'));
     return $this->renderPartial('show', array('groupEditor' => $groupEditor));
   }
 
@@ -44,7 +44,7 @@ class BaseW3sGroupsManagerActions extends sfActions
 
   public function executeEdit(sfWebRequest $request)
   {
-	  if($request->hasParameter('idGroup') && $request->hasParameter('groupName') && $request->hasParameter('idTemplate'))
+	  if($request->hasParameter('idGroup') && ($request->hasParameter('groupName') || $request->hasParameter('idTemplate')))
     {
 		  $group = DbFinder::from('W3sGroup')->findPK($this->getRequestParameter('idGroup'));
       if ($group != null)
@@ -63,7 +63,7 @@ class BaseW3sGroupsManagerActions extends sfActions
         $this->getResponse()->setStatusCode(404);
         $groupEditor = new w3sGroupEditorForEdit($request->getParameter('idGroup'), $request->getParameter('groupName'));
       }
-
+      
       return $this->renderPartial('edit', array('result' => $result, "groupEditor" => $groupEditor));
     }
 	  else
@@ -153,32 +153,5 @@ class BaseW3sGroupsManagerActions extends sfActions
       $this->options = W3sTemplatePeer::doSelect(new Criteria());
     }
 
-  }
-  
-  /**
-   * Reloads the combobox with groups.
-   */
-  public function executeCheckTemplateElements()
-  {
-    // Change page mode
-    if ($this->getRequestParameter('idNewGroup')  != ''){
-      $oGroups = W3sGroupPeer::retrieveByPk($this->getRequestParameter('idNewGroup'));
-      $idNewTemplate = $oGroups->getTemplateId();
-    }
-
-    // Change group mode
-    else{
-      $idNewTemplate = $this->getRequestParameter('idNewTemplate');
-    }
-
-    $groups = W3sGroupPeer::retrieveByPk($this->getRequestParameter('idGroup'));
-    if ($groups->getTemplateId() != $idNewTemplate){
-      $group = new W3sGroup();
-      $this->changinElements = $group->checkTemplateElementsForChange($this->getRequestParameter('idGroup'), $groups->getTemplateId(), $idNewTemplate);
-      //$this->availableElements = W3sTemplateElementPeer::divNamesOptionsForSelect($idNewTemplate, true);
-    }
-    else{
-      $this->changinElements = array();
-    }
   }
 }

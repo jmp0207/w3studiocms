@@ -55,7 +55,7 @@ class w3sContentManagerScript extends w3sContentManager{
   {
   	$content = $this->content->getContent();
   	if (strpos($content, '<?php') !== false){
-      $file = sprintf('%s/tmpslot_%sphp', sfConfig::get('app_w3s_web_templates_dir'), sfContext::getInstance()->getUser()->getGuardUser()->getId());
+      $file = sprintf('%s/tmpslot_%sphp', sfConfig::get('app_w3s_web_themes_dir'), sfContext::getInstance()->getUser()->getGuardUser()->getId());
       $fp = fopen ($file, "w");
       fwrite($fp, $content);
       fclose($fp);

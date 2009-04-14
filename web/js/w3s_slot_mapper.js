@@ -143,7 +143,7 @@ var w3sSlotMapper = Class.create({
   save: function()
   {
     var hasFailed = false;
-    $('w3s_mapping').enable();
+    $('w3s_mapping').enable(); 
     var sActionPath = w3studioCMS.frontController + 'slotMapper/save';
 	  new Ajax.Updater('w3s_error', sActionPath,
 	      {asynchronous:true,
@@ -161,7 +161,7 @@ var w3sSlotMapper = Class.create({
 	          {
 	            curWindow.setSize(230, 120);
 	            curWindow.setHTMLContent($('w3s_error').innerHTML);
-              if (!hasFailed) W3sWindow.closeModal();
+              //if (!hasFailed) W3sWindow.closeModal();
 	          },
 	        parameters:'sourceId=' + W3sSlotMapper.sourceTemplateId +
                      '&destId=' + W3sSlotMapper.destTemplateId +
@@ -240,13 +240,13 @@ var w3sSlotMapper = Class.create({
 
   loadSlotMapper: function(source, dest)
   {
-    this.doLoadSlotMapper(this.sourceTemplateId);
-    this.doLoadSlotMapper(this.destTemplateId, 'w3s_slot_mapper2');
+    this.doLoadSlotMapper(this.sourceTemplateId, this.destTemplateId);
+    this.doLoadSlotMapper(this.destTemplateId, this.sourceTemplateId, 'w3s_slot_mapper2');
 
 	  return false;
 	},
 
-  doLoadSlotMapper: function(idTemplate, destDiv)
+  doLoadSlotMapper: function(idTemplate, otherTemplate, destDiv)
   {
     if (destDiv == null) destDiv = 'w3s_slot_mapper1';
     var sActionPath = w3studioCMS.frontController + 'slotMapper/renderTemplate';
@@ -282,7 +282,8 @@ var w3sSlotMapper = Class.create({
 	              curWindow.setHTMLContent($('w3s_error').innerHTML);
 	            }
 	          },
-	        parameters:'idTemplate=' + idTemplate});
+	        parameters:'idTemplate=' + idTemplate +
+                     '&otherTemplate=' + otherTemplate});
 
 	  return false;
 	}

@@ -53,8 +53,8 @@ class w3sGroupManager
    */
   public function add($groupName, $idTemplate)
   {
-    $groupName = w3sCommonFunctions::slugify($groupName); 
-    if ($groupName != '')
+    $groupName = w3sCommonFunctions::slugify($groupName);
+    if ($groupName != 'n-a')
     {
 	    if ($idTemplate != null)
 	    {
@@ -106,40 +106,33 @@ class w3sGroupManager
   public function edit($groupName, $idTemplate)
   {
     $groupName = w3sCommonFunctions::slugify($groupName);
-    if ($groupName != '')
+    if ($groupName != 'n-a' || $idTemplate != null)
     {
-	    if ($idTemplate != null)
-	    {
-        if ($groupName != $this->group->getGroupName() || $this->group->getTemplateId() != $idTemplate )
-		    {
-			    if (DbFinder::from('W3sTemplate')->findPK($idTemplate) != null)
-		    	{
-				    $this->group->setTemplateId($idTemplate);
-						$this->group->setGroupName($groupName);
-						$this->group->setEdited(1);
-						$result = ($this->group->isModified() && $this->group->save() > 0) ? 1 : 0;
-		    	}
-		    	else
-			    {
-				    // The template doesn't exist
-				    $result = 16;
-			    }
-		    }
-		    else
-		    {
-			    // Group name exists
-			    $result = 2;
-		    }
-	    }
-	    else
-	    {
-		    // The template id is null
-		    $result = 8;
-	    }
+      if (($groupName != 'n-a' && $groupName != $this->group->getGroupName()) || ($idTemplate != null && $this->group->getTemplateId() != $idTemplate ))
+      {
+        if ($idTemplate == null || DbFinder::from('W3sTemplate')->findPK($idTemplate) != null)
+        {
+          if ($idTemplate != null) $this->group->setTemplateId($idTemplate);
+          $this->group->setGroupName($groupName);
+          $this->group->setEdited(1);
+          $result = $this->group->save();
+        }
+        else
+        {
+          // The template doesn't exist  
+          $result = 16;
+        }
+      }
+      else
+      {
+        // Nothing to edit
+        $result = 2;
+      }
+	    
 	  }
 	  else{
 
-	    // Group name is empty
+	    // Group name is empty && idTemplate misses
 	    $result = 4;
 	  }
 

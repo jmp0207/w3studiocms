@@ -513,7 +513,8 @@ abstract class w3sContentManager extends w3sTemplateEngineEditor
    * @return bool
    *
    */ 
-  protected function makeSpace($params, $op){ //print_r($params);
+  protected function makeSpace($params, $op)
+  {
     
     // Checks the $params parameter. If doesn't match, throwns and exception
     $required = array("PageId", "SlotId", "LanguageId", "ContentPosition");

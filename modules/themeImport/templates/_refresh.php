@@ -15,4 +15,4 @@
   
   $theme = new w3sThemeImport();
   
-  echo $theme->renderThemes(DbFinder::from('W3sProject')->find());
+  echo $theme->drawThemes(DbFinder::from('W3sProject')->find());
