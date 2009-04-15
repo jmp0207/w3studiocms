@@ -4,10 +4,3 @@ button1:
   action: W3sTools.openFileUploader(2)
   actionParams:
     class: image_button
-button2:
-  image: <?php echo sfConfig::get('app_w3s_web_images_dir')?>/image_manager/delete.png
-  caption: Remove template
-  action: alert('This function is not implemented yet')
-  #objImageManager.deleteSelectedImage('<?php echo sfContext::getInstance()->getController()->genUrl('imageManager/deleteImage') ?>')
-  actionParams:
-    class: image_button

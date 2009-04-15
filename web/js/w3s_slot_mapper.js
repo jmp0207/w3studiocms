@@ -161,7 +161,7 @@ var w3sSlotMapper = Class.create({
 	          {
 	            curWindow.setSize(230, 120);
 	            curWindow.setHTMLContent($('w3s_error').innerHTML);
-              //if (!hasFailed) W3sWindow.closeModal();
+              if (!hasFailed) W3sWindow.closeModal();
 	          },
 	        parameters:'sourceId=' + W3sSlotMapper.sourceTemplateId +
                      '&destId=' + W3sSlotMapper.destTemplateId +
