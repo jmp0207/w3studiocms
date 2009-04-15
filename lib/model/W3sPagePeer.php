@@ -36,7 +36,7 @@ class W3sPagePeer extends BaseW3sPagePeer
     return DbFinder::from('W3sPage')->
 									   orderby('PageName', 'ASC')->
 									   where('ToDelete', '0')->
-									   findOne();
+									   find();
     
     
   }

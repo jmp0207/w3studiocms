@@ -588,4 +588,27 @@ class w3sCommonFunctions
 
     return $text;
   }
+
+  /**
+   * Check current location and return:
+   * - basename if standard location
+   * - src if custom location
+   * 
+   * @param string $fullPath The full path to file
+   * @param string $baseDir Standard document(web) base dir
+   *
+   * @return string
+   */
+  static public function getStdBasename($fullPath, $baseDir)
+  {
+    $basename = basename($fullPath);
+    $stdPath = w3sCommonFunctions::checkLastDirSeparator(sfConfig::get('sf_web_dir').$baseDir) . $basename;
+
+    if ($stdPath == $fullPath)
+    {
+      return $basename;
+    }
+
+    return str_replace(sfConfig::get('sf_web_dir'), '', $fullPath);
+  }
 }
